@@ -10,39 +10,39 @@ public class Election{
     protected int quota;
     protected Scanner fileReader;
 
-    protected Election(int totalVotes, int totalSeats, ArrayList<Party> parties, Scanner fileReader){
+    public Election(int totalVotes, int totalSeats, ArrayList<Party> parties, Scanner fileReader){
         this.totalVotes = totalVotes;
         this.totalSeats = totalSeats;
         this.parties = parties;
         this.fileReader = fileReader;
     }
 
-    protected int calculateQuota(){
+    public int calculateQuota(){
         return (int) Math.floor(totalVotes/totalSeats);
     }
 
-    protected void voteCounting() {
+    public void voteCounting() {
 
     }
 
-    protected ArrayList<Party> coinToss(ArrayList<Party> tiedParties) {
+    public ArrayList<Party> coinToss(ArrayList<Party> tiedParties) {
         ArrayList<Party> winners= new ArrayList<>();
         return winners;
     }
 
-    protected void allocateSeats() {
+    public void allocateSeats() {
 
     }
 
-    protected void findWinners() {
+    public void findWinners() {
 
     }
 
-    protected void displayResults() {
+    public void displayResults() {
 
     }
 
-    protected void auditFile() {
+    public void auditFile() {
         
     }
 }
