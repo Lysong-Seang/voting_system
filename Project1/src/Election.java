@@ -1,33 +1,54 @@
 // import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.random.*;
+import java.util.Random;
+import java.io.BufferedReader;
 
 public class Election{
     protected int totalVotes;
     protected int totalSeats;
     protected ArrayList<Party> parties;
     protected int quota;
-    protected Scanner fileReader;
+    protected BufferedReader br;
 
-    public Election(int totalVotes, int totalSeats, ArrayList<Party> parties, Scanner fileReader){
+    // Initializes the variables of the Election class.
+    public Election(int totalVotes, int totalSeats, ArrayList<Party> parties, BufferedReader br){
         this.totalVotes = totalVotes;
         this.totalSeats = totalSeats;
         this.parties = parties;
-        this.fileReader = fileReader;
+        this.br = br;
     }
 
+    // Calculates the quota which is the floor of the 
+    // total number of votes divided by the total number of seats.
     public int calculateQuota(){
         return (int) Math.floor(totalVotes/totalSeats);
     }
 
+    // Counts the votes for each party.
     public void voteCounting() {
 
-    }
+        //Reads through each ballot and counts each parties ballots. 
+        for (int i = 0; i < totalVotes; i++) {
+            String ballot = br.readLine();
+            String[] tokens = ballot.split(",");
 
-    public ArrayList<Party> coinToss(ArrayList<Party> tiedParties) {
-        ArrayList<Party> winners= new ArrayList<>();
-        return winners;
+            int index = tokens.length - 1;
+            parties[index].setNumVotes(parties[index].getNumVotes() + 1);
+        }
+    }
+    // Simulates a fair coin toss to break a tie between a list of parties.
+    public Party coinToss(ArrayList<Party> winners) {
+        Random rand = new Random();
+        
+        // The winning index is randomized 1000 times and the winner
+        // is chosen on the 1001th time to simulate a fair coin toss.  
+        int index = rand.nextInt(winners.size());
+        for(int i = 0; i < 1000; i++) {
+            index = rand.nextInt(winners.size());
+        }
+
+        return winners[index];
     }
 
     public void allocateSeats() {
