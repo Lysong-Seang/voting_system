@@ -9,12 +9,8 @@ public class Election{
     protected int totalSeats;
     protected ArrayList<Party> parties;
     protected int quota;
-<<<<<<< HEAD
-    protected Scanner fileReader;
     protected ArrayList<Candidate> winnerList;
-=======
     protected BufferedReader br;
->>>>>>> 2117d0a75dd77736978d269d3fbb54a2c99d6728
 
     // Initializes the variables of the Election class.
     public Election(int totalVotes, int totalSeats, ArrayList<Party> parties, BufferedReader br){
@@ -32,20 +28,15 @@ public class Election{
 
     // Counts the votes for each party.
     public void voteCounting() {
-<<<<<<< HEAD
-    }
-=======
-
         //Reads through each ballot and counts each parties ballots. 
         for (int i = 0; i < totalVotes; i++) {
             String ballot = br.readLine();
             String[] tokens = ballot.split(",");
->>>>>>> 2117d0a75dd77736978d269d3fbb54a2c99d6728
-
             int index = tokens.length - 1;
             parties[index].setNumVotes(parties[index].getNumVotes() + 1);
         }
     }
+
     // Simulates a fair coin toss to break a tie between a list of parties.
     public Party coinToss(ArrayList<Party> winners) {
         Random rand = new Random();
