@@ -78,8 +78,22 @@ public class Election{
         }
     }
 
-    public void findWinners() {
+    public ArrayList<String> findWinners() {
+        int largestVote = -1;
+        ArrayList<String> winners;
         
+        for (Party party: parties) {
+            int thisPartyVote = party.getNumVotes();
+            String thisPartyName = party.getName();
+            if (largestVote < thisPartyVote) {
+                largestVote = thisPartyVote;
+                winners.clear();
+                winners.add(thisPartyName);
+            } else if (largestVote == thisPartyVote) {
+                winners.add(thisPartyName);
+            }
+        }
+        return winners;
     }
 
     public void displayResults() {
