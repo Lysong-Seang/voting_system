@@ -65,16 +65,28 @@ public class Election{
         //for each party in a round-robin fashion.
         while (remainingSeats > 0){
             int largestRemainingVotes = -1;
-            Party allocatedParty;
+            ArrayList<Party> largestVoteParties; allocatedParty;
             for (Party party: parties) {
                 //calculate remaining votes
                 int remainingVotes = party.getNumVotes() - this.quota * party.getNumAllocatedSeats();
                 if (remainingVotes > largestRemainingVotes) {
                     largestRemainingVotes = remainingVotes;
-                    allocatedParty = party;
+                    largestVoteParties.clear();
+                    largestVoteParties.add(party);
+                } else if (remainingVotes == largestRemainingVotes) {
+                    largestVoteParties.add(party);
                 }
             }
-            allocatedParty.setNumAllocatedSeats(allocatedParty.getNumAllocatedSeats() + 1);
+            if (largestVoteParties.size() == 1) {
+                Party allocatedParty = largestVoteParties.get(0);
+                allocatedParty.setNumAllocatedSeats(allocatedParty.getNumAllocatedSeats() + 1);
+                remainingSeats -= 1;
+            } else if (largestVoteParties.size() > 1) {
+                //coin toss to determine seat allocation
+                Party allocatedParty = coinToss(largestVoteParties);
+                allocatedParty.setNumAllocatedSeats(allocatedParty.getNumAllocatedSeats() + 1);
+                remainingSeats -= 1;
+            }
         }
     }
 
