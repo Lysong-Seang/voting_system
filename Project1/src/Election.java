@@ -9,7 +9,7 @@ public class Election{
     protected int totalSeats;
     protected ArrayList<Party> parties;
     protected int quota;
-    protected ArrayList<Candidate> winnerList;
+    protected ArrayList<Party> winnerList;
     protected BufferedReader br;
 
     // Initializes the variables of the Election class.
@@ -18,6 +18,7 @@ public class Election{
         this.totalSeats = totalSeats;
         this.parties = parties;
         this.br = br;
+        winnerList = new ArrayList<>();
     }
 
     // Calculates the quota which is the floor of the 
@@ -90,22 +91,19 @@ public class Election{
         }
     }
 
-    public ArrayList<String> findWinners() {
+    public void findWinners() {
         int largestVote = -1;
-        ArrayList<String> winners;
         
         for (Party party: parties) {
             int thisPartyVote = party.getNumVotes();
-            String thisPartyName = party.getName();
             if (largestVote < thisPartyVote) {
                 largestVote = thisPartyVote;
-                winners.clear();
-                winners.add(thisPartyName);
+                winnerList.clear();
+                winnerList.add(party);
             } else if (largestVote == thisPartyVote) {
-                winners.add(thisPartyName);
+                winnerList.add(party);
             }
         }
-        return winners;
     }
 
     public void displayResults() {

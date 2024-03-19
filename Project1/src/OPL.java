@@ -4,6 +4,8 @@ import java.util.Random;
 import java.io.BufferedReader;
 
 public class OPL extends Election{
+    protected ArrayList<Candidate> winnerList;
+
     public OPL(int totalVotes, int totalSeats, ArrayList<Party> parties, BufferedReader br){
         super(totalVotes, totalSeats, parties, br);
     }
