@@ -9,7 +9,7 @@ public class Election{
     protected int totalSeats;
     protected ArrayList<Party> parties;
     protected int quota;
-    protected ArrayList<Party> winnerList;
+    protected ArrayList<Candidates> winnerList;
     protected BufferedReader br;
 
     // Initializes the variables of the Election class.
@@ -66,7 +66,7 @@ public class Election{
         //for each party in a round-robin fashion.
         while (remainingSeats > 0){
             int largestRemainingVotes = -1;
-            ArrayList<Party> largestVoteParties; allocatedParty;
+            ArrayList<Party> largestVoteParties;
             for (Party party: parties) {
                 //calculate remaining votes
                 int remainingVotes = party.getNumVotes() - this.quota * party.getNumAllocatedSeats();
@@ -92,18 +92,14 @@ public class Election{
     }
 
     public void findWinners() {
-        int largestVote = -1;
-        
         for (Party party: parties) {
-            int thisPartyVote = party.getNumVotes();
-            if (largestVote < thisPartyVote) {
-                largestVote = thisPartyVote;
-                winnerList.clear();
-                winnerList.add(party);
-            } else if (largestVote == thisPartyVote) {
-                winnerList.add(party);
+            int thisPartySeats = party.getNumAllcoatedSeats();
+            ArrayList<Candidate> thisPartyCandidates = party.getCandidates();
+            int maxAllocation = Math.max(thisPartySeats, thisPartyCandidates.size());
+            for (int i=0; i<maxAllocation; i++) {
+                this.winnerList.add(thisPartyCandidates.get(i));
             }
-        }
+        } 
     }
 
     public void displayResults() {
