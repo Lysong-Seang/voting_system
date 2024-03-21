@@ -8,8 +8,8 @@ import java.io.BufferedReader;
  * @author Crystal Wen and Shunichi Sawamura
 */
 public class OPL extends Election{
-    protected ArrayList<Candidate> winnerList;
-    protected ArrayList<Candidate> candidates; 
+    private ArrayList<Candidate> winnerList;
+    private ArrayList<Candidate> candidates; 
 
     /**
      * The constructor for OPL. It initalizes all variables when a user calls it.
