@@ -12,7 +12,7 @@ public class Election{
     protected int totalSeats;
     protected ArrayList<Party> parties;
     protected int quota;
-    protected ArrayList<Party> winnerList;
+    protected ArrayList<Candidates> winnerList;
     protected BufferedReader br;
 
     /**
@@ -22,7 +22,6 @@ public class Election{
      * @param parties
      * @param br
      */
-
     public Election(int totalVotes, int totalSeats, ArrayList<Party> parties, BufferedReader br){
         this.totalVotes = totalVotes;
         this.totalSeats = totalSeats;
@@ -90,7 +89,7 @@ public class Election{
         //for each party in a round-robin fashion.
         while (remainingSeats > 0){
             int largestRemainingVotes = -1;
-            ArrayList<Party> largestVoteParties; allocatedParty;
+            ArrayList<Party> largestVoteParties;
             for (Party party: parties) {
                 //calculate remaining votes
                 int remainingVotes = party.getNumVotes() - this.quota * party.getNumAllocatedSeats();
@@ -131,12 +130,9 @@ public class Election{
             } else if (largestVote == thisPartyVote) {
                 winnerList.add(party);
             }
-        }
+        } 
     }
 
-    /**
-     * Calls the DisplayResults class to display the results of the election.
-     */
     public void displayResults() {
         DisplayResults results = new DisplayResults(
                 "CPL", 
