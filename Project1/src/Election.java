@@ -133,6 +133,9 @@ public class Election{
         } 
     }
 
+    /**
+     * Calls the Display class to display the results of the election.
+     */
     public void displayResults() {
         DisplayResults results = new DisplayResults(
                 "CPL", 
