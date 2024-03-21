@@ -4,7 +4,7 @@ import java.util.Random;
 import java.io.BufferedReader;
 
 /**
- * This is the OPL class that inherits from the Election class and runs an OPL type election.
+ * The OPL class that inherits from the Election class and runs an OPL type election.
  * @author Crystal Wen and Shunichi Sawamura
 */
 public class OPL extends Election{
