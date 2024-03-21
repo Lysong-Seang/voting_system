@@ -118,17 +118,12 @@ public class Election{
      * Finds the winner based on the party with the most votes.
      */
     public void findWinners() {
-        int largestVote = -1;
-        
-        // Finds the party with most amount of votes.
         for (Party party: parties) {
-            int thisPartyVote = party.getNumVotes();
-            if (largestVote < thisPartyVote) {
-                largestVote = thisPartyVote;
-                winnerList.clear();
-                winnerList.add(party);
-            } else if (largestVote == thisPartyVote) {
-                winnerList.add(party);
+            int thisPartySeats = party.getNumAllcoatedSeats();
+            ArrayList<Candidate> thisPartyCandidates = party.getCandidates();
+            int maxAllocation = Math.max(thisPartySeats, thisPartyCandidates.size());
+            for (int i=0; i<maxAllocation; i++) {
+                this.winnerList.add(thisPartyCandidates.get(i));
             }
         } 
     }
