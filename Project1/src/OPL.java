@@ -46,7 +46,7 @@ public class OPL extends Election{
             int canIndex = parties.get(partyIndex).getCandidates.indexOf(candidate.getName());
 
             parties.get(partyIndex).getCandidates.get(canIndex).setNumVotes(candidateVotes);
-            parties.get(partyIndex).setNumVotes(parties.get(partyIndex).getNumVotes() + candidateVotes)
+            parties.get(partyIndex).setNumVotes(parties.get(partyIndex).getNumVotes() + candidateVotes);
         }
     }
 
@@ -70,8 +70,31 @@ public class OPL extends Election{
     }
 
     @Override
-    public ArrayList<String> findWinners() {
-        return null;
+    public void findWinners() {
+        for (Party party: parties) {
+            int thisPartySeats = party.getNumAllcoatedSeats();
+            ArrayList<Candidate> thisPartyCandidates = party.getCandidates();
+            int maxAllocation = Math.max(thisPartySeats, thisPartyCandidates.size());
+            for (int i=0; i<maxAllocation; i++) {
+                int largestVote = -1;
+                ArrayList<Candidate> largestVoteCandidates;
+                for (Candidate candidate: thisPartyCandidates) {
+                    int thisCandidateVote = candidate.getNumVotes();
+                    if (largestVote < thisCandidateVote && !this.winnerList.contains(candidate)) {
+                        largestVoteCandidate.clear();
+                        largestVoteCandidates.add(candidate);
+                        largestVote = thisCandidateVote;
+                    } else if (largestVote == thisCandidateVote && !this.winnerList.contains(candidate)) {
+                        largestVoteCandidates.add(candidate);
+                    }
+                }
+                if (largestVoteCandidates.size() == 1) {
+                    this.winnerList.add(largestVoteCandidates.get(0));
+                } else if (largestVoteCandidates.size() > 1) {
+                    this.winnerList.add(coinTossOPL(largestVoteCandidates));
+                }
+            }
+        }
     }
 
     @Override
