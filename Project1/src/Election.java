@@ -1,9 +1,12 @@
-// import java.io.File;
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.Random;
 import java.io.BufferedReader;
 
+/**
+ * This is the parent class to both the CPL and OPL class. 
+ * It has the methods required to run both types of elections.
+ * @author Crystal Wen and Shunichi Sawamura
+ */
 public class Election{
     protected int totalVotes;
     protected int totalSeats;
@@ -12,7 +15,14 @@ public class Election{
     protected ArrayList<Party> winnerList;
     protected BufferedReader br;
 
-    // Initializes the variables of the Election class.
+    /**
+     * Initializes the variables of the Election class.
+     * @param totalVotes
+     * @param totalSeats
+     * @param parties
+     * @param br
+     */
+
     public Election(int totalVotes, int totalSeats, ArrayList<Party> parties, BufferedReader br){
         this.totalVotes = totalVotes;
         this.totalSeats = totalSeats;
@@ -21,24 +31,35 @@ public class Election{
         winnerList = new ArrayList<>();
     }
 
-    // Calculates the quota which is the floor of the 
-    // total number of votes divided by the total number of seats.
+    /**
+     * Calculates the quota which is the floor of the 
+     * total number of votes divided by the total number of seats.
+     * @return quota
+     */
     public int calculateQuota(){
-        return (int) Math.floor(totalVotes/totalSeats);
+        int quota = (int) Math.floor(totalVotes/totalSeats);
+        return quota;
     }
 
-    // Counts the votes for each party.
+    /**
+     * Counts the votes for each party.
+     * This will not work if the total number of votes is less than or equal to 0.
+     */
     public void voteCounting() {
         //Reads through each ballot and counts each parties ballots. 
         for (int i = 0; i < totalVotes; i++) {
             String ballot = br.readLine();
             String[] tokens = ballot.split(",");
             int index = tokens.length - 1;
-            parties[index].setNumVotes(parties[index].getNumVotes() + 1);
+            parties.get(index).setNumVotes(parties.get(index).getNumVotes() + 1);
         }
     }
 
-    // Simulates a fair coin toss to break a tie between a list of parties.
+    /**
+     * Simulates a fair coin toss to break a tie between a list of parties.
+     * @param winners
+     * @return The randomly chosen index of winner 
+     */
     public Party coinToss(ArrayList<Party> winners) {
         Random rand = new Random();
         
@@ -49,16 +70,19 @@ public class Election{
             index = rand.nextInt(winners.size());
         }
 
-        return winners[index];
+        return winners.get(index);
     }
 
+    /**
+     * Allocate seats to each party.
+     */
     public void allocateSeats() {
         int remainingSeats = this.totalSeats;
         //divide the number of votes that each party gets by the quota.
         for (Party party: parties) {
             //seat allocation first round
             int firstAllocatedSeats = party.getNumVotes() / this.quota;
-            party.setNumAllocatedSeats(firstAllocateSeats);
+            party.setNumAllocatedSeats(firstAllocatedSeats);
             remainingSeats -= firstAllocatedSeats;
             //update 
         }
@@ -91,9 +115,13 @@ public class Election{
         }
     }
 
+    /**
+     * Finds the winner based on the party with the most votes.
+     */
     public void findWinners() {
         int largestVote = -1;
         
+        // Finds the party with most amount of votes.
         for (Party party: parties) {
             int thisPartyVote = party.getNumVotes();
             if (largestVote < thisPartyVote) {
@@ -106,6 +134,9 @@ public class Election{
         }
     }
 
+    /**
+     * Calls the DisplayResults class to display the results of the election.
+     */
     public void displayResults() {
         DisplayResults results = new DisplayResults(
                 "CPL", 
@@ -116,10 +147,13 @@ public class Election{
                 );
     }
 
+    /**
+     * Calls the Audit class to create an audit file.
+     */
     public void auditFile() {
         Audit auditFile = new Audit(
                 "CPL",
-                this.parties.size();
+                this.parties.size(),
                 this.totalVotes,
                 this.totalSeats,
                 this.winnerList
