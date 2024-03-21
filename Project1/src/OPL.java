@@ -96,9 +96,4 @@ public class OPL extends Election{
             }
         }
     }
-
-    @Override
-    public void auditFile() {
-
-    }
 }
