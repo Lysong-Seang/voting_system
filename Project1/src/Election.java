@@ -12,12 +12,12 @@ import java.util.Random;
  * @author Shunichi Sawamura
  */
 public class Election{
-    protected int totalVotes;
-    protected int totalSeats;
-    protected ArrayList<Party> parties;
-    protected int quota;
-    protected ArrayList<Candidate> winnerList;
-    protected BufferedReader br;
+    public int totalVotes;
+    public int totalSeats;
+    public ArrayList<Party> parties;
+    public int quota;
+    public ArrayList<Candidate> winnerList;
+    public BufferedReader br;
 
     /**
      * Initializes the variables of the Election class.

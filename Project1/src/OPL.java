@@ -12,8 +12,8 @@ import java.util.Random;
  * @author Shunichi Sawamura
 */
 public class OPL extends Election{
-    private ArrayList<Candidate> winnerList;
-    private ArrayList<Candidate> candidates; 
+    public ArrayList<Candidate> winnerList;
+    public ArrayList<Candidate> candidates; 
 
     /**
      * The constructor for OPL. It initalizes all variables when a user calls it.

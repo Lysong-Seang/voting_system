@@ -13,6 +13,7 @@ import java.util.Random;
 public class TestCPL {
     @Test
     public void testCPLVoteCounting() {
+        ArrayList<Party> expected = new ArrayList<>();
         ArrayList<Party> actual = new ArrayList<>();
 
         ArrayList<Candidate> demCandidates = new ArrayList<>();
@@ -39,7 +40,9 @@ public class TestCPL {
         
         indepCandidates.add(new Candidate("Mike", "Independent", 0));
 
-        actual.add
+        actual.add(new Party("Democratic", 3, demCandidates));
+        actual.add(new Party("Republican", 2, repCandidates));
+        actual.add(new Party())
     }
 }
 
