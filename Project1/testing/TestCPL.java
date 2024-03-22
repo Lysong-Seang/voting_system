@@ -6,18 +6,19 @@ import src.Party;
 import src.Candidate;
 import src.CPL;
 
+import static org.junit.Assert.assertEquals;
+
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class TestCPL {
-    @Test
-    public void testCalculateQuota() {
+    // @Test
+    // public void testCalculateQuota() {
 
-    }
+    // }
 
     @Test
-    public void testVoteCounting() {
+    public void testVoteCounting() throws IOException {
         ArrayList<Party> expected = new ArrayList<>();
         ArrayList<Party> actual = new ArrayList<>();
 
@@ -51,21 +52,43 @@ public class TestCPL {
         expected.add(new Party("Reform", 2, reformCandidates));
         expected.add(new Party("Green", 1, greenCandidates));
         expected.add(new Party("Independent", 1, indepCandidates));
-    }
 
-    @Test
-    public void testCoinToss(){
+        actual.add(new Party("Democratic", 0, demCandidates));
+        actual.add(new Party("Republican", 0, repCandidates));
+        actual.add(new Party("New Wave", 0, waveCandidates));
+        actual.add(new Party("Reform", 0, reformCandidates));
+        actual.add(new Party("Green", 0, greenCandidates));
+        actual.add(new Party("Independent", 0, indepCandidates));
 
-    }
+        int totalVotes = 9;
+        int totalSeats = 3;
 
-    @Test
-    public void testAllocateSeats() {
+        FileReader fileReader = new FileReader("Project1/testing/testCPLVote.csv");
+        BufferedReader br = new BufferedReader(fileReader);
 
-    }
-
-    @Test void testFindWinners(){
+        CPL cpl = new CPL(totalVotes, totalSeats, actual, br);
+        cpl.voteCounting();
+        
+        for(int i = 0; i < expected.size(); i++) {
+            assertEquals(expected.get(i).getNumVotes(), cpl.parties.get(i).getNumVotes());
+        }
         
     }
+
+    // @Test
+    // public void testCoinToss(){
+
+    // }
+
+    // @Test
+    // public void testAllocateSeats() {
+
+    // }
+
+    // @Test 
+    // public void testFindWinners(){
+
+    // }
 }
 
 
