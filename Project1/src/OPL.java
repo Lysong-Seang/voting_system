@@ -1,7 +1,10 @@
+package src;
+
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Random;
-import java.io.BufferedReader;
+//import java.io.BufferedReader;
 
 /**
  * The OPL class that inherits from the Election class and runs an OPL type election.
@@ -30,23 +33,58 @@ public class OPL extends Election{
      * Counts the votes each candidate and their respective party has.
      */
     @Override
-    public void voteCounting() {
+    public void voteCounting() throws IOException {
         //Sums up the number of votes for each candidate.
         for (int i = 0; i < totalVotes; i++) {
             String ballot = br.readLine();
+            //DELETE LATER
+            System.out.println(ballot);
             String[] tokens = ballot.split(",");
             int index = tokens.length - 1;
             candidates.get(index).setNumVotes(candidates.get(index).getNumVotes() + 1);
         }
 
+
+        //DELETE
+        for (Candidate candidate: candidates) {
+            System.out.println("+++" + candidate.getParty() + "+++");
+        }
+        System.out.println("");
+        for (Party party: parties) {
+            System.out.println("+++" + party.getName() + "+++");
+            for (Candidate candidate: candidates) {
+                if (candidate.getParty().equals(party.getName())) {
+                    System.out.println("party name: " + party.getName() + " matches with candidate data");
+                }
+            }
+        }
+        //
+        
         /*Finds the party of each respective candidate and sums up the votes of the candiates
         in their respective party to determine the number of votes that their party gets. */ 
         for (Candidate candidate:candidates) {
+            //DELETE LATER
+            System.out.println(candidate.getName());
             int candidateVotes = candidate.getNumVotes();
-            int partyIndex = parties.indexOf(candidate.getParty());
-            int canIndex = parties.get(partyIndex).getCandidates.indexOf(candidate.getName());
+            //UPDATE PART
+            int partyIndex = -5;
+            for (int i=0; i<parties.size(); i++) {
+                if (parties.get(i).getName().equals(candidate.getParty())) {
+                    partyIndex = i;
+                }
+            }
+            //int partyIndex = parties.indexOf(candidate.getParty());
+            System.out.println("party index: " + partyIndex); // Delete later
+            int canIndex = -5;
+            //int canIndex = parties.get(partyIndex).getCandidates().indexOf(candidate.getName());
+            for (int i=0; i<parties.get(partyIndex).getCandidates().size(); i++) {
+                if (parties.get(partyIndex).getCandidates().get(i).getName().equals(candidate.getName())) {
+                    canIndex = i;
+                }
+            }
+            System.out.println("candidate index: " + canIndex); // Delete later
 
-            parties.get(partyIndex).getCandidates.get(canIndex).setNumVotes(candidateVotes);
+            parties.get(partyIndex).getCandidates().get(canIndex).setNumVotes(candidateVotes);
             parties.get(partyIndex).setNumVotes(parties.get(partyIndex).getNumVotes() + candidateVotes);
         }
     }
@@ -75,16 +113,14 @@ public class OPL extends Election{
     @Override
     public void findWinners() {
         for (Party party: parties) {
-            int thisPartySeats = party.getNumAllcoatedSeats();
+            int thisPartySeats = party.getNumAllocatedSeats();
             ArrayList<Candidate> thisPartyCandidates = party.getCandidates();
             int maxAllocation = Math.max(thisPartySeats, thisPartyCandidates.size());
 
             // Goes through all of the party in the election.
             for (int i=0; i<maxAllocation; i++) {
                 int largestVote = -1;
-                ArrayList<Candidate> largestVoteCandidates;
-
-                // Finds the candidate with the most vote.
+                ArrayList<Candidate> largestVoteCandidates = new ArrayList<Candidate>();
                 for (Candidate candidate: thisPartyCandidates) {
                     int thisCandidateVote = candidate.getNumVotes();
                     

@@ -1,6 +1,9 @@
+package src;
+
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Random;
-import java.io.BufferedReader;
+//import java.io.BufferedReader;
 
 /**
  * This is the parent class to both the CPL and OPL class. 
@@ -13,7 +16,7 @@ public class Election{
     protected int totalSeats;
     protected ArrayList<Party> parties;
     protected int quota;
-    protected ArrayList<Candidates> winnerList;
+    protected ArrayList<Candidate> winnerList;
     protected BufferedReader br;
 
     /**
@@ -37,7 +40,7 @@ public class Election{
      * @return quota
      */
     public int calculateQuota(){
-        int quota = (int) Math.floor(totalVotes/totalSeats);
+        quota = (int) Math.floor(totalVotes/totalSeats);
         return quota;
     }
 
@@ -45,8 +48,8 @@ public class Election{
      * Counts the votes for each party.
      * This will not work if the total number of votes is less than or equal to 0.
      */
-    public void voteCounting() {
-        // Reads through each ballot and counts each parties ballots. 
+    public void voteCounting() throws IOException {
+        //Reads through each ballot and counts each parties ballots. 
         for (int i = 0; i < totalVotes; i++) {
             String ballot = br.readLine();
             String[] tokens = ballot.split(",");
@@ -91,8 +94,8 @@ public class Election{
         //for each party in a round-robin fashion.
         while (remainingSeats > 0){
             int largestRemainingVotes = -1;
-            ArrayList<Party> largestVoteParties;
-            
+            ArrayList<Party> largestVoteParties = new ArrayList<Party>();
+
             //here
             for (Party party: parties) {
                 //calculate remaining votes
@@ -126,7 +129,7 @@ public class Election{
     public void findWinners() {
         //here
         for (Party party: parties) {
-            int thisPartySeats = party.getNumAllcoatedSeats();
+            int thisPartySeats = party.getNumAllocatedSeats();
             ArrayList<Candidate> thisPartyCandidates = party.getCandidates();
             int maxAllocation = Math.max(thisPartySeats, thisPartyCandidates.size());
 
@@ -146,7 +149,7 @@ public class Election{
                 this.parties.size(), 
                 this.totalVotes, 
                 this.totalSeats,
-                this.winnerList,
+                this.winnerList
                 );
     }
 
@@ -159,7 +162,8 @@ public class Election{
                 this.parties.size(),
                 this.totalVotes,
                 this.totalSeats,
-                this.winnerList
+                this.winnerList,
+                this.parties
                 );
     }
 

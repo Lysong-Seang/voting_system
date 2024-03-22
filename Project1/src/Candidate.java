@@ -1,12 +1,15 @@
+package src;
+
+
 public class Candidate {
     String name;
-    int votes;
+    int numVotes;
     String partyName;
 
-    public Candidate(String name, String partyName){
+    public Candidate(String name, String partyName, int numVotes){
         this.name = name;
         this.partyName = partyName;
-        this.votes = 0;
+        this.numVotes = numVotes;
     }
 
     public String getName() {
@@ -17,21 +20,22 @@ public class Candidate {
         this.name = name;
     }
 
-    public int getVotes() {
-        return votes;
+    public int getNumVotes() {
+        return numVotes;
     }
 
-    public void setVotes(int votes) {
-        this.votes = votes;
+    public void setNumVotes(int numVotes) {
+        this.numVotes = numVotes;
     }
 
-    public String getPartyName() {
+    public String getParty() {
         return partyName;
     }
 
+    /*
     public void setPartyName(String partyName) {
         this.partyName = partyName;
-    }
+    }*/
     
 
 }
