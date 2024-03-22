@@ -12,7 +12,12 @@ import java.util.Random;
 
 public class TestCPL {
     @Test
-    public void testCPLVoteCounting() {
+    public void testCalculateQuota() {
+
+    }
+
+    @Test
+    public void testVoteCounting() {
         ArrayList<Party> expected = new ArrayList<>();
         ArrayList<Party> actual = new ArrayList<>();
 
@@ -46,7 +51,19 @@ public class TestCPL {
         expected.add(new Party("Reform", 2, reformCandidates));
         expected.add(new Party("Green", 1, greenCandidates));
         expected.add(new Party("Independent", 1, indepCandidates));
+    }
 
+    @Test
+    public void testCoinToss(){
+
+    }
+
+    @Test
+    public void testAllocateSeats() {
+
+    }
+
+    @Test void testFindWinners(){
         
     }
 }
