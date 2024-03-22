@@ -149,7 +149,8 @@ public class Election{
                 this.parties.size(), 
                 this.totalVotes, 
                 this.totalSeats,
-                this.winnerList
+                this.winnerList,
+                this.parties
                 );
     }
 

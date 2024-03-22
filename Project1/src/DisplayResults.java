@@ -26,13 +26,14 @@ public class DisplayResults {
      */
 
     public DisplayResults(String electionType, int numParties, int numBallots, int numSeats,
-                          ArrayList<Candidate> winnerList) {
+                          ArrayList<Candidate> winnerList, ArrayList<Party> parties) {
         this.electionType = electionType;
         this.numParties = numParties;
         this.numBallots = numBallots;
         this.numSeats = numSeats;
         this.winnerList = winnerList;
         this.quota = numBallots / numSeats;
+        this.parties = parties;
 
     }
     /**
@@ -44,7 +45,7 @@ public class DisplayResults {
 
     public void displayResults() {
         System.out.println("----Election Results----\n");
-        System.out.println("Election type: \n" + electionType);
+        System.out.println("Election type: " + electionType);
         System.out.println("Number of Parties: " + parties.size());
         int count=0;
         for (int i=0 ; i<parties.size(); i++){
@@ -54,7 +55,7 @@ public class DisplayResults {
         System.out.println("Number of Candidates: " + count);
 
         System.out.println("Number of Seats: " + numSeats);
-        System.out.println("Number of Ballots: \n" + numBallots);
+        System.out.println("Number of Ballots: " + numBallots);
         System.out.println("Number of Quotas : "+ this.quota);
         if (electionType.equals("CPL")) {
             for (int i = 0; i < parties.size(); i++) {

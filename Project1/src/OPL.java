@@ -159,7 +159,10 @@ public class OPL extends Election{
                 this.totalVotes, 
                 this.totalSeats,
                 this.winnerList,
+                this.parties
                 );
+
+        results.displayResults();
     }
 
     /**
@@ -172,7 +175,16 @@ public class OPL extends Election{
                 this.parties.size(),
                 this.totalVotes,
                 this.totalSeats,
-                this.winnerList
+                this.winnerList,
+                this.parties
                 );
+        
+        try {
+            auditFile.audit();
+        } catch (IOException e) {
+            System.out.println("Fail to generate audit file");
+        }
+
+
     }
 }

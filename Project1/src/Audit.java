@@ -97,7 +97,7 @@ public class Audit {
                             (winnerList.get(i).getNumVotes()/(double)numBallots)*100+ " / "+winnerList.get(i).getNumVotes()+")");
 
                 }
-               writer.write("\n");
+                writer.write("\n");
                 writer.write("***** Candidate *****\n");
                 for(int j=0; j< parties.size(); j++){
                     ArrayList<Candidate> arrayName = parties.get(j).getCandidates();
@@ -108,7 +108,7 @@ public class Audit {
                     }
                     writer.write(arrayName.get(arrayName.size()-1).getName()+"\n");
                 }
-
+                writer.close();
 
             }
         }
