@@ -5,7 +5,8 @@ import java.io.BufferedReader;
 /**
  * This is the parent class to both the CPL and OPL class. 
  * It has the methods required to run both types of elections.
- * @author Crystal Wen and Shunichi Sawamura
+ * @author Crystal Wen
+ * @author Shunichi Sawamura
  */
 public class Election{
     protected int totalVotes;
@@ -45,7 +46,7 @@ public class Election{
      * This will not work if the total number of votes is less than or equal to 0.
      */
     public void voteCounting() {
-        //Reads through each ballot and counts each parties ballots. 
+        // Reads through each ballot and counts each parties ballots. 
         for (int i = 0; i < totalVotes; i++) {
             String ballot = br.readLine();
             String[] tokens = ballot.split(",");
@@ -62,8 +63,8 @@ public class Election{
     public Party coinToss(ArrayList<Party> winners) {
         Random rand = new Random();
         
-        // The winning index is randomized 1000 times and the winner
-        // is chosen on the 1001th time to simulate a fair coin toss.  
+        /* The winning index is randomized 1000 times and the winner
+        is chosen on the 1001th time to simulate a fair coin toss. */
         int index = rand.nextInt(winners.size());
         for(int i = 0; i < 1000; i++) {
             index = rand.nextInt(winners.size());
@@ -85,11 +86,14 @@ public class Election{
             remainingSeats -= firstAllocatedSeats;
             //update 
         }
+
         //Distribute remaining seats by comparing the largest remainder of votes 
         //for each party in a round-robin fashion.
         while (remainingSeats > 0){
             int largestRemainingVotes = -1;
             ArrayList<Party> largestVoteParties;
+            
+            //here
             for (Party party: parties) {
                 //calculate remaining votes
                 int remainingVotes = party.getNumVotes() - this.quota * party.getNumAllocatedSeats();
@@ -101,6 +105,8 @@ public class Election{
                     largestVoteParties.add(party);
                 }
             }
+
+            //here
             if (largestVoteParties.size() == 1) {
                 Party allocatedParty = largestVoteParties.get(0);
                 allocatedParty.setNumAllocatedSeats(allocatedParty.getNumAllocatedSeats() + 1);
@@ -115,13 +121,16 @@ public class Election{
     }
 
     /**
-     * Finds the winner based on the party with the most votes.
-     */
+     * Finds the winner based on the party with the most seats.
+    */
     public void findWinners() {
+        //here
         for (Party party: parties) {
             int thisPartySeats = party.getNumAllcoatedSeats();
             ArrayList<Candidate> thisPartyCandidates = party.getCandidates();
             int maxAllocation = Math.max(thisPartySeats, thisPartyCandidates.size());
+
+            //here
             for (int i=0; i<maxAllocation; i++) {
                 this.winnerList.add(thisPartyCandidates.get(i));
             }
