@@ -92,7 +92,7 @@ public class TestCPL {
     }
 
     @Test
-    public void testCoinToss() throws FileNotFoundException{
+    public void testCoinTossCPL() throws FileNotFoundException{
         ArrayList<Party> parties = new ArrayList<>();
         int totalVotes = 10000;
         int totalSeats = 3;
