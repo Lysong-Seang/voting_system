@@ -7,15 +7,31 @@ import src.Candidate;
 import src.CPL;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.io.*;
 import java.util.ArrayList;
 
 public class TestCPL {
-    // @Test
-    // public void testCalculateQuota() {
+    @Test
+    public void testCalculateQuota() throws IOException {
+        ArrayList<Party> parties = new ArrayList<>();
+        int totalVotes = 10000;
+        int totalSeats = 3;
+        FileReader fileReader = new FileReader("Project1/testing/testCPLVote.csv");
+        BufferedReader br = new BufferedReader(fileReader);
+        
+        CPL cpl = new CPL(totalVotes, totalSeats, parties, br);
+        int actual = cpl.calculateQuota();
+        assertEquals(3333, actual);
 
-    // }
+        totalVotes = 10;
+        totalSeats = 5;
+
+        cpl = new CPL(totalVotes, totalSeats, parties, br);
+        actual = cpl.calculateQuota();
+        assertEquals(2, actual);
+    }
 
     @Test
     public void testVoteCounting() throws IOException {
@@ -68,17 +84,36 @@ public class TestCPL {
 
         CPL cpl = new CPL(totalVotes, totalSeats, actual, br);
         cpl.voteCounting();
-        
+
         for(int i = 0; i < expected.size(); i++) {
             assertEquals(expected.get(i).getNumVotes(), cpl.parties.get(i).getNumVotes());
         }
         
     }
 
-    // @Test
-    // public void testCoinToss(){
+    @Test
+    public void testCoinToss() throws FileNotFoundException{
+        ArrayList<Party> parties = new ArrayList<>();
+        int totalVotes = 10000;
+        int totalSeats = 3;
+        FileReader fileReader = new FileReader("Project1/testing/testCPLVote.csv");
+        BufferedReader br = new BufferedReader(fileReader);
 
-    // }
+        ArrayList<Party> testWinner = new ArrayList<>();
+        testWinner.add(new Party("Democratic", 5, new ArrayList<>()));
+        testWinner.add(new Party("Republican", 5, new ArrayList<>()));
+
+        CPL cpl = new CPL(totalVotes, totalSeats, parties, br);
+        Party actualWinner = cpl.coinToss(testWinner);
+
+        assertNotNull(actualWinner);
+
+        testWinner.add(new Party("Reform", 5, new ArrayList<>()));
+        testWinner.add(new Party("Independent", 5, new ArrayList<>()));
+
+        actualWinner = cpl.coinToss(testWinner);
+        assertNotNull(actualWinner);
+    }
 
     // @Test
     // public void testAllocateSeats() {
