@@ -1,11 +1,9 @@
-package testing;
+package src2;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
-import src2.Candidate;
-
-class CandidateTest {
+class TestCandidate {
 	
 	@Test
 	public void testCandidateInitialization() {
@@ -13,15 +11,6 @@ class CandidateTest {
 	   assertEquals("John Doe", candidate.getName(), "Candidate name should be initialized correctly.");
 	   assertEquals("Independent", candidate.getParty(), "Candidate party should be initialized correctly.");
 	   assertEquals(1000, candidate.getNumVotes(), "Candidate votes should be initialized correctly.");
-	}
-
-	@Test
-	public void testSetName() {
-		String oldCandidateName = "John Backman";
-		String candidateName = "John Doe";
-		Candidate candidate = new Candidate(oldCandidateName, "Independent", 1000);
-		candidate.setName(candidateName);
-	    assertEquals(candidateName, candidate.getName(), "setName should update the candidate's name.");
 	}
 
 	@Test

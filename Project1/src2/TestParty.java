@@ -1,14 +1,11 @@
-package testing;
+package src2;
 
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
-import src2.Candidate;
-import src2.Party;
-
-class PartyTest {
+class TestParty {
 	
 	@Test
 	void testParty() {

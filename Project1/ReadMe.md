@@ -9,8 +9,8 @@ You must install Java on your local machine to be able to use the Voting System.
 
 ## Downloading
 Download the files from https://github.umn.edu/umn-csci-5801-01-S24/repo-Team16/tree/main/Project1 and save it to your local machine. Here are the following folders and files:
-- **./src**: This folder holds all of the program files.
-- **./testing**: This folder holds the test logs and all of the test files. Any files with a .java extension are the JUnit testing and manual testing files for the program files in "src".
+- **./src**: This folder holds all of the program files. All files that have a "Test" in the beginning are test files.
+- **./testing**: This folder holds the test logs and all of the test files.
 - **./documentation**: This folder holds all of the documentation documents.
 - **ReadMe.md**: This file provides the instructions to use the software.
 - **buglist.pdf**: This file documents the bugs and issues found during testing.

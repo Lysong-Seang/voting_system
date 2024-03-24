@@ -1,14 +1,9 @@
-package testing;
+package src2;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
-
-import src2.CPL;
-import src2.Candidate;
-import src2.OPL;
-import src2.Party;
 
 public class TestCoinToss {
     public static void testCoinTossCPL() throws FileNotFoundException{
