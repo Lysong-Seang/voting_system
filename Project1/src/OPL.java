@@ -46,19 +46,19 @@ public class OPL extends Election{
 
 
         //DELETE
-        for (Candidate candidate: candidates) {
-            System.out.println("+++" + candidate.getParty() + "+++");
-        }
-        System.out.println("");
-        for (Party party: parties) {
-            System.out.println("+++" + party.getName() + "+++");
-            for (Candidate candidate: candidates) {
-                if (candidate.getParty().equals(party.getName())) {
-                    System.out.println("party name: " + party.getName() + " matches with candidate data");
-                }
-            }
-        }
-        //
+        // for (Candidate candidate: candidates) {
+        //     System.out.println("+++" + candidate.getParty() + "+++");
+        // }
+        // System.out.println("");
+        // for (Party party: parties) {
+        //     System.out.println("+++" + party.getName() + "+++");
+        //     for (Candidate candidate: candidates) {
+        //         if (candidate.getParty().equals(party.getName())) {
+        //             System.out.println("party name: " + party.getName() + " matches with candidate data");
+        //         }
+        //     }
+        // }
+        // //
         
         /*Finds the party of each respective candidate and sums up the votes of the candiates
         in their respective party to determine the number of votes that their party gets. */ 
@@ -71,6 +71,7 @@ public class OPL extends Election{
             for (int i=0; i<parties.size(); i++) {
                 if (parties.get(i).getName().equals(candidate.getParty())) {
                     partyIndex = i;
+                    break;
                 }
             }
             //int partyIndex = parties.indexOf(candidate.getParty());
@@ -80,6 +81,7 @@ public class OPL extends Election{
             for (int i=0; i<parties.get(partyIndex).getCandidates().size(); i++) {
                 if (parties.get(partyIndex).getCandidates().get(i).getName().equals(candidate.getName())) {
                     canIndex = i;
+                    break;
                 }
             }
             System.out.println("candidate index: " + canIndex); // Delete later

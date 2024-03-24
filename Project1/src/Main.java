@@ -6,51 +6,48 @@ import java.util.Scanner;
 
 
 public class Main {
-    private String name;
-    private BufferedReader br;
-    private String electionType;
-    private ArrayList<Candidate> candidates;
-    private ArrayList <Party> parties;
-    private OPL opl;
-    private CPL cpl;
-    private int seats;
-    private int ballots;
+    // private String name;
+    // private BufferedReader br;
+    // private String electionType;
+    // private ArrayList<Candidate> candidates;
+    // private ArrayList <Party> parties;
+    // private OPL opl;
+    // private CPL cpl;
+    // private int seats;
+    // private int ballots;
 
-    public static void main(String[] args) throws IOException {
-        
-        String filename;
-        // file name given from command line argument
-        if (args.length > 0) {
-            filename = args[0];
-        // ask file name by text prompt
-        } else {
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("Please enter your file name: ");
-            filename = scanner.nextLine();
+    public static void runElection(String electionType, int totalVotes, int totalSeats, ArrayList<Party> parties, ArrayList<Candidate> candidates, BufferedReader br) throws IOException {
+        if (electionType.equals("CPL")) {
+            CPL cpl = new CPL(totalVotes, totalSeats, parties, br);
+            cpl.calculateQuota();
+            cpl.voteCounting();
+            cpl.allocateSeats();
+            cpl.findWinners();
+            cpl.auditFile();
+            cpl.displayResults();
         }
-        
-        Main main = new Main();
-        try {
-            main.readBallotFile(filename);
-            main.runElection();
-        } catch (NullPointerException e) {
-            System.out.println("End the Process");
+        if (electionType.equals("OPL")){
+            OPL opl = new OPL(totalVotes, totalSeats, parties, br, candidates);
+            opl.calculateQuota();
+            opl.voteCounting();
+            opl.allocateSeats();
+            opl.findWinners();
+            opl.auditFile();
+            opl.displayResults();
         }
+
     }
 
-    public Main(){
-        
-    }
-
-    public void readBallotFile(String file) throws IOException {
-        this.candidates = new ArrayList<Candidate>();
-        this.parties = new ArrayList<Party>();
+    public static void readBallotFile(String file) throws IOException {
+        ArrayList<Candidate> candidates = new ArrayList<Candidate>();
+        ArrayList <Party> parties = new ArrayList<Party>();
         ArrayList<String> partyNames = new ArrayList<String>();
+
         try{
 
             FileReader fileReader = new FileReader(file);
             BufferedReader reader = new BufferedReader(fileReader);
-            this.electionType = reader.readLine();
+            String electionType = reader.readLine();
             int totalSeats = Integer.parseInt(reader.readLine());
             int totalVotes= Integer.parseInt(reader.readLine());
             //this.seats = Integer.parseInt(reader.readLine());
@@ -59,13 +56,13 @@ public class Main {
 
             // read the candidate information which party they belong to
             // I am not sure should I use the parties arraylist or not
-            if (this.electionType.equals("OPL")){
+            if (electionType.equals("OPL")){
                 for (int i=0; i< numCandidateOrParties; i++ ){
                     String [] split = reader.readLine().split(",");
                     String partyn = split[0];
                     String name = split[1];
                     Candidate candidate = new Candidate(name, partyn, 0);
-                    this.candidates.add(candidate);
+                    candidates.add(candidate);
                     //save party name if it has not stored yet
                     if (!partyNames.contains(partyn)) {
                         partyNames.add(partyn);
@@ -96,9 +93,9 @@ public class Main {
 
                 }
 
-                this.opl = new OPL(totalVotes, totalSeats, parties, reader, candidates);
+                // this.opl = new OPL(totalVotes, totalSeats, parties, reader, candidates);
 
-            } else if (this.electionType.equals("CPL")) {
+            } else if (electionType.equals("CPL")) {
                 // after the loop the candidate arraylist will be clear out
                 // all information will in parties arraylist
 
@@ -114,31 +111,40 @@ public class Main {
                     Party party = new Party(partyn, 0, candidates);
                     parties.add(party);
                 }
-                this.cpl = new CPL(totalVotes, totalSeats, parties, reader);
+                // this.cpl = new CPL(totalVotes, totalSeats, parties, reader);
             }
+            runElection(electionType, totalVotes, totalSeats, parties, candidates, reader);
+            
         } catch (FileNotFoundException e){
             System.out.println("File does not exist");
         }
     }
 
-    public void runElection() throws IOException {
-        if (electionType.equals("CPL")) {
-            cpl.calculateQuota();
-            cpl.voteCounting();
-            cpl.allocateSeats();
-            cpl.findWinners();
-            cpl.auditFile();
-            cpl.displayResults();
+    public static void main(String[] args) throws IOException {
+        
+        String filename;
+        // file name given from command line argument
+        if (args.length > 0) {
+            filename = args[0];
+        // ask file name by text prompt
+        } else {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Please enter your file name: ");
+            filename = scanner.nextLine();
+            scanner.close();
         }
-        if (this.electionType.equals("OPL")){
-            opl.calculateQuota();
-            opl.voteCounting();
-            opl.allocateSeats();
-            opl.findWinners();
-            opl.auditFile();
-            opl.displayResults();
+        
+        // Main main = new Main();
+        try {
+            readBallotFile(filename);
+            // main.runElection();
+        } catch (NullPointerException e) {
+            System.out.println("End the Process");
         }
-
     }
+
+    // public Main(){
+        
+    // }
 
 }
