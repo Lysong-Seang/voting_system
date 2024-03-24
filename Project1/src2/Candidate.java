@@ -1,10 +1,9 @@
-package src;
-
+package src2;
 
 public class Candidate {
-    String name;
-    int numVotes;
-    String partyName;
+    private String name;
+    private int numVotes;
+    private String partyName;
 
     public Candidate(String name, String partyName, int numVotes){
         this.name = name;
@@ -31,11 +30,4 @@ public class Candidate {
     public String getParty() {
         return partyName;
     }
-
-    /*
-    public void setPartyName(String partyName) {
-        this.partyName = partyName;
-    }*/
-    
-
 }

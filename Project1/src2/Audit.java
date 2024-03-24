@@ -1,4 +1,4 @@
-package votingsystem;
+package src2;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -42,7 +42,7 @@ public class Audit {
         this.parties = parties;
         this.quota = numBallots / numSeats;
         LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy_MM_dd_HH_mm_ss");
         String formattedDateTime = now.format(formatter);
         this.fileName = "auditFile" + formattedDateTime + ".txt";
     }
@@ -53,8 +53,8 @@ public class Audit {
      * It also displays the winners and the number of seats allocated to each party, as well as the percentage of votes
      * received by each party and candidate.
      */
-    public void audit() throws IOException {    	
-    	
+    public void audit() throws IOException {
+        File f = new File("testing.txt");  	
         BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
         writer.write("Election type: " + electionType);
         writer.newLine();

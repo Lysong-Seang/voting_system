@@ -1,9 +1,8 @@
-package src;
+package src2;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Random;
-//import java.io.BufferedReader;
 
 /**
  * This is the parent class to both the CPL and OPL class. 
@@ -87,7 +86,6 @@ public class Election{
             int firstAllocatedSeats = party.getNumVotes() / this.quota;
             party.setNumAllocatedSeats(firstAllocatedSeats);
             remainingSeats -= firstAllocatedSeats;
-            //update 
         }
 
         //Distribute remaining seats by comparing the largest remainder of votes 
@@ -96,26 +94,32 @@ public class Election{
             int largestRemainingVotes = -1;
             ArrayList<Party> largestVoteParties = new ArrayList<Party>();
 
-            //here
+            //Checks remaining seats for each party and 
+            //figures out which party has the largest remaining votes.
             for (Party party: parties) {
-                //calculate remaining votes
+                //Calculate remaining votes.
                 int remainingVotes = party.getNumVotes() - this.quota * party.getNumAllocatedSeats();
+                //If current remaining votes are larger than current largest, update the largest votes.
                 if (remainingVotes > largestRemainingVotes) {
                     largestRemainingVotes = remainingVotes;
                     largestVoteParties.clear();
                     largestVoteParties.add(party);
+                //If it is same as the current largest, 
+                //record this party as one of the largest votes parties.
                 } else if (remainingVotes == largestRemainingVotes) {
                     largestVoteParties.add(party);
                 }
             }
 
-            //here
+            //If there is only one party that has the largest votes, give the seat to that party.
             if (largestVoteParties.size() == 1) {
                 Party allocatedParty = largestVoteParties.get(0);
                 allocatedParty.setNumAllocatedSeats(allocatedParty.getNumAllocatedSeats() + 1);
                 remainingSeats -= 1;
+            //If there are multiple parties that have the largest votes, 
+            //randomly picks one party to seat allocation.
             } else if (largestVoteParties.size() > 1) {
-                //coin toss to determine seat allocation
+                //Coin toss to determine seat allocation
                 Party allocatedParty = coinToss(largestVoteParties);
                 allocatedParty.setNumAllocatedSeats(allocatedParty.getNumAllocatedSeats() + 1);
                 remainingSeats -= 1;
@@ -127,13 +131,13 @@ public class Election{
      * Finds the winner based on the party with the most seats.
     */
     public void findWinners() {
-        //here
+        //Each party clarifies the number of allocated seats based on the voting results and candidate information.
         for (Party party: parties) {
             int thisPartySeats = party.getNumAllocatedSeats();
             ArrayList<Candidate> thisPartyCandidates = party.getCandidates();
-            int maxAllocation = Math.max(thisPartySeats, thisPartyCandidates.size());
-
-            //here
+            int maxAllocation = Math.min(thisPartySeats, thisPartyCandidates.size());
+            
+            //Give the seat to candidate from the 
             for (int i=0; i<maxAllocation; i++) {
                 this.winnerList.add(thisPartyCandidates.get(i));
             }
@@ -152,6 +156,7 @@ public class Election{
                 this.winnerList,
                 this.parties
                 );
+        results.displayResults();
     }
 
     /**
@@ -166,6 +171,11 @@ public class Election{
                 this.winnerList,
                 this.parties
                 );
+        try {
+            auditFile.audit();
+        } catch (IOException e) {
+            System.out.println("Fail to generate an audit file");
+        }
     }
 
 }

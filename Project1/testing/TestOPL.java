@@ -2,9 +2,9 @@ package testing;
 
 import org.junit.Test;
 
-import src.Party;
-import src.Candidate;
-import src.OPL;
+import src2.Candidate;
+import src2.OPL;
+import src2.Party;
 
 import static org.junit.Assert.assertEquals;
 

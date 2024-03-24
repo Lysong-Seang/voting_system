@@ -1,4 +1,4 @@
-package votingsystem;
+package src2;
 
 import java.util.ArrayList;
 import java.io.BufferedReader;

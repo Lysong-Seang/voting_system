@@ -1,4 +1,4 @@
-package src;
+package src2;
 
 import java.util.ArrayList;
 
@@ -12,14 +12,11 @@ public class Party {
         this.name = name;
         this.candidates = candidates;
         this.numVotes = numVotes;
+        this.numAllocatedSeats = 0;
     }
 
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public int getNumVotes() {

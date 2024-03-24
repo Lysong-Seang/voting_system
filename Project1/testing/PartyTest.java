@@ -1,13 +1,15 @@
 package testing;
 
 import static org.junit.jupiter.api.Assertions.*;
-import java.io.*;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
-class PartyTest {
+import src2.Candidate;
+import src2.Party;
 
+class PartyTest {
+	
 	@Test
 	void testParty() {
 		String partyName = "Democratic";

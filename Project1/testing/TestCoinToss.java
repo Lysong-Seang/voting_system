@@ -5,10 +5,10 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 
-import src.CPL;
-import src.Candidate;
-import src.OPL;
-import src.Party;
+import src2.CPL;
+import src2.Candidate;
+import src2.OPL;
+import src2.Party;
 
 public class TestCoinToss {
     public static void testCoinTossCPL() throws FileNotFoundException{

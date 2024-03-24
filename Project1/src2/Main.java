@@ -1,4 +1,4 @@
-package src;
+package src2;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -6,28 +6,19 @@ import java.util.Scanner;
 
 
 public class Main {
-    // private String name;
-    // private BufferedReader br;
-    // private String electionType;
-    // private ArrayList<Candidate> candidates;
-    // private ArrayList <Party> parties;
-    // private OPL opl;
-    // private CPL cpl;
-    // private int seats;
-    // private int ballots;
-
-    public static void runElection(String electionType, int totalVotes, int totalSeats, ArrayList<Party> parties, ArrayList<Candidate> candidates, BufferedReader br) throws IOException {
+    
+    public static void runElection(String electionType, int totalVotes, int totalSeats, 
+                            ArrayList<Party> parties, BufferedReader reader, ArrayList<Candidate> candidates) throws IOException {
         if (electionType.equals("CPL")) {
-            CPL cpl = new CPL(totalVotes, totalSeats, parties, br);
+            CPL cpl = new CPL(totalVotes, totalSeats, parties, reader);
             cpl.calculateQuota();
             cpl.voteCounting();
             cpl.allocateSeats();
             cpl.findWinners();
             cpl.auditFile();
             cpl.displayResults();
-        }
-        if (electionType.equals("OPL")){
-            OPL opl = new OPL(totalVotes, totalSeats, parties, br, candidates);
+        }else {
+            OPL opl = new OPL(totalVotes, totalSeats, parties, reader, candidates);
             opl.calculateQuota();
             opl.voteCounting();
             opl.allocateSeats();
@@ -35,14 +26,12 @@ public class Main {
             opl.auditFile();
             opl.displayResults();
         }
-
     }
 
     public static void readBallotFile(String file) throws IOException {
         ArrayList<Candidate> candidates = new ArrayList<Candidate>();
-        ArrayList <Party> parties = new ArrayList<Party>();
+        ArrayList<Party> parties = new ArrayList<Party>();
         ArrayList<String> partyNames = new ArrayList<String>();
-
         try{
 
             FileReader fileReader = new FileReader(file);
@@ -50,8 +39,7 @@ public class Main {
             String electionType = reader.readLine();
             int totalSeats = Integer.parseInt(reader.readLine());
             int totalVotes= Integer.parseInt(reader.readLine());
-            //this.seats = Integer.parseInt(reader.readLine());
-            //this.ballots = Integer.parseInt(reader.readLine());
+            
             int numCandidateOrParties = Integer.parseInt(reader.readLine());
 
             // read the candidate information which party they belong to
@@ -80,21 +68,6 @@ public class Main {
                     parties.add(party);
                 }
 
-                // Delete later
-                System.out.println("total seat, total vote : " + totalSeats + " " + totalVotes);
-                System.out.println("num candidates or parties: " + numCandidateOrParties);
-                for (Party party: parties) {
-                    System.out.println(party.getName());
-                    for (Candidate _can: party.getCandidates()) {
-                        System.out.println(_can.getName());
-                        System.out.println(_can.getParty());
-                    }
-                    System.out.println(" ");
-
-                }
-
-                // this.opl = new OPL(totalVotes, totalSeats, parties, reader, candidates);
-
             } else if (electionType.equals("CPL")) {
                 // after the loop the candidate arraylist will be clear out
                 // all information will in parties arraylist
@@ -108,15 +81,13 @@ public class Main {
                         Candidate candidate = new Candidate(name, partyn, 0);
                         thisPartyCandidates.add(candidate);
                     }
-                    Party party = new Party(partyn, 0, candidates);
+                    Party party = new Party(partyn, 0, thisPartyCandidates);
                     parties.add(party);
                 }
-                // this.cpl = new CPL(totalVotes, totalSeats, parties, reader);
             }
-            runElection(electionType, totalVotes, totalSeats, parties, candidates, reader);
-            
+            runElection(electionType, totalVotes, totalSeats, parties, reader, candidates);
         } catch (FileNotFoundException e){
-            System.out.println("File does not exist");
+            System.out.println("File not found.");
         }
     }
 
@@ -129,22 +100,26 @@ public class Main {
         // ask file name by text prompt
         } else {
             Scanner scanner = new Scanner(System.in);
-            System.out.println("Please enter your file name: ");
+            System.out.print("Please enter your file name: ");
             filename = scanner.nextLine();
-            scanner.close();
         }
         
-        // Main main = new Main();
+        File file = new File(filename);
+        while (!file.exists()) {
+        	System.out.println("File Not Found");
+        	Scanner scanner = new Scanner(System.in);
+            System.out.print("Please enter your file name: ");
+            filename = scanner.nextLine();
+            file = new File(filename);
+        }
+
         try {
             readBallotFile(filename);
-            // main.runElection();
         } catch (NullPointerException e) {
-            System.out.println("End the Process");
+            System.out.println();
         }
+        System.out.println();
+        System.out.println("End the Process");
     }
-
-    // public Main(){
-        
-    // }
 
 }

@@ -1,4 +1,4 @@
-package votingsystem;
+package src2;
 
 
 import java.io.*;
@@ -161,6 +161,7 @@ public class OPL extends Election{
             auditFile.audit();
         } catch (IOException e) {
             System.out.println("Fail to generate audit file");
+            e.printStackTrace();
         }
 
 
