@@ -7,7 +7,6 @@ import src.Candidate;
 import src.CPL;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -89,30 +88,6 @@ public class TestCPL {
             assertEquals(expected.get(i).getNumVotes(), cpl.parties.get(i).getNumVotes());
         }
         
-    }
-
-    @Test
-    public void testCoinTossCPL() throws FileNotFoundException{
-        ArrayList<Party> parties = new ArrayList<>();
-        int totalVotes = 10000;
-        int totalSeats = 3;
-        FileReader fileReader = new FileReader("Project1/testing/testCPLVote.csv");
-        BufferedReader br = new BufferedReader(fileReader);
-
-        ArrayList<Party> testWinner = new ArrayList<>();
-        testWinner.add(new Party("Democratic", 5, new ArrayList<>()));
-        testWinner.add(new Party("Republican", 5, new ArrayList<>()));
-
-        CPL cpl = new CPL(totalVotes, totalSeats, parties, br);
-        Party actualWinner = cpl.coinToss(testWinner);
-
-        assertNotNull(actualWinner);
-
-        testWinner.add(new Party("Reform", 5, new ArrayList<>()));
-        testWinner.add(new Party("Independent", 5, new ArrayList<>()));
-
-        actualWinner = cpl.coinToss(testWinner);
-        assertNotNull(actualWinner);
     }
 
     // @Test

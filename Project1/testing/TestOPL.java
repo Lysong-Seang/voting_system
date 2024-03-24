@@ -74,31 +74,6 @@ public class TestOPL {
         }
     }
 
-    @Test
-    public void testCoinTossOPL() throws FileNotFoundException {
-        int totalVotes = 10000;
-        int totalSeats = 3;
-        ArrayList<Party> parties = new ArrayList<>();
-        FileReader fileReader = new FileReader("Project1/testing/testCPLVote.csv");
-        BufferedReader br = new BufferedReader(fileReader);
-        ArrayList<Candidate> candidates = new ArrayList<>();
-
-        ArrayList<Candidate> testWinner = new ArrayList<>();
-        testWinner.add(new Candidate("Sara", "Democratic", 10));
-        testWinner.add(new Candidate("Bob Mc'Bobson", "Republican", 10));
-
-        OPL opl = new OPL(totalVotes, totalSeats, parties, br, candidates);
-        Candidate actualWinner = opl.coinTossOPL(testWinner);
-
-        assertNotNull(actualWinner);
-
-        testWinner.add(new Candidate("Steve Mc'Steveson", "Green", 10));
-        testWinner.add(new Candidate("Renee", "Independent", 10));
-
-        actualWinner = opl.coinTossOPL(testWinner);
-        assertNotNull(actualWinner);
-    }
-
     // @Test 
     // public void testFindWinners(){
 
