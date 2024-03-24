@@ -3,12 +3,10 @@ package testing;
 import org.junit.Test;
 
 import src.Party;
-import src.CPL;
 import src.Candidate;
 import src.OPL;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 
 import java.io.*;
 import java.util.ArrayList;
