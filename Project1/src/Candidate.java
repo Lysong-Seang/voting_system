@@ -1,21 +1,20 @@
-package src2;
+package src;
 
 /**
+ * This is the Candidate class that stores all candidate information for election
  * @author Fumisato Teranishi
+ * @author Shunichi Sawamura
  */
 public class Candidate {
-    /**
-     * Field descriptions of the Cadidate class
-     * @param name
-     * @param party
-     * @param numVotes
-     */
     private String name;
     private String party;
     private int numVotes;
 
-    /**
-     * The constructor for Candidate
+     /**
+     * Initialize the variables of Canddiate class.
+     * @param name
+     * @param party
+     * @param numVotes
      */
     public Candidate(String name, String party, int numVotes) {
         this.name = name;
@@ -24,25 +23,33 @@ public class Candidate {
     }
 
     /**
-     * The get and set methods below
+     * Return the candidate name.
+     * @return name
      */
-
-// Obtaining the Name
     public String getName() {
         return this.name;
     }
 
-// Obtaining the Party
+    /**
+     * Return the party name that the candidate belongs.
+     * @return party
+     */
     public String getParty() {
         return this.party;
     }
 
-// Obtaining the number of votes
+    /**
+     * Return the number of obtained votes for the candidate.
+     * @return numVotes
+     */
     public int getNumVotes() {
         return this.numVotes;
     }
 
-// Setting the number of votes
+    /**
+     * Set the number of obtained votes for this candidate.
+     * @param voteNum
+     */
     public void setNumVotes(int voteNum) {
         this.numVotes = voteNum;
     }

@@ -1,4 +1,4 @@
-package src2;
+package src;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -9,10 +9,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * class is responsible for managing and displaying the results of an election.
- * It includes details such as the type of election, the number of parties, ballots, seats, and the winners list.
- * This class also calculates the quota based on the number of ballots and seats, and provides functionality
- * to display detailed election results including the percentage of votes and the allocation of seats among candidates.
+ * This class saves the election results to a txt file.
  * @author Lysong Seang
  * @author Shunichi Sawamura
  */
@@ -31,6 +28,7 @@ public class Audit {
      * @param numBallots the total number of ballots cast.
      * @param numSeats the total number of seats available.
      * @param winnerList a list of candidates who have won in the election.
+     * @param parties a list of parties in the election. 
      */
     public Audit(String electionType, int numParties, int numBallots, int numSeats,
         ArrayList<Candidate> winnerList, ArrayList<Party> parties){
@@ -48,10 +46,8 @@ public class Audit {
     }
 
     /**
-     * Write the results of the election. This method prints detailed information about the election,
-     * including the type of election, number of parties, candidates, seats, ballots, and quotas.
-     * It also displays the winners and the number of seats allocated to each party, as well as the percentage of votes
-     * received by each party and candidate.
+     * Makes a new txt file to save all information for the election results,
+     * including winners, and ballot statistics.
      */
     public void audit() throws IOException {
         File f = new File("testing.txt");  	
@@ -67,7 +63,7 @@ public class Audit {
         writer.write("Quota Value: "+ quota);
         writer.newLine();
         
-        //Save each party name and candidate affiliation to the audit file
+        //Save each party name and candidate affiliation to the audit file.
         for (Party party: parties) {
         	String partyCandidateInfo = party.getName() + ": ";  
         	//iterate candidate info in each party
@@ -78,7 +74,7 @@ public class Audit {
         	writer.newLine();
         }
         
-        //Save calculations of the largest remainder approach for each party to the audit file
+        //Save calculations of the largest remainder approach for each party to the audit file.
         for (Party party: parties) {
         	writer.write("----- " + party.getName() + " -----");
         	writer.newLine();
@@ -92,7 +88,7 @@ public class Audit {
         	String party2ndSeatCalculation = "Remaining Votes:" + remainingVotes + " --> Second Allocation Seats:" + (party.getNumAllocatedSeats() - firstAllocationSeats);
         	writer.write(party2ndSeatCalculation);
         	writer.newLine();
-        	//Save the number of votes for each candidate if election is OPL to the audit file
+        	//Save the number of votes for each candidate if election is OPL to the audit file.
         	if (electionType.equals("OPL")) {
         		for (Candidate candidate: party.getCandidates()) {
         			writer.write(candidate.getName() + " Votes: " + candidate.getNumVotes());
@@ -103,7 +99,7 @@ public class Audit {
         
         writer.write("*** Winner(s) ***");
         writer.newLine();
-        //Save winners and its party affiliation to the audit file
+        //Save winners and its party affiliation to the audit file.
         for (Candidate winner: winnerList) {
         	writer.write(winner.getName() + " (" + winner.getParty() + ")");
         	writer.newLine();
@@ -111,7 +107,7 @@ public class Audit {
         writer.flush();
         writer.close();
         
-        //Update file permission to prevent editing
+        //Update file permission to prevent editing.
         File file = new File(fileName);
         file.setReadable(true); 
         file.setWritable(false, false);

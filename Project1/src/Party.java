@@ -1,12 +1,12 @@
-package src2;
+package src;
 
 import java.util.ArrayList;
 
 /**
- * This is the Party class that defines setters and getters inside like the Candidate class
+ * This is the Party class that stores all related information for election.
  * @author Fumisato Teranishi
+ * @author Shunichi Sawamura
  */
-
 public class Party {
     private String name;
     private int numVotes;
@@ -16,11 +16,9 @@ public class Party {
     /**
      * Initializes the variables of the Party class.
      * @param name
-     * @param candidate
      * @param numVotes
-     * @param numAllocatedSeats
+     * @param candidates
      */
-
     public Party(String name, int numVotes, ArrayList<Candidate> candidates){
         this.name = name;
         this.candidates = candidates;
@@ -29,7 +27,7 @@ public class Party {
     }
 
     /**
-     * Getting the name of candidates in each election
+     * Getting the name of the party.
      * @return name
      */
     public String getName() {
@@ -37,50 +35,47 @@ public class Party {
     }
 
     /**
-     * Getting the number of votes in each election
-     * @param numVotes
+     * Getting the number of obtained votes for the party.
+     * @return numVotes
      */
     public int getNumVotes() {
         return numVotes;
     }
 
     /**
-     * Setting the number of votes in each election
+     * Setting the number of obtained votes for the party.
      * @param numVotes
      */
-
     public void setNumVotes(int numVotes) {
         this.numVotes = numVotes;
     }
 
     /**
-     * Getting the candidate inside the arraylist in each election
-     * @param candidates
+     * Getting the candidates list who belong to the party
+     * @return candidates
      */
-
     public ArrayList<Candidate> getCandidates() {
         return candidates;
     }
 
     /**
-     * Setting the candidate inside the arraylist in each election
-     * @param candidates
+     * Setting the candidates list who belong to the party 
+     * @param candidates 
      */
-
     public void setCandidates(ArrayList<Candidate> candidates) {
         this.candidates = candidates;
     }
 
     /**
-     * Setting the number of allocated seats in each election
-     * @return numAllocatedSeats
+     * Setting the number of allocated seats for the party
+     * @param numSeats
      */
     public void setNumAllocatedSeats(int numSeats) {
         this.numAllocatedSeats = numSeats;
     }
 
     /**
-     * Getting the number of allocated seats in each election
+     * Getting the number of allocated seats for the party
      * @return numAllocatedSeats
      */
     public int getNumAllocatedSeats() {
