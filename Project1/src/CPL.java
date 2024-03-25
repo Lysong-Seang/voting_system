@@ -12,3 +12,4 @@ public class CPL extends Election{
         super(totalVotes, totalSeats, parties, br);
     }
 }
+

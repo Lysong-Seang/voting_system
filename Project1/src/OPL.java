@@ -1,11 +1,9 @@
 package src;
 
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Random;
-//import java.io.BufferedReader;
 
 /**
  * The OPL class that inherits from the Election class and runs an OPL type election.
@@ -17,12 +15,12 @@ public class OPL extends Election{
     public ArrayList<Candidate> candidates; 
 
     /**
-     * The constructor for OPL. It initalizes all variables when a user calls it.
-     * @param totalVotes
-     * @param totalSeats
-     * @param parties
-     * @param br
-     * @param candidates
+     * The constructor for OPL. It initializes all variables when a user calls it.
+     * @param totalVotes total number of votes in election
+     * @param totalSeats total number of allocated seaats in election
+     * @param parties    a list of parties in election
+     * @param br         a buffered reader to continue reading the given ballot file
+     * @param candidates a list of candidates in election
      */
     public OPL(int totalVotes, int totalSeats, ArrayList<Party> parties, BufferedReader br, ArrayList<Candidate> candidates){
         super(totalVotes, totalSeats, parties, br);
@@ -32,6 +30,7 @@ public class OPL extends Election{
 
     /**
      * Counts the votes each candidate and their respective party has.
+     * @throws IOExcetion if an I/O error occurs while reading the ballot file
      */
     @Override
     public void voteCounting() throws IOException {
@@ -69,8 +68,8 @@ public class OPL extends Election{
 
     /**
      * Simulates a fair coin toss to break a tie between a list of parties.
-     * @param winners
-     * @return The randomly chosen index of winner 
+     * @param winners a list of winners in the election
+     * @return the randomly chosen index of winner 
      */
      public Candidate coinTossOPL(ArrayList<Candidate> winners) {
         Random rand = new Random();

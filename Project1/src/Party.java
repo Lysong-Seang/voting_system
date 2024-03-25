@@ -15,9 +15,9 @@ public class Party {
 
     /**
      * Initializes the variables of the Party class.
-     * @param name
-     * @param numVotes
-     * @param candidates
+     * @param name       party name
+     * @param numVotes   total number of votes obtained
+     * @param candidates a list of candidates belong to the party
      */
     public Party(String name, int numVotes, ArrayList<Candidate> candidates){
         this.name = name;
@@ -28,7 +28,7 @@ public class Party {
 
     /**
      * Getting the name of the party.
-     * @return name
+     * @return name return party name
      */
     public String getName() {
         return name;
@@ -36,7 +36,7 @@ public class Party {
 
     /**
      * Getting the number of obtained votes for the party.
-     * @return numVotes
+     * @return numVotes return total number of obtained votes
      */
     public int getNumVotes() {
         return numVotes;
@@ -44,7 +44,7 @@ public class Party {
 
     /**
      * Setting the number of obtained votes for the party.
-     * @param numVotes
+     * @param numVotes update total number of obtained votes
      */
     public void setNumVotes(int numVotes) {
         this.numVotes = numVotes;
@@ -52,7 +52,7 @@ public class Party {
 
     /**
      * Getting the candidates list who belong to the party
-     * @return candidates
+     * @return candidates return a list of candidate of the party
      */
     public ArrayList<Candidate> getCandidates() {
         return candidates;
@@ -60,7 +60,7 @@ public class Party {
 
     /**
      * Setting the candidates list who belong to the party 
-     * @param candidates 
+     * @param candidates update a list of candidate of the party
      */
     public void setCandidates(ArrayList<Candidate> candidates) {
         this.candidates = candidates;
@@ -68,7 +68,7 @@ public class Party {
 
     /**
      * Setting the number of allocated seats for the party
-     * @param numSeats
+     * @param numSeats update the number of allocated seats
      */
     public void setNumAllocatedSeats(int numSeats) {
         this.numAllocatedSeats = numSeats;
@@ -76,9 +76,10 @@ public class Party {
 
     /**
      * Getting the number of allocated seats for the party
-     * @return numAllocatedSeats
+     * @return numAllocatedSeats return the number of allocated seats
      */
     public int getNumAllocatedSeats() {
         return numAllocatedSeats;
     }
 }
+

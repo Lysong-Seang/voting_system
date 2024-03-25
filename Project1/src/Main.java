@@ -14,12 +14,12 @@ public class Main {
     
     /**
      * Runs voting system based on the given information.
-     * @param electionType
-     * @param totalVotes
-     * @param totalSeats
-     * @param parties
-     * @param reader
-     * @param candidates
+     * @param electionType type of the election
+     * @param totalVotes   total number of votes in election
+     * @param totalSeats   total number of allocated seats in election
+     * @param parties      a list of parties in election
+     * @param reader       buffered reader to continue reading the given file
+     * @param candidates   a list of candidates in election
      */
     public static void runElection(String electionType, int totalVotes, int totalSeats, 
                             ArrayList<Party> parties, BufferedReader reader, ArrayList<Candidate> candidates) throws IOException {
@@ -46,7 +46,8 @@ public class Main {
 
     /**
      * Read the contents of the given file to get basic ballot information.
-     * @param file
+     * @param file         name of the given ballot file
+     * @throws IOException if an I/O error occurs while reading the ballot file
      */
     public static void readBallotFile(String file) throws IOException {
         ArrayList<Candidate> candidates = new ArrayList<Candidate>();
@@ -112,7 +113,8 @@ public class Main {
     /**
      * This will be implemented first in this voting system program. It receives
      * the file name and runs the whole system.
-     * @param args
+     * @param args         can receive the ballot file name from command line argument
+     * @throws IOException if an I/O error occurs while reading the ballot file
      */
     public static void main(String[] args) throws IOException {
         String filename;
@@ -148,3 +150,4 @@ public class Main {
     }
 
 }
+

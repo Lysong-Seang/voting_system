@@ -24,11 +24,11 @@ public class Audit {
     /**
      * object with the specified details of the election.
      * @param electionType the type of the election.
-     * @param numParties the number of parties participating in the election.
-     * @param numBallots the total number of ballots cast.
-     * @param numSeats the total number of seats available.
-     * @param winnerList a list of candidates who have won in the election.
-     * @param parties a list of parties in the election. 
+     * @param numParties   the number of parties participating in the election.
+     * @param numBallots   the total number of ballots cast.
+     * @param numSeats     the total number of seats available.
+     * @param winnerList   a list of candidates who have won in the election.
+     * @param parties      a list of parties in the election. 
      */
     public Audit(String electionType, int numParties, int numBallots, int numSeats,
         ArrayList<Candidate> winnerList, ArrayList<Party> parties){
@@ -48,6 +48,7 @@ public class Audit {
     /**
      * Makes a new txt file to save all information for the election results,
      * including winners, and ballot statistics.
+     * @throws IOException if an I/O error occurs while creating an audit file
      */
     public void audit() throws IOException {
         File f = new File("testing.txt");  	
@@ -115,3 +116,4 @@ public class Audit {
         
     }
 }
+

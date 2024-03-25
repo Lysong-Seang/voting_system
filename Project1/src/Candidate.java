@@ -54,3 +54,4 @@ public class Candidate {
         this.numVotes = voteNum;
     }
 }
+

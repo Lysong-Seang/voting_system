@@ -20,10 +20,10 @@ public class Election{
 
     /**
      * Initializes the variables of the Election class.
-     * @param totalVotes
-     * @param totalSeats
-     * @param parties
-     * @param br
+     * @param totalVotes total number of votes in election
+     * @param totalSeats total number of seats in election
+     * @param parties    a list of parties in election
+     * @param br         buffered reader to continue reading the given ballot file
      */
     public Election(int totalVotes, int totalSeats, ArrayList<Party> parties, BufferedReader br){
         this.totalVotes = totalVotes;
@@ -36,7 +36,7 @@ public class Election{
     /**
      * Calculates the quota which is the floor of the 
      * total number of votes divided by the total number of seats.
-     * @return quota
+     * @return quota return the quota value after calculate it
      */
     public int calculateQuota(){
         quota = (int) Math.floor(totalVotes/totalSeats);
@@ -46,6 +46,7 @@ public class Election{
     /**
      * Counts the votes for each party.
      * This will not work if the total number of votes is less than or equal to 0.
+     * @throws IOException if an I/O error occurs while reading the ballot file
      */
     public void voteCounting() throws IOException {
         //Reads through each ballot and counts each parties ballots. 
@@ -59,7 +60,7 @@ public class Election{
 
     /**
      * Simulates a fair coin toss to break a tie between a list of parties.
-     * @param winners
+     * @param winners a list of election winners
      * @return The randomly chosen index of winner 
      */
     public Party coinToss(ArrayList<Party> winners) {
@@ -179,5 +180,4 @@ public class Election{
     }
 
 }
-
 
