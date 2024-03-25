@@ -12,9 +12,9 @@ public class Candidate {
 
      /**
      * Initialize the variables of Canddiate class.
-     * @param name
-     * @param party
-     * @param numVotes
+     * @param name     candidate name
+     * @param party    party that candidate belongs to
+     * @param numVotes total number of obtained votes
      */
     public Candidate(String name, String party, int numVotes) {
         this.name = name;
@@ -24,7 +24,7 @@ public class Candidate {
 
     /**
      * Return the candidate name.
-     * @return name
+     * @return name return the candidate name
      */
     public String getName() {
         return this.name;
@@ -32,7 +32,7 @@ public class Candidate {
 
     /**
      * Return the party name that the candidate belongs.
-     * @return party
+     * @return party return the party name
      */
     public String getParty() {
         return this.party;
@@ -40,7 +40,7 @@ public class Candidate {
 
     /**
      * Return the number of obtained votes for the candidate.
-     * @return numVotes
+     * @return numVotes return the number of obtained votes
      */
     public int getNumVotes() {
         return this.numVotes;
@@ -48,7 +48,7 @@ public class Candidate {
 
     /**
      * Set the number of obtained votes for this candidate.
-     * @param voteNum
+     * @param voteNum update the number of obtained votes
      */
     public void setNumVotes(int voteNum) {
         this.numVotes = voteNum;
