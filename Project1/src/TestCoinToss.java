@@ -1,4 +1,4 @@
-package src2;
+package src;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
