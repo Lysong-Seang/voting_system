@@ -89,6 +89,7 @@ public class OPL extends Election{
      */
     @Override
     public void findWinners() {
+        // For each party, check the obtained seats and allocate to candidates
         for (Party party: parties) {
             int thisPartySeats = party.getNumAllocatedSeats();
             ArrayList<Candidate> thisPartyCandidates = party.getCandidates();
