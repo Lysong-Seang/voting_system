@@ -52,7 +52,7 @@ public class TestOPL {
         int totalVotes = 9;
         int totalSeats = 2;
 
-        FileReader fileReader = new FileReader("Project1/testing/testOPLVote.csv");
+        FileReader fileReader = new FileReader("testOPLVote.csv");
         BufferedReader br = new BufferedReader(fileReader);
 
         OPL opl = new OPL(totalVotes, totalSeats, actual, br, candidatesActual);

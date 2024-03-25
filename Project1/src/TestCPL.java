@@ -13,7 +13,7 @@ public class TestCPL {
         ArrayList<Party> parties = new ArrayList<>();
         int totalVotes = 10000;
         int totalSeats = 3;
-        FileReader fileReader = new FileReader("Project1/testing/testCPLVote.csv");
+        FileReader fileReader = new FileReader("testCPLVote.csv");
         BufferedReader br = new BufferedReader(fileReader);
         
         CPL cpl = new CPL(totalVotes, totalSeats, parties, br);
