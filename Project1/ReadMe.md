@@ -1,3 +1,5 @@
+We will be using our two-day late pass for this project
+
 # Voting System
 The Voting System is a stand-alone product to be used after the voting and a CSV file holding the ballots is created. This system is to count the number of votes each party or candidate recieved. This system runs two types of elections: a Closed-Party listing and an Open-Party listing. It will also display the results and statistics of the election and save this information in an audit file.
 
