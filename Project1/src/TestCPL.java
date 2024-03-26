@@ -90,7 +90,7 @@ public class TestCPL {
 
     @Test
     public void testAllocateSeats() {
-       	//Assume the voteCounting is already done and allocated seats for each party is determined.
+       	//Assume the voteCounting is already done
     	ArrayList<Party> parties = new ArrayList<>();
     	
     	ArrayList<Candidate> demCandidates = new ArrayList<>();
@@ -140,7 +140,7 @@ public class TestCPL {
     @Test
     public void testAllocateSeatsForTie() {
     	//if there is a seat left, but two parties have same remaining votes
-    	//Assume the voteCounting is already done and allocated seats for each party is determined.
+    	//Assume the voteCounting is already done
     	ArrayList<Party> parties = new ArrayList<>();
     	
     	ArrayList<Candidate> demCandidates = new ArrayList<>();
@@ -192,16 +192,14 @@ public class TestCPL {
     	// Get error when reading a ballot file
     	} catch (IOException e) {
             fail("Error: " + e.getMessage());
-    	}
-        
-        
+    	}   
     }
     
     
     @Test 
     public void testFindWinners(){
     	
-		//Assume vote counting is already done
+	//Assume vote counting is already done
     	ArrayList<Party> parties = new ArrayList<>();
         ArrayList<Candidate> demCandidates = new ArrayList<>();
         ArrayList<Candidate> repCandidates = new ArrayList<>();
