@@ -3,6 +3,8 @@ package src;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -74,7 +76,7 @@ public class TestCPL {
         int totalVotes = 9;
         int totalSeats = 3;
 
-        FileReader fileReader = new FileReader("Project1/testing/testCPLVote.csv");
+        FileReader fileReader = new FileReader("testCPLVote.csv");
         BufferedReader br = new BufferedReader(fileReader);
 
         CPL cpl = new CPL(totalVotes, totalSeats, actual, br);
@@ -86,16 +88,173 @@ public class TestCPL {
         
     }
 
-    // @Test
-    // public void testAllocateSeats() {
+    @Test
+    public void testAllocateSeats() {
+       	//Assume the voteCounting is already done and allocated seats for each party is determined.
+    	ArrayList<Party> parties = new ArrayList<>();
+    	
+    	ArrayList<Candidate> demCandidates = new ArrayList<>();
+        ArrayList<Candidate> repCandidates = new ArrayList<>();
+        ArrayList<Candidate> indepCandidates = new ArrayList<>();
+    	
+        demCandidates.add(new Candidate("Pike", "Democratic", 2));
+        demCandidates.add(new Candidate("Lucy", "Democratic", 1));
+        demCandidates.add(new Candidate("Beiye", "Democratic", 0));
 
-    // }
+        repCandidates.add(new Candidate("Etta", "Republican", 1));
+        repCandidates.add(new Candidate("Alawa", "Republican", 2));
+        
+        indepCandidates.add(new Candidate("Sasha", "Independent1", 2));
+        
+        Party dem = new Party("Democratic", 3, demCandidates);
+        Party rep = new Party("Republican", 3, repCandidates);
+        Party ind = new Party("Independent1", 2, indepCandidates);
+        parties.add(dem);
+        parties.add(rep);
+        parties.add(ind);
+        
+        int _totalVotes = 8;
+        int _totalSeats = 2;
+        
+        try {
+        	FileReader fileReader = new FileReader("testCPLVote.csv");
+        	BufferedReader br = new BufferedReader(fileReader);
+            CPL cpl = new CPL(_totalVotes, _totalSeats, parties, br);
+            cpl.calculateQuota();
+            cpl.allocateSeats();
+            //Check democratic gets 1 seat
+            assertEquals(1, cpl.parties.get(0).getNumAllocatedSeats());
+            //Check republican gets 1 seat
+            assertEquals(1, cpl.parties.get(1).getNumAllocatedSeats());
+            //Check independent1 gets no seat
+            assertEquals(0, cpl.parties.get(2).getNumAllocatedSeats());
+        // Handle the FileNotFoundException
+        } catch (FileNotFoundException e) {
+            fail("File not found: " + e.getMessage());
+    	// Get error when reading a ballot file
+    	} catch (IOException e) {
+            fail("Error: " + e.getMessage());
+    	}
+    }
 
-    // @Test 
-    // public void testFindWinners(){
+    @Test
+    public void testAllocateSeatsForTie() {
+    	//if there is a seat left, but two parties have same remaining votes
+    	//Assume the voteCounting is already done and allocated seats for each party is determined.
+    	ArrayList<Party> parties = new ArrayList<>();
+    	
+    	ArrayList<Candidate> demCandidates = new ArrayList<>();
+        ArrayList<Candidate> repCandidates = new ArrayList<>();
+        ArrayList<Candidate> indepCandidates = new ArrayList<>();
+    	
+        demCandidates.add(new Candidate("Pike", "Democratic", 2));
+        demCandidates.add(new Candidate("Lucy", "Democratic", 1));
+        demCandidates.add(new Candidate("Beiye", "Democratic", 0));
 
-    // }
+        repCandidates.add(new Candidate("Etta", "Republican", 1));
+        repCandidates.add(new Candidate("Alawa", "Republican", 2));
+        
+        indepCandidates.add(new Candidate("Sasha", "Independent1", 0));
+        
+        Party dem = new Party("Democratic", 3, demCandidates);
+        Party rep = new Party("Republican", 3, repCandidates);
+        Party ind = new Party("Independent1", 0, indepCandidates);
+        parties.add(dem);
+        parties.add(rep);
+        parties.add(ind);
+        
+        int _totalVotes = 6;
+        int _totalSeats = 3;
+        
+        try {
+        	FileReader fileReader = new FileReader("testCPLVote.csv");
+        	BufferedReader br = new BufferedReader(fileReader);
+            CPL cpl = new CPL(_totalVotes, _totalSeats, parties, br);
+            cpl.calculateQuota();
+            cpl.allocateSeats();
+            
+            int totalNumAllocatedSeats = 0;
+            for (Party party: cpl.parties) { 
+            	totalNumAllocatedSeats += party.getNumAllocatedSeats();
+            }
+            //Check total allocated seats are 3
+            assertEquals("Total allocated seats are same value as total seats in election",
+            		_totalSeats, totalNumAllocatedSeats);
+            //Either Democratic or Republican gets 2 seats or 1 seat
+            int democraticNumSeat = cpl.parties.get(0).getNumAllocatedSeats();
+            assertTrue(democraticNumSeat == 1 || democraticNumSeat == 2);
+            int republicanNumSeat = cpl.parties.get(0).getNumAllocatedSeats();
+            assertTrue(republicanNumSeat == 1 || republicanNumSeat == 2);
+            
+        // Handle the FileNotFoundException
+        } catch (FileNotFoundException e) {
+            fail("File not found: " + e.getMessage());
+    	// Get error when reading a ballot file
+    	} catch (IOException e) {
+            fail("Error: " + e.getMessage());
+    	}
+        
+        
+    }
+    
+    
+    @Test 
+    public void testFindWinners(){
+    	
+		//Assume vote counting is already done
+    	ArrayList<Party> parties = new ArrayList<>();
+        ArrayList<Candidate> demCandidates = new ArrayList<>();
+        ArrayList<Candidate> repCandidates = new ArrayList<>();
+        ArrayList<Candidate> indepCandidates = new ArrayList<>();
+    	
+        Candidate winner1 = new Candidate("Pike", "Democratic", 2);
+        Candidate winner2 = new Candidate("Etta", "Republican", 2);
+        Candidate winner3 = new Candidate("Alawa", "Republican", 2);
+        
+        demCandidates.add(winner1);
+        demCandidates.add(new Candidate("Lucy", "Democratic", 1));
+        demCandidates.add(new Candidate("Beiye", "Democratic", 0));
+
+        repCandidates.add(winner2);
+        repCandidates.add(winner3);
+        
+        indepCandidates.add(new Candidate("Sasha", "Independent1", 0));
+        
+        Party dem = new Party("Democratic", 3, demCandidates);
+        Party rep = new Party("Republican", 4, repCandidates);
+        Party ind = new Party("Independent1", 0, indepCandidates);
+        parties.add(dem);
+        parties.add(rep);
+        parties.add(ind);
+        
+        ArrayList<Candidate> winners = new ArrayList<>();
+        winners.add(winner1);
+        winners.add(winner2);
+        winners.add(winner3);
+        
+        int _totalVotes = 7;
+        int _totalSeats = 3;
+        
+        try {
+        	FileReader fileReader = new FileReader("testCPLVote.csv");
+        	BufferedReader br = new BufferedReader(fileReader);
+            CPL cpl = new CPL(_totalVotes, _totalSeats, parties, br);
+            cpl.calculateQuota();
+            cpl.allocateSeats();
+            cpl.findWinners();
+            
+            assertEquals("Number of allocated seat is equal to the size of winner list",
+            		_totalSeats, cpl.winnerList.size());
+            assertEquals("Winners are saved successfully", winners, cpl.winnerList);
+            
+        // Handle the FileNotFoundException
+        } catch (FileNotFoundException e) {
+            fail("File not found: " + e.getMessage());
+    	// Get error when reading a ballot file
+    	} catch (IOException e) {
+            fail("Error: " + e.getMessage());
+    	}
+
+    }
 }
-
-
 
