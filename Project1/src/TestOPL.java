@@ -8,9 +8,9 @@ import java.util.ArrayList;
 
 public class TestOPL {
 	
-	private ArrayList<Party> expected;
-	private ArrayList<Party> actual;
-	private ArrayList<Candidate> candidatesActual;
+    private ArrayList<Party> expected;
+    private ArrayList<Party> actual;
+    private ArrayList<Candidate> candidatesActual;
     private ArrayList<Candidate> candidatesExpected;
 
     private ArrayList<Candidate> demCandidates;
@@ -73,8 +73,8 @@ public class TestOPL {
         totalSeats = 2;
         
         try {
-        	fileReader = new FileReader("testOPLVote.csv");
-        	br = new BufferedReader(fileReader);
+            fileReader = new FileReader("testOPLVote.csv");
+            br = new BufferedReader(fileReader);
             opl = new OPL(totalVotes, totalSeats, actual, br, candidatesActual);
             opl.voteCounting();
         // Handle the FileNotFoundException
@@ -136,8 +136,8 @@ public class TestOPL {
         int _totalSeats = 2;
         
         try {
-        	fileReader = new FileReader("testOPLVote.csv");
-        	br = new BufferedReader(fileReader);
+            fileReader = new FileReader("testOPLVote.csv");
+            br = new BufferedReader(fileReader);
             opl = new OPL(_totalVotes, _totalSeats, parties, br, candidates);
             opl.voteCounting();
         // Handle the FileNotFoundException
@@ -162,8 +162,8 @@ public class TestOPL {
         totalSeats = 1;
         
         try {
-        	fileReader = new FileReader("testOPLVote.csv");
-        	br = new BufferedReader(fileReader);
+            fileReader = new FileReader("testOPLVote.csv");
+            br = new BufferedReader(fileReader);
             opl = new OPL(totalVotes, totalSeats, actual, br, candidatesActual);
             opl.calculateQuota();
             opl.voteCounting();
