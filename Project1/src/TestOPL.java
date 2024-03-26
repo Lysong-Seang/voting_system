@@ -189,8 +189,11 @@ public class TestOPL {
             }
         }
 
-        // Assert that the list contains either value A or value B
+        // Check that the list contains either value A or value B
         assertTrue("Winner List should contain either Etta or Alawa in Republican", containsOneCandidate);
+	// Check the size of winner list is equal to the total seat number.
+	assertEquals("Number of allocated seat is equal to the size of winner list",
+        	totalSeats, opl.winnerList.size());
 
     }
 }
