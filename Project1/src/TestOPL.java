@@ -8,9 +8,9 @@ import java.util.ArrayList;
 
 public class TestOPL {
 	
-	private ArrayList<Party> expected;
-	private ArrayList<Party> actual;
-	private ArrayList<Candidate> candidatesActual;
+    private ArrayList<Party> expected;
+    private ArrayList<Party> actual;
+    private ArrayList<Candidate> candidatesActual;
     private ArrayList<Candidate> candidatesExpected;
 
     private ArrayList<Candidate> demCandidates;
@@ -73,8 +73,8 @@ public class TestOPL {
         totalSeats = 2;
         
         try {
-        	fileReader = new FileReader("testOPLVote.csv");
-        	br = new BufferedReader(fileReader);
+            fileReader = new FileReader("testOPLVote.csv");
+            br = new BufferedReader(fileReader);
             opl = new OPL(totalVotes, totalSeats, actual, br, candidatesActual);
             opl.voteCounting();
         // Handle the FileNotFoundException
@@ -136,8 +136,8 @@ public class TestOPL {
         int _totalSeats = 2;
         
         try {
-        	fileReader = new FileReader("testOPLVote.csv");
-        	br = new BufferedReader(fileReader);
+            fileReader = new FileReader("testOPLVote.csv");
+            br = new BufferedReader(fileReader);
             opl = new OPL(_totalVotes, _totalSeats, parties, br, candidates);
             opl.voteCounting();
         // Handle the FileNotFoundException
@@ -162,8 +162,8 @@ public class TestOPL {
         totalSeats = 1;
         
         try {
-        	fileReader = new FileReader("testOPLVote.csv");
-        	br = new BufferedReader(fileReader);
+            fileReader = new FileReader("testOPLVote.csv");
+            br = new BufferedReader(fileReader);
             opl = new OPL(totalVotes, totalSeats, actual, br, candidatesActual);
             opl.calculateQuota();
             opl.voteCounting();
@@ -189,8 +189,11 @@ public class TestOPL {
             }
         }
 
-        // Assert that the list contains either value A or value B
+        // Check that the list contains either value A or value B
         assertTrue("Winner List should contain either Etta or Alawa in Republican", containsOneCandidate);
+	// Check the size of winner list is equal to the total seat number.
+	assertEquals("Number of allocated seat is equal to the size of winner list",
+        	totalSeats, opl.winnerList.size());
 
     }
 }
