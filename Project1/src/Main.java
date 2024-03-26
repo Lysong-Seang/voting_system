@@ -20,6 +20,7 @@ public class Main {
      * @param parties      a list of parties in election
      * @param reader       buffered reader to continue reading the given file
      * @param candidates   a list of candidates in election
+     * @throws IOException if an I/O error occurs while reading the ballot file
      */
     public static void runElection(String electionType, int totalVotes, int totalSeats, 
                             ArrayList<Party> parties, BufferedReader reader, ArrayList<Candidate> candidates) throws IOException {

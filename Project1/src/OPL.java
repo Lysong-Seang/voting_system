@@ -30,7 +30,7 @@ public class OPL extends Election{
 
     /**
      * Counts the votes each candidate and their respective party has.
-     * @throws IOExcetion if an I/O error occurs while reading the ballot file
+     * @throws IOException if an I/O error occurs while reading the ballot file
      */
     @Override
     public void voteCounting() throws IOException {
