@@ -7,7 +7,7 @@ The Voting System is a stand-alone product to be used after the voting and a CSV
 The following are instructions on downloading and running the system.
 
 ## Prerequisites
-You must install Java on your local machine to be able to use the Voting System. Additionally, the ballot file must be valid and in csv format, as it is assumed that the file is without errors.
+You must install Java on your local machine to be able to use the Voting System. Additionally, the ballot file must be valid and in csv format, as it is assumed that the file is without errors. For testing, we used JUnit Jupiter.
 
 ## Downloading
 Download the files from https://github.umn.edu/umn-csci-5801-01-S24/repo-Team16/tree/main/Project1 and save it to your local machine. Here are the following folders and files:
@@ -18,7 +18,7 @@ Download the files from https://github.umn.edu/umn-csci-5801-01-S24/repo-Team16/
 - **buglist.pdf**: This file documents the bugs and issues found during testing.
 
 ## Running
-After the files are downloaded, compile all of the program files in the "src" folder using the command `javac src/*.java`. Then use the command `java src/Main` to run the program. If you wish to run the program with one of the test csv files in "testing", type in "../testing/(file name)" when prompted. Otherwise, type the file path to your csv file when prompted. If you are a tester, pass your file path as a command line argument when running the program.
+After the files are downloaded, compile all of the program files in the "src" folder using the command `javac src/*.java`. Then use the command `java src/Main` to run the program. If you wish to run the program with one of the test csv files in "testing", type in your file name when prompted. Otherwise, type the file path to your csv file when prompted. If you are a tester, pass your file path as a command line argument when running the program.
 
 # Authors
 Team 16
