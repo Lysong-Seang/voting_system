@@ -5,6 +5,11 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * This file tests Party class methods.
+ * @author Fumisato Teranishi
+ * @author Shunichi Sawamura
+ */
 class TestParty {
 	
 	@Test

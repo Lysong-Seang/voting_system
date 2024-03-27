@@ -6,6 +6,11 @@ import static org.junit.Assert.*;
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * This file tests OPL class methods.
+ * @author Crystal Wen
+ * @author Shunichi Sawamura
+ */
 public class TestOPL {
 	
     private ArrayList<Party> expected;

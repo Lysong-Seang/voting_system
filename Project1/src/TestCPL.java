@@ -9,6 +9,11 @@ import static org.junit.Assert.fail;
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * This file tests Election and CPL class methods.
+ * @author Crystal Wen
+ * @author Shunichi Sawamura
+ */
 public class TestCPL {
     @Test
     public void testCalculateQuota() throws IOException {

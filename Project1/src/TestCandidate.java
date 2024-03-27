@@ -3,6 +3,11 @@ package src;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
+/**
+ * This file tests Candidate class methods.
+ * @author Fumisato Teranishi
+ * @author Shunichi Sawamura
+ */
 class TestCandidate {
 	
 	@Test
