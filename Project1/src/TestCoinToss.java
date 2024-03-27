@@ -6,7 +6,7 @@ import java.io.FileReader;
 import java.util.ArrayList;
 
 /**
- * This file tests CoinToss method in CPL and OPL class..
+ * This file tests CoinToss method in CPL and OPL class.
  * @author Crystal Wen
  */
 public class TestCoinToss {
