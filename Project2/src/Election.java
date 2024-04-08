@@ -63,17 +63,17 @@ public class Election{
      * @param winners a list of election winners
      * @return The randomly chosen index of winner 
      */
-    public Party coinToss(ArrayList<Party> winners) {
+    public int coinToss(int len) {
         Random rand = new Random();
         
         /* The winning index is randomized 1000 times and the winner
         is chosen on the 1001th time to simulate a fair coin toss. */
-        int index = rand.nextInt(winners.size());
+        int index = rand.nextInt(len);
         for(int i = 0; i < 1000; i++) {
-            index = rand.nextInt(winners.size());
+            index = rand.nextInt(len);
         }
 
-        return winners.get(index);
+        return index;
     }
 
     /**
@@ -121,7 +121,8 @@ public class Election{
             //randomly picks one party to seat allocation.
             } else if (largestVoteParties.size() > 1) {
                 //Coin toss to determine seat allocation
-                Party allocatedParty = coinToss(largestVoteParties);
+                int index = coinToss(largestVoteParties.size());
+                Party allocatedParty = largestVoteParties.get(index);
                 allocatedParty.setNumAllocatedSeats(allocatedParty.getNumAllocatedSeats() + 1);
                 remainingSeats -= 1;
             }
@@ -148,9 +149,9 @@ public class Election{
     /**
      * Calls the Display class to display the results of the election.
      */
-    public void displayResults() {
+    public void displayResults(String type) {
         DisplayResults results = new DisplayResults(
-                "CPL", 
+                type, 
                 this.parties.size(), 
                 this.totalVotes, 
                 this.totalSeats,
@@ -163,9 +164,9 @@ public class Election{
     /**
      * Calls the Audit class to create an audit file.
      */
-    public void auditFile() {
+    public void auditFile(String type) {
         Audit auditFile = new Audit(
-                "CPL",
+                type,
                 this.parties.size(),
                 this.totalVotes,
                 this.totalSeats,

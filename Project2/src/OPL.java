@@ -2,8 +2,6 @@ package src;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.Random;
 
 /**
  * The OPL class that inherits from the Election class and runs an OPL type election.
@@ -67,24 +65,6 @@ public class OPL extends Election{
     }
 
     /**
-     * Simulates a fair coin toss to break a tie between a list of parties.
-     * @param winners a list of winners in the election
-     * @return the randomly chosen index of winner 
-     */
-     public Candidate coinTossOPL(ArrayList<Candidate> winners) {
-        Random rand = new Random();
-        
-        /* The winning index is randomized 1000 times and the winner
-        is chosen on the 1001th time to simulate a fair coin toss. */ 
-        int index = rand.nextInt(winners.size());
-        for(int i = 0; i < 1000; i++) {
-            index = rand.nextInt(winners.size());
-        }
-
-        return winners.get(index);
-    }
-
-    /**
      * Finds the winner based on the candidate with the most votes.
      */
     @Override
@@ -120,51 +100,12 @@ public class OPL extends Election{
                 if (largestVoteCandidates.size() == 1) {
                     this.winnerList.add(largestVoteCandidates.get(0));
                 } else if (largestVoteCandidates.size() > 1) {
-                    this.winnerList.add(coinTossOPL(largestVoteCandidates));
+                    int index = coinToss(largestVoteCandidates.size());
+                    Candidate winner = largestVoteCandidates.get(index);
+                    this.winnerList.add(winner);
                 }
             }
         }
-    }
-
-    /**
-     * Calls the Display class to display the results of the election.
-     */
-    @Override
-    public void displayResults() {
-        DisplayResults results = new DisplayResults(
-                "OPL", 
-                this.parties.size(), 
-                this.totalVotes, 
-                this.totalSeats,
-                this.winnerList,
-                this.parties
-                );
-
-        results.displayResults();
-    }
-
-    /**
-     * Calls the Audit class to create an audit file.
-     */
-    @Override
-    public void auditFile() {
-        Audit auditFile = new Audit(
-                "OPL",
-                this.parties.size(),
-                this.totalVotes,
-                this.totalSeats,
-                this.winnerList,
-                this.parties
-                );
-        
-        try {
-            auditFile.audit();
-        } catch (IOException e) {
-            System.out.println("Fail to generate audit file");
-            e.printStackTrace();
-        }
-
-
     }
 }
 

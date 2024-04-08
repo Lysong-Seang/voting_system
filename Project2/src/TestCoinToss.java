@@ -14,7 +14,7 @@ public class TestCoinToss {
         ArrayList<Party> parties = new ArrayList<>();
         int totalVotes = 10000;
         int totalSeats = 3;
-        FileReader fileReader = new FileReader("testCPLVote.csv");
+        FileReader fileReader = new FileReader("./testing/testCPLVote.csv");
         BufferedReader br = new BufferedReader(fileReader);
         int c1 = 0, c2 = 0;
 
@@ -26,7 +26,8 @@ public class TestCoinToss {
         Party winner;
 
         for(int i = 0; i < 1000; i++) {
-            winner = cpl.coinToss(testWinner);
+            int index = cpl.coinToss(testWinner.size());
+            winner = testWinner.get(index);
             if(winner.getName().equals("Democratic")) c1++;
             else c2++;
         }
@@ -40,7 +41,8 @@ public class TestCoinToss {
         testWinner.add(new Party("Reform", 5, new ArrayList<>()));
         
         for(int i = 0; i < 1000; i++) {
-            winner = cpl.coinToss(testWinner);
+            int index = cpl.coinToss(testWinner.size());
+            winner = testWinner.get(index);
             if(winner.getName().equals("Democratic")) c1++;
             else if (winner.getName().equals("Republican")) c2++;
             else c3++;
@@ -55,7 +57,7 @@ public class TestCoinToss {
         int totalVotes = 10000;
         int totalSeats = 3;
         ArrayList<Party> parties = new ArrayList<>();
-        FileReader fileReader = new FileReader("testOPLVote.csv");
+        FileReader fileReader = new FileReader("./testing/testOPLVote.csv");
         BufferedReader br = new BufferedReader(fileReader);
         ArrayList<Candidate> candidates = new ArrayList<>();
         int c1 = 0, c2 = 0;
@@ -68,7 +70,8 @@ public class TestCoinToss {
         Candidate winner;
 
         for(int i = 0; i < 1000; i++) {
-            winner = opl.coinTossOPL(testWinner);
+            int index = opl.coinToss(testWinner.size());
+            winner = testWinner.get(index);
             if(winner.getName().equals("Sara")) c1++;
             else c2++;
         }
@@ -83,7 +86,8 @@ public class TestCoinToss {
         testWinner.add(new Candidate("Renee", "Independent", 10));
 
         for(int i = 0; i < 1000; i++) {
-            winner = opl.coinTossOPL(testWinner);
+            int index = opl.coinToss(testWinner.size());
+            winner = testWinner.get(index);
             if(winner.getName().equals("Sara")) c1++;
             else if(winner.getName().equals("Bob Mc'Bobson")) c2++;
             else if(winner.getName().equals("Steve Mc'Steveson")) c3++;
@@ -99,7 +103,7 @@ public class TestCoinToss {
     public static void main (String[] args) throws FileNotFoundException{
         testCoinTossCPL();
 
-        System.out.println("\n\nTesting coinTossOPL");
+        System.out.println("\n\nTesting coinToss OPL");
         testCoinTossOPL();
     }    
 }
