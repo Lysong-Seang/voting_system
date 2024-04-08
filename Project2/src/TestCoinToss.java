@@ -14,7 +14,7 @@ public class TestCoinToss {
         ArrayList<Party> parties = new ArrayList<>();
         int totalVotes = 10000;
         int totalSeats = 3;
-        FileReader fileReader = new FileReader("./testing/testCPLVote.csv");
+        FileReader fileReader = new FileReader("testCPLVote.csv");
         BufferedReader br = new BufferedReader(fileReader);
         int c1 = 0, c2 = 0;
 

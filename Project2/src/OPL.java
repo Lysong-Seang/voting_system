@@ -28,39 +28,44 @@ public class OPL extends Election{
 
     /**
      * Counts the votes each candidate and their respective party has.
-     * @throws IOException if an I/O error occurs while reading the ballot file
      */
     @Override
-    public void voteCounting() throws IOException {
-        //Sums up the number of votes for each candidate.
-        for (int i = 0; i < totalVotes; i++) {
-            String ballot = br.readLine();
-            String[] tokens = ballot.split(",");
-            int index = tokens.length - 1;
-            candidates.get(index).setNumVotes(candidates.get(index).getNumVotes() + 1);
-        }
+    public void voteCounting() {
+        // Calls IOException if an I/O error occurs while reading the ballot file
+        try {
+            //Sums up the number of votes for each candidate.
+            for (int i = 0; i < totalVotes; i++) {
+                String ballot = br.readLine();
+                String[] tokens = ballot.split(",");
+                int index = tokens.length - 1;
+                candidates.get(index).setNumVotes(candidates.get(index).getNumVotes() + 1);
+            }
         
-        /*Finds the party of each respective candidate and sums up the votes of the candiates
-        in their respective party to determine the number of votes that their party gets. */ 
-        for (Candidate candidate:candidates) {
-            int candidateVotes = candidate.getNumVotes();
-            int partyIndex = -5;
-            //Finds the party index in party arrays for each candidate. 
-            for (int i=0; i<parties.size(); i++) {
-                if (parties.get(i).getName().equals(candidate.getParty())) {
-                    partyIndex = i;
+        
+            /*Finds the party of each respective candidate and sums up the votes of the candiates
+            in their respective party to determine the number of votes that their party gets. */ 
+            for (Candidate candidate:candidates) {
+                int candidateVotes = candidate.getNumVotes();
+                int partyIndex = -5;
+                //Finds the party index in party arrays for each candidate. 
+                for (int i=0; i<parties.size(); i++) {
+                    if (parties.get(i).getName().equals(candidate.getParty())) {
+                        partyIndex = i;
+                    }
                 }
-            }
-            int canIndex = -5;
-            //Finds the candidate index in candidate arrays in Party object for each candidate. 
-            for (int i=0; i<parties.get(partyIndex).getCandidates().size(); i++) {
-                if (parties.get(partyIndex).getCandidates().get(i).getName().equals(candidate.getName())) {
-                    canIndex = i;
+                int canIndex = -5;
+                //Finds the candidate index in candidate arrays in Party object for each candidate. 
+                for (int i=0; i<parties.get(partyIndex).getCandidates().size(); i++) {
+                    if (parties.get(partyIndex).getCandidates().get(i).getName().equals(candidate.getName())) {
+                        canIndex = i;
+                    }
                 }
-            }
 
-            parties.get(partyIndex).getCandidates().get(canIndex).setNumVotes(candidateVotes);
-            parties.get(partyIndex).setNumVotes(parties.get(partyIndex).getNumVotes() + candidateVotes);
+                parties.get(partyIndex).getCandidates().get(canIndex).setNumVotes(candidateVotes);
+                parties.get(partyIndex).setNumVotes(parties.get(partyIndex).getNumVotes() + candidateVotes);
+            }
+        } catch (IOException e) {
+            System.out.println("Fail to read the ballot file.");
         }
     }
 

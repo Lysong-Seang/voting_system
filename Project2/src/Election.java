@@ -48,7 +48,8 @@ public class Election{
      * This will not work if the total number of votes is less than or equal to 0.
      * @throws IOException if an I/O error occurs while reading the ballot file
      */
-    public void voteCounting() throws IOException {
+    public void voteCounting() {}
+    /*public void voteCounting() throws IOException {
         //Reads through each ballot and counts each parties ballots. 
         for (int i = 0; i < totalVotes; i++) {
             String ballot = br.readLine();
@@ -56,7 +57,7 @@ public class Election{
             int index = tokens.length - 1;
             parties.get(index).setNumVotes(parties.get(index).getNumVotes() + 1);
         }
-    }
+    }*/
 
     /**
      * Simulates a fair coin toss to break a tie between a list of parties.
@@ -129,10 +130,13 @@ public class Election{
         }
     }
 
+
+    
     /**
      * Finds the winner based on the party with the most seats.
-    */
-    public void findWinners() {
+     */
+    public void findWinners() {}
+    /*public void findWinners() {
         //Each party clarifies the number of allocated seats based on the voting results and candidate information.
         for (Party party: parties) {
             int thisPartySeats = party.getNumAllocatedSeats();
@@ -144,7 +148,7 @@ public class Election{
                 this.winnerList.add(thisPartyCandidates.get(i));
             }
         } 
-    }
+    }*/
 
     /**
      * Calls the Display class to display the results of the election.
