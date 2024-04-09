@@ -80,14 +80,13 @@ public class DisplayResults {
                 if (winnerList.size() <= 0) {
                     System.out.print(" N/A ***");
                 } else {
-
                     // Loop through winner list to get the name of the winner
                     for (int j = 0; j < winnerList.size() - 1; j++) {
                         if (winnerList.get(j).getParty().equals(parties.get(i).getName())) {
                             System.out.print(winnerList.get(j).getName() + ", ");
                         }
                     }
-                    System.out.print(winnerList.get(winnerList.size() - 1).getName());
+                    // System.out.print(winnerList.get(winnerList.size() - 1).getName());
                 }
                 System.out.print(" ***\n");
                 System.out.println("Number of Votes: " + parties.get(i).getNumVotes());
