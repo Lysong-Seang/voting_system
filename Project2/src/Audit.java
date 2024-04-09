@@ -89,6 +89,13 @@ public class Audit {
         	String party2ndSeatCalculation = "Remaining Votes:" + remainingVotes + " --> Second Allocation Seats:" + (party.getNumAllocatedSeats() - firstAllocationSeats);
         	writer.write(party2ndSeatCalculation);
         	writer.newLine();
+
+            //Add statistics % of Vote to % of Seats
+            int percentVotes = party.getNumVotes() * 100 / numBallots;
+            int percentSeats = party.getNumAllocatedSeats() * 100 / numSeats;
+            String percents = "% of Vote / % of Seats: " + percentVotes + "% / " + percentSeats + "%";
+            writer.write(percents);
+            writer.newLine();
         	//Save the number of votes for each candidate if election is OPL to the audit file.
         	if (electionType.equals("OPL")) {
         		for (Candidate candidate: party.getCandidates()) {

@@ -9,7 +9,6 @@ import java.util.ArrayList;
  * @author Shunichi Sawamura
 */
 public class OPL extends Election{
-    public ArrayList<Candidate> winnerList;
     public ArrayList<Candidate> candidates; 
 
     /**
