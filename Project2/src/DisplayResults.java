@@ -3,7 +3,8 @@ package src;
 import java.util.ArrayList;
 
 /**
- * This class is responsible for managing and displaying the results of an election.
+ * This class is responsible for managing and displaying the results of an
+ * election.
  * It includes details such as the type of election, the number of parties,
  * ballots, seats, and the winners list.
  * This class also calculates the quota based on the number of ballots and
@@ -82,7 +83,9 @@ public class DisplayResults {
 
                     // Loop through winner list to get the name of the winner
                     for (int j = 0; j < winnerList.size() - 1; j++) {
-                        System.out.print(winnerList.get(j).getName() + ", ");
+                        if (winnerList.get(j).getParty().equals(parties.get(i).getName())) {
+                            System.out.print(winnerList.get(j).getName() + ", ");
+                        }
                     }
                     System.out.print(winnerList.get(winnerList.size() - 1).getName());
                 }
@@ -136,4 +139,3 @@ public class DisplayResults {
         }
     }
 }
-
