@@ -2,8 +2,6 @@ package src;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.Random;
 
 /**
  * The OPL class that inherits from the Election class and runs an OPL type election.
@@ -30,58 +28,45 @@ public class OPL extends Election{
 
     /**
      * Counts the votes each candidate and their respective party has.
-     * @throws IOException if an I/O error occurs while reading the ballot file
      */
     @Override
-    public void voteCounting() throws IOException {
-        //Sums up the number of votes for each candidate.
-        for (int i = 0; i < totalVotes; i++) {
-            String ballot = br.readLine();
-            String[] tokens = ballot.split(",");
-            int index = tokens.length - 1;
-            candidates.get(index).setNumVotes(candidates.get(index).getNumVotes() + 1);
-        }
-        
-        /*Finds the party of each respective candidate and sums up the votes of the candiates
-        in their respective party to determine the number of votes that their party gets. */ 
-        for (Candidate candidate:candidates) {
-            int candidateVotes = candidate.getNumVotes();
-            int partyIndex = -5;
-            //Finds the party index in party arrays for each candidate. 
-            for (int i=0; i<parties.size(); i++) {
-                if (parties.get(i).getName().equals(candidate.getParty())) {
-                    partyIndex = i;
-                }
+    public void voteCounting() {
+        // Calls IOException if an I/O error occurs while reading the ballot file
+        try {
+            //Sums up the number of votes for each candidate.
+            for (int i = 0; i < totalVotes; i++) {
+                String ballot = br.readLine();
+                String[] tokens = ballot.split(",");
+                int index = tokens.length - 1;
+                candidates.get(index).setNumVotes(candidates.get(index).getNumVotes() + 1);
             }
-            int canIndex = -5;
-            //Finds the candidate index in candidate arrays in Party object for each candidate. 
-            for (int i=0; i<parties.get(partyIndex).getCandidates().size(); i++) {
-                if (parties.get(partyIndex).getCandidates().get(i).getName().equals(candidate.getName())) {
-                    canIndex = i;
-                }
-            }
-
-            parties.get(partyIndex).getCandidates().get(canIndex).setNumVotes(candidateVotes);
-            parties.get(partyIndex).setNumVotes(parties.get(partyIndex).getNumVotes() + candidateVotes);
-        }
-    }
-
-    /**
-     * Simulates a fair coin toss to break a tie between a list of parties.
-     * @param winners a list of winners in the election
-     * @return the randomly chosen index of winner 
-     */
-     public Candidate coinTossOPL(ArrayList<Candidate> winners) {
-        Random rand = new Random();
         
-        /* The winning index is randomized 1000 times and the winner
-        is chosen on the 1001th time to simulate a fair coin toss. */ 
-        int index = rand.nextInt(winners.size());
-        for(int i = 0; i < 1000; i++) {
-            index = rand.nextInt(winners.size());
-        }
+        
+            /*Finds the party of each respective candidate and sums up the votes of the candiates
+            in their respective party to determine the number of votes that their party gets. */ 
+            for (Candidate candidate:candidates) {
+                int candidateVotes = candidate.getNumVotes();
+                int partyIndex = -5;
+                //Finds the party index in party arrays for each candidate. 
+                for (int i=0; i<parties.size(); i++) {
+                    if (parties.get(i).getName().equals(candidate.getParty())) {
+                        partyIndex = i;
+                    }
+                }
+                int canIndex = -5;
+                //Finds the candidate index in candidate arrays in Party object for each candidate. 
+                for (int i=0; i<parties.get(partyIndex).getCandidates().size(); i++) {
+                    if (parties.get(partyIndex).getCandidates().get(i).getName().equals(candidate.getName())) {
+                        canIndex = i;
+                    }
+                }
 
-        return winners.get(index);
+                parties.get(partyIndex).getCandidates().get(canIndex).setNumVotes(candidateVotes);
+                parties.get(partyIndex).setNumVotes(parties.get(partyIndex).getNumVotes() + candidateVotes);
+            }
+        } catch (IOException e) {
+            System.out.println("Fail to read the ballot file.");
+        }
     }
 
     /**
@@ -120,51 +105,12 @@ public class OPL extends Election{
                 if (largestVoteCandidates.size() == 1) {
                     this.winnerList.add(largestVoteCandidates.get(0));
                 } else if (largestVoteCandidates.size() > 1) {
-                    this.winnerList.add(coinTossOPL(largestVoteCandidates));
+                    int index = coinToss(largestVoteCandidates.size());
+                    Candidate winner = largestVoteCandidates.get(index);
+                    this.winnerList.add(winner);
                 }
             }
         }
-    }
-
-    /**
-     * Calls the Display class to display the results of the election.
-     */
-    @Override
-    public void displayResults() {
-        DisplayResults results = new DisplayResults(
-                "OPL", 
-                this.parties.size(), 
-                this.totalVotes, 
-                this.totalSeats,
-                this.winnerList,
-                this.parties
-                );
-
-        results.displayResults();
-    }
-
-    /**
-     * Calls the Audit class to create an audit file.
-     */
-    @Override
-    public void auditFile() {
-        Audit auditFile = new Audit(
-                "OPL",
-                this.parties.size(),
-                this.totalVotes,
-                this.totalSeats,
-                this.winnerList,
-                this.parties
-                );
-        
-        try {
-            auditFile.audit();
-        } catch (IOException e) {
-            System.out.println("Fail to generate audit file");
-            e.printStackTrace();
-        }
-
-
     }
 }
 

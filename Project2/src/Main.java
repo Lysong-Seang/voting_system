@@ -31,8 +31,8 @@ public class Main {
             cpl.voteCounting();
             cpl.allocateSeats();
             cpl.findWinners();
-            cpl.auditFile();
-            cpl.displayResults();
+            cpl.auditFile("CPL");
+            cpl.displayResults("CPL");
         //If election type is OPL, create OPL object and runs voting system
         }else {
             OPL opl = new OPL(totalVotes, totalSeats, parties, reader, candidates);
@@ -40,8 +40,8 @@ public class Main {
             opl.voteCounting();
             opl.allocateSeats();
             opl.findWinners();
-            opl.auditFile();
-            opl.displayResults();
+            opl.auditFile("OPL");
+            opl.displayResults("OPL");
         }
     }
 

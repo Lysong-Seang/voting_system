@@ -48,7 +48,8 @@ public class Election{
      * This will not work if the total number of votes is less than or equal to 0.
      * @throws IOException if an I/O error occurs while reading the ballot file
      */
-    public void voteCounting() throws IOException {
+    public void voteCounting() {}
+    /*public void voteCounting() throws IOException {
         //Reads through each ballot and counts each parties ballots. 
         for (int i = 0; i < totalVotes; i++) {
             String ballot = br.readLine();
@@ -56,24 +57,24 @@ public class Election{
             int index = tokens.length - 1;
             parties.get(index).setNumVotes(parties.get(index).getNumVotes() + 1);
         }
-    }
+    }*/
 
     /**
      * Simulates a fair coin toss to break a tie between a list of parties.
      * @param winners a list of election winners
      * @return The randomly chosen index of winner 
      */
-    public Party coinToss(ArrayList<Party> winners) {
+    public int coinToss(int len) {
         Random rand = new Random();
         
         /* The winning index is randomized 1000 times and the winner
         is chosen on the 1001th time to simulate a fair coin toss. */
-        int index = rand.nextInt(winners.size());
+        int index = rand.nextInt(len);
         for(int i = 0; i < 1000; i++) {
-            index = rand.nextInt(winners.size());
+            index = rand.nextInt(len);
         }
 
-        return winners.get(index);
+        return index;
     }
 
     /**
@@ -121,17 +122,21 @@ public class Election{
             //randomly picks one party to seat allocation.
             } else if (largestVoteParties.size() > 1) {
                 //Coin toss to determine seat allocation
-                Party allocatedParty = coinToss(largestVoteParties);
+                int index = coinToss(largestVoteParties.size());
+                Party allocatedParty = largestVoteParties.get(index);
                 allocatedParty.setNumAllocatedSeats(allocatedParty.getNumAllocatedSeats() + 1);
                 remainingSeats -= 1;
             }
         }
     }
 
+
+    
     /**
      * Finds the winner based on the party with the most seats.
-    */
-    public void findWinners() {
+     */
+    public void findWinners() {}
+    /*public void findWinners() {
         //Each party clarifies the number of allocated seats based on the voting results and candidate information.
         for (Party party: parties) {
             int thisPartySeats = party.getNumAllocatedSeats();
@@ -143,14 +148,14 @@ public class Election{
                 this.winnerList.add(thisPartyCandidates.get(i));
             }
         } 
-    }
+    }*/
 
     /**
      * Calls the Display class to display the results of the election.
      */
-    public void displayResults() {
+    public void displayResults(String type) {
         DisplayResults results = new DisplayResults(
-                "CPL", 
+                type, 
                 this.parties.size(), 
                 this.totalVotes, 
                 this.totalSeats,
@@ -163,9 +168,9 @@ public class Election{
     /**
      * Calls the Audit class to create an audit file.
      */
-    public void auditFile() {
+    public void auditFile(String type) {
         Audit auditFile = new Audit(
-                "CPL",
+                type,
                 this.parties.size(),
                 this.totalVotes,
                 this.totalSeats,
