@@ -131,7 +131,7 @@ public class Main {
         
         File file = new File(filename);
         //If the given file name is not found, keep asking the file name
-        while (!file.exists()) {
+        while (!file.exists() || file.isDirectory()) {
         	System.out.println("File Not Found");
         	Scanner scanner = new Scanner(System.in);
             System.out.print("Please enter your file name: ");
