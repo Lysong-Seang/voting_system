@@ -1,15 +1,14 @@
 package src;
 
 import java.util.ArrayList;
-import java.io.*;
 
 /**
  * The CPL class inherits the Election class to run a CPL type election.
  * @author Crystal Wen
  */
 public class CPL extends Election{
-    public CPL(int totalVotes, int totalSeats, ArrayList<Party> parties, BufferedReader br){
-        super(totalVotes, totalSeats, parties, br);
+    public CPL(int totalVotes, int totalSeats, ArrayList<Party> parties, ArrayList<String[]> ballots){
+        super(totalVotes, totalSeats, parties, ballots);
     }
 
 
@@ -19,17 +18,10 @@ public class CPL extends Election{
      */
     @Override
     public void voteCounting() {
-        // Calls IOException if an I/O error occurs while reading the ballot file
-        try {
         //Reads through each ballot and counts each parties ballots.
         for (int i = 0; i < totalVotes; i++) {
-            String ballot = br.readLine();
-            String[] tokens = ballot.split(",");
-            int index = tokens.length - 1;
+            int index = ballots.get(i).length - 1;
             parties.get(index).setNumVotes(parties.get(index).getNumVotes() + 1);
-        }
-        } catch (IOException e) {
-            System.out.println("Fail to read the ballot file.");
         }
     }
 

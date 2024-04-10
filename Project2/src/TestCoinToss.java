@@ -1,8 +1,6 @@
 package src;
 
-import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.util.ArrayList;
 
 /**
@@ -10,15 +8,14 @@ import java.util.ArrayList;
  * @author Crystal Wen
  */
 public class TestCoinToss {
-    public static void testCoinToss() throws FileNotFoundException{
+    public static void testCoinToss() {
         ArrayList<Party> parties = new ArrayList<>();
         int totalVotes = 10000;
         int totalSeats = 3;
-        FileReader fileReader = new FileReader("testing/testCPLVote.csv");
-        BufferedReader br = new BufferedReader(fileReader);
+        ArrayList<String[]> ballots = new ArrayList<String[]>();
         int c1 = 0, c2 = 0;
 
-        Election election = new Election(totalVotes, totalSeats, parties, br);
+        Election election = new Election(totalVotes, totalSeats, parties, ballots);
 
         for(int i = 0; i < 1000; i++) {
             int index = election.coinToss(2);
