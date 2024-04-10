@@ -127,39 +127,39 @@ public class Main {
     public static void main(String[] args) throws IOException {
         String[] filenames;
         File[] files;
+        Scanner scanner = new Scanner(System.in);
+
         //File name given from command line argument.
         if (args.length > 0) {
             filenames = args;
         //Ask file name by text prompt.
         } else {
-            Scanner scanner = new Scanner(System.in);
             System.out.print("Please enter your file name(s) (separate each file name with a space): ");
             filenames = scanner.nextLine().split(" ");
-            scanner.close();
         }
         files = new File[filenames.length];
 
+        //Makes every filename into a File object and adding it to the files array
         for(int i = 0; i < files.length; i++) {
             files[i] = new File(filenames[i]);
 
             //If the given file name is not found, keep asking the file name
-            Scanner scanner = new Scanner(System.in);
             while (!files[i].exists() || files[i].isDirectory()) {
                 System.out.println("File " + (i + 1) + " Not Found");
                 System.out.print("Please enter your file name: ");
-                String filename = scanner.nextLine();
-                files[i] = new File(filename);
+                files[i] = new File(scanner.nextLine());
             }
-            scanner.close();
+            
         }
+        scanner.close();
         
         //Try to open the given file, fetch the ballots info, and clarify the results.
-        // try {
-        //     readBallotFile(files);
-        // //If it fails to open, stop the process
-        // } catch (NullPointerException e) {
-        //     System.out.println();
-        // }
+        try {
+            readBallotFile(files);
+        //If it fails to open, stop the process
+        } catch (NullPointerException e) {
+            System.out.println();
+        }
         System.out.println();
         System.out.println("End the Process");
     }
