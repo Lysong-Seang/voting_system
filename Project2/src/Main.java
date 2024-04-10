@@ -125,36 +125,41 @@ public class Main {
      * @throws IOException if an I/O error occurs while reading the ballot file
      */
     public static void main(String[] args) throws IOException {
-        String filename;
+        String[] filenames;
+        File[] files;
         //File name given from command line argument.
         if (args.length > 0) {
-            filename = args[0];
+            filenames = args;
         //Ask file name by text prompt.
         } else {
             Scanner scanner = new Scanner(System.in);
-            System.out.print("Please enter your file name: ");
-            filename = scanner.nextLine();
+            System.out.print("Please enter your file name(s) (separate each file name with a space): ");
+            filenames = scanner.nextLine().split(" ");
+            scanner.close();
+        }
+        files = new File[filenames.length];
+
+        for(int i = 0; i < files.length; i++) {
+            files[i] = new File(filenames[i]);
+
+            //If the given file name is not found, keep asking the file name
+            Scanner scanner = new Scanner(System.in);
+            while (!files[i].exists() || files[i].isDirectory()) {
+                System.out.println("File " + (i + 1) + " Not Found");
+                System.out.print("Please enter your file name: ");
+                String filename = scanner.nextLine();
+                files[i] = new File(filename);
+            }
             scanner.close();
         }
         
-        File file = new File(filename);
-        //If the given file name is not found, keep asking the file name
-        Scanner scanner = new Scanner(System.in);
-        while (!file.exists() || file.isDirectory()) {
-        	System.out.println("File Not Found");
-            System.out.print("Please enter your file name: ");
-            filename = scanner.nextLine();
-            file = new File(filename);
-        }
-        scanner.close();
-        
         //Try to open the given file, fetch the ballots info, and clarify the results.
-        try {
-            readBallotFile(filename);
-        //If it fails to open, stop the process
-        } catch (NullPointerException e) {
-            System.out.println();
-        }
+        // try {
+        //     readBallotFile(files);
+        // //If it fails to open, stop the process
+        // } catch (NullPointerException e) {
+        //     System.out.println();
+        // }
         System.out.println();
         System.out.println("End the Process");
     }
