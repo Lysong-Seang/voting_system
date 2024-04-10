@@ -39,10 +39,11 @@ public class Audit {
         this.winnerList = winnerList;
         this.parties = parties;
         this.quota = numBallots / numSeats;
-        LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy_MM_dd_HH_mm_ss");
-        String formattedDateTime = now.format(formatter);
-        this.fileName = "auditFile" + formattedDateTime + ".txt";
+        // LocalDateTime now = LocalDateTime.now();
+        // DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy_MM_dd_HH_mm_ss");
+        // String formattedDateTime = now.format(formatter);
+        // this.fileName = "auditFile" + formattedDateTime + ".txt";
+        this.fileName = "auditFile.txt";
     }
 
     /**
@@ -51,8 +52,8 @@ public class Audit {
      * @throws IOException if an I/O error occurs while creating an audit file
      */
     public void audit() throws IOException {
-        File f = new File("testing.txt");  	
-        BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
+        BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, false));
+
         writer.write("Election type: " + electionType);
         writer.newLine();
         writer.write("Number of Parties: " + parties.size());
