@@ -16,7 +16,7 @@ public class Election{
     public ArrayList<Party> parties;
     public int quota;
     public ArrayList<Candidate> winnerList;
-    public BufferedReader br;
+    ArrayList<String[]> ballots;
 
     /**
      * Initializes the variables of the Election class.
@@ -25,11 +25,11 @@ public class Election{
      * @param parties    a list of parties in election
      * @param br         buffered reader to continue reading the given ballot file
      */
-    public Election(int totalVotes, int totalSeats, ArrayList<Party> parties, BufferedReader br){
+    public Election(int totalVotes, int totalSeats, ArrayList<Party> parties, ArrayList<String[]> ballots){
         this.totalVotes = totalVotes;
         this.totalSeats = totalSeats;
         this.parties = parties;
-        this.br = br;
+        this.ballots = ballots;
         winnerList = new ArrayList<>();
     }
 
@@ -46,18 +46,8 @@ public class Election{
     /**
      * Counts the votes for each party.
      * This will not work if the total number of votes is less than or equal to 0.
-     * @throws IOException if an I/O error occurs while reading the ballot file
      */
     public void voteCounting() {}
-    /*public void voteCounting() throws IOException {
-        //Reads through each ballot and counts each parties ballots. 
-        for (int i = 0; i < totalVotes; i++) {
-            String ballot = br.readLine();
-            String[] tokens = ballot.split(",");
-            int index = tokens.length - 1;
-            parties.get(index).setNumVotes(parties.get(index).getNumVotes() + 1);
-        }
-    }*/
 
     /**
      * Simulates a fair coin toss to break a tie between a list of parties.
@@ -136,19 +126,7 @@ public class Election{
      * Finds the winner based on the party with the most seats.
      */
     public void findWinners() {}
-    /*public void findWinners() {
-        //Each party clarifies the number of allocated seats based on the voting results and candidate information.
-        for (Party party: parties) {
-            int thisPartySeats = party.getNumAllocatedSeats();
-            ArrayList<Candidate> thisPartyCandidates = party.getCandidates();
-            int maxAllocation = Math.min(thisPartySeats, thisPartyCandidates.size());
-            
-            //Give the seat to candidate from the 
-            for (int i=0; i<maxAllocation; i++) {
-                this.winnerList.add(thisPartyCandidates.get(i));
-            }
-        } 
-    }*/
+    
 
     /**
      * Calls the Display class to display the results of the election.
