@@ -129,7 +129,9 @@ public class Main {
         //If the file is not found, show the following output.
         } catch (FileNotFoundException e){
             System.out.println("File not found.");
-        }
+        } catch (NumberFormatException e) {
+            System.out.println("Inappropriate File provided.");
+        }  
     }
 
     /**
@@ -202,6 +204,8 @@ public class Main {
         //If the file is not found, show the following output.
         } catch (FileNotFoundException e){
             System.out.println("File not found.");
+        } catch (NumberFormatException e) {
+            System.out.println("Inappropriate File provided.");
         }
     }
     
