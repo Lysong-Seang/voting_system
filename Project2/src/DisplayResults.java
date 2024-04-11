@@ -3,7 +3,8 @@ package src;
 import java.util.ArrayList;
 
 /**
- * This class is responsible for managing and displaying the results of an election.
+ * This class is responsible for managing and displaying the results of an
+ * election.
  * It includes details such as the type of election, the number of parties,
  * ballots, seats, and the winners list.
  * This class also calculates the quota based on the number of ballots and
@@ -62,10 +63,9 @@ public class DisplayResults {
             count += numCandidate;
         }
         System.out.println("Number of Candidates: " + count);
-
         System.out.println("Number of Seats: " + numSeats);
         System.out.println("Number of Ballots: " + numBallots);
-        System.out.println("Number of Quota : " + this.quota);
+        System.out.println("Number of Quota : " + this.quota + "\n");
 
         // print in CPL style
         if (electionType.equals("CPL")) {
@@ -79,12 +79,12 @@ public class DisplayResults {
                 if (winnerList.size() <= 0) {
                     System.out.print(" N/A ***");
                 } else {
-
                     // Loop through winner list to get the name of the winner
-                    for (int j = 0; j < winnerList.size() - 1; j++) {
-                        System.out.print(winnerList.get(j).getName() + ", ");
+                    for (int j = 0; j < winnerList.size(); j++) {
+                        if (winnerList.get(j).getParty().equals(parties.get(i).getName())) {
+                            System.out.print(winnerList.get(j).getName());
+                        }
                     }
-                    System.out.print(winnerList.get(winnerList.size() - 1).getName());
                 }
                 System.out.print(" ***\n");
                 System.out.println("Number of Votes: " + parties.get(i).getNumVotes());
@@ -107,7 +107,6 @@ public class DisplayResults {
             if (electionType.equals("OPL")) {
                 System.out.println("***** Winner *****\n");
                 // print out the name of the winner, % of the total votes and the nubmer of
-                //
                 // votes each candidate gets
                 for (int i = 0; i < winnerList.size(); i++) {
                     System.out.println((i + 1) + ". " + winnerList.get(i).getName() + " ( % of number of toal votes " +
@@ -136,4 +135,3 @@ public class DisplayResults {
         }
     }
 }
-
