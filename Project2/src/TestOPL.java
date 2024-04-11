@@ -3,7 +3,6 @@ package src;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-import java.io.*;
 import java.util.ArrayList;
 
 /**
@@ -24,11 +23,11 @@ public class TestOPL {
     
     private int totalVotes;
     private int totalSeats;
-    private FileReader fileReader;
-    private BufferedReader br;
+    private ArrayList<String[]> ballots;
     private OPL opl;
 
     public void setDefault() {
+        ballots = new ArrayList<>();
     	expected = new ArrayList<>();
         actual = new ArrayList<>();
         candidatesActual = new ArrayList<>();
@@ -60,6 +59,22 @@ public class TestOPL {
         repCandidates.add(new Candidate("Alawa", "Republican", 0));
         
         indepCandidates.add(new Candidate("Sasha", "Independent1", 0));
+        
+        String[] b1 = {"1"};
+        String[] b2 = {"", "1"};
+        String[] b4 = {"", "", "", "1"};
+        String[] b5 = {"", "", "", "", "1"};
+        String[] b6 = {"","", "", "", "", "1"};
+    
+        ballots.add(b1);
+        ballots.add(b1);
+        ballots.add(b2);
+        ballots.add(b5);
+        ballots.add(b6);
+        ballots.add(b4);
+        ballots.add(b4);
+        ballots.add(b5);
+        ballots.add(b6);
 
         expected.add(new Party("Democratic", 3, demCandidates));
         expected.add(new Party("Republican", 4, repCandidates));
@@ -69,6 +84,7 @@ public class TestOPL {
         actual.add(new Party("Republican", 0, repCandidates));
         actual.add(new Party("Independent1", 0, indepCandidates));
         
+        
     }
     
     @Test
@@ -77,18 +93,8 @@ public class TestOPL {
     	totalVotes = 9;
         totalSeats = 2;
         
-        try {
-            fileReader = new FileReader("testOPLVote.csv");
-            br = new BufferedReader(fileReader);
-            opl = new OPL(totalVotes, totalSeats, actual, br, candidatesActual);
-            opl.voteCounting();
-        // Handle the FileNotFoundException
-        } catch (FileNotFoundException e) {
-            fail("File not found: " + e.getMessage());
-    	// Get error when reading a ballot file
-    	} catch (IOException e) {
-            fail("Error: " + e.getMessage());
-        }
+        opl = new OPL(totalVotes, totalSeats, actual, ballots, candidatesActual);
+        opl.voteCounting();
     	
         for(int i = 0; i < expected.size(); i++) {
             assertEquals(expected.get(i).getNumVotes(), opl.parties.get(i).getNumVotes());
@@ -139,19 +145,26 @@ public class TestOPL {
         
         int _totalVotes = 8;
         int _totalSeats = 2;
-        
-        try {
-            fileReader = new FileReader("testOPLVote.csv");
-            br = new BufferedReader(fileReader);
-            opl = new OPL(_totalVotes, _totalSeats, parties, br, candidates);
-            opl.voteCounting();
-        // Handle the FileNotFoundException
-        } catch (FileNotFoundException e) {
-            fail("File not found: " + e.getMessage());
-    	// Get error when reading a ballot file
-    	} catch (IOException e) {
-            fail("Error: " + e.getMessage());
-        }
+
+        ArrayList<String[]> b = new ArrayList<>();
+        String[] b1 = {"1"};
+        String[] b2 = {"", "1"};
+        String[] b4 = {"", "", "", "1"};
+        String[] b5 = {"", "", "", "", "1"};
+        String[] b6 = {"","", "", "", "", "1"};
+    
+        b.add(b1);
+        b.add(b1);
+        b.add(b2);
+        b.add(b5);
+        b.add(b6);
+        b.add(b4);
+        b.add(b4);
+        b.add(b5);
+        b.add(b6);
+ 
+        opl = new OPL(_totalVotes, _totalSeats, parties, b, candidates);
+        opl.voteCounting();
         
         opl.findWinners();
         //check the candidates who have the largest vote in seat allocated party win 
@@ -166,20 +179,10 @@ public class TestOPL {
     	totalVotes = 9;
         totalSeats = 1;
         
-        try {
-            fileReader = new FileReader("testOPLVote.csv");
-            br = new BufferedReader(fileReader);
-            opl = new OPL(totalVotes, totalSeats, actual, br, candidatesActual);
-            opl.calculateQuota();
-            opl.voteCounting();
-            opl.allocateSeats();
-        // Handle the FileNotFoundException
-        } catch (FileNotFoundException e) {
-            fail("File not found: " + e.getMessage());
-    	// Get error when reading a ballot file
-    	} catch (IOException e) {
-            fail("Error: " + e.getMessage());
-        }
+        opl = new OPL(totalVotes, totalSeats, actual, ballots, candidatesActual);
+        opl.calculateQuota();
+        opl.voteCounting();
+        opl.allocateSeats();
         
         //FindWinners are always implemented after voteCounting
     	opl.findWinners();
@@ -196,10 +199,9 @@ public class TestOPL {
 
         // Check that the list contains either value A or value B
         assertTrue("Winner List should contain either Etta or Alawa in Republican", containsOneCandidate);
-	// Check the size of winner list is equal to the total seat number.
-	assertEquals("Number of allocated seat is equal to the size of winner list",
-        	totalSeats, opl.winnerList.size());
+        // Check the size of winner list is equal to the total seat number.
+        assertEquals("Number of allocated seat is equal to the size of winner list",
+                totalSeats, opl.winnerList.size());
 
     }
 }
-
