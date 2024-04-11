@@ -85,7 +85,7 @@ public class Main {
         try{
             //Reads and extracts the necessary data from each ballot file.
             for(int i = 0; i < files.length; i++) {
-                FileReader fileReader = new FileReader(files[0]);
+                FileReader fileReader = new FileReader(files[i]);
                 BufferedReader reader = new BufferedReader(fileReader);
                 electionType = reader.readLine();
                 totalSeats = Integer.parseInt(reader.readLine());
@@ -150,7 +150,7 @@ public class Main {
         try{
             //Reads and extracts the necessary data from each ballot file.
             for(int i = 0; i < files.length; i++) {
-                FileReader fileReader = new FileReader(files[0]);
+                FileReader fileReader = new FileReader(files[i]);
                 BufferedReader reader = new BufferedReader(fileReader);
                 electionType = reader.readLine();
                 totalSeats = Integer.parseInt(reader.readLine());
