@@ -125,21 +125,19 @@ public class Main {
      * @throws IOException if an I/O error occurs while reading the ballot file
      */
     public static void main(String[] args) throws IOException {
-        String filename;
+        String filename = null;
+        Scanner scanner = new Scanner(System.in);
         //File name given from command line argument.
         if (args.length > 0) {
             filename = args[0];
         //Ask file name by text prompt.
         } else {
-            Scanner scanner = new Scanner(System.in);
             System.out.print("Please enter your file name: ");
             filename = scanner.nextLine();
-            scanner.close();
         }
         
         File file = new File(filename);
         //If the given file name is not found, keep asking the file name
-        Scanner scanner = new Scanner(System.in);
         while (!file.exists() || file.isDirectory()) {
         	System.out.println("File Not Found");
             System.out.print("Please enter your file name: ");
