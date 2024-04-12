@@ -47,76 +47,171 @@ public class Main {
 
     /**
      * Read the contents of the given file to get basic ballot information.
-     * @param file         name of the given ballot file
+     * @param files         An array of the names of the given ballot files
      * @throws IOException if an I/O error occurs while reading the ballot file
      */
-    public static void readBallotFile(String file) throws IOException {
+    public static void readBallotFile(String[] files) throws IOException {
+        try {
+            FileReader fileReader = new FileReader(files[0]);
+            BufferedReader reader = new BufferedReader(fileReader);
+            String electionType = reader.readLine();
+            reader.close();
+            
+            //Checks the election type of the file(s).
+            if(electionType.equals("CPL")) readCPL(files);
+            else if(electionType.equals("OPL")) readOPL(files);
+            else if(electionType.equals("MPO")) readMPO(files);
+            else readMV(files);
+        
+        //If the file is not found, show the following output.
+        } catch (FileNotFoundException e) {
+            System.out.println("File Not Found");
+        }   
+    }
+
+    /**
+     * Reads and extracts the necessary information from CPL-type election ballot file(s).
+     * @param files             An array of the names of the given ballot files
+     * @throws IOException      if an I/O error occurs while reading the ballot file
+     */
+    public static void readCPL(String[] files) throws IOException {
+        ArrayList<Party> parties = new ArrayList<Party>();
+        ArrayList<String[]> ballots = new ArrayList<String[]>();
+        String electionType = "";
+        int totalSeats = 0;
+        int numCandidateOrParties = 0;
+        int totalVotes = 0;
+
+        try{
+            //Reads and extracts the necessary data from each ballot file.
+            for(int i = 0; i < files.length; i++) {
+                FileReader fileReader = new FileReader(files[i]);
+                BufferedReader reader = new BufferedReader(fileReader);
+                electionType = reader.readLine();
+                totalSeats = Integer.parseInt(reader.readLine());
+                int currVotes = Integer.parseInt(reader.readLine());
+                totalVotes += currVotes;
+                numCandidateOrParties = Integer.parseInt(reader.readLine());
+
+                //For each party, store all candidates and party infos with objects.
+                for (int j=0; j<numCandidateOrParties; j++){
+
+                    //If this is the first file being read, then the Arraylist of parties 
+                    //and their respective candidates are initialized.
+                    if( i == 0) {
+                        ArrayList<Candidate> thisPartyCandidates = new ArrayList<Candidate>();
+                        String [] split = reader.readLine().split(",");
+                        String partyn = split[0];
+                        //Store candidates info for this party.
+                        for (int k=1; k< split.length; k++){
+                            String name = split[k];
+                            Candidate candidate = new Candidate(name, partyn, 0);
+                            thisPartyCandidates.add(candidate);
+                        }
+                        Party party = new Party(partyn, 0, thisPartyCandidates);
+                        parties.add(party);
+
+                    //Otherwise, those lines will be skipped.
+                    } else {
+                        reader.readLine();
+                    }
+                    
+                }
+
+                //Adds the lines that contains the ballots to a data structure.
+                for (int j = 0; j < currVotes; j++) {
+                    ballots.add(reader.readLine().split(","));
+                }
+                reader.close();
+            }
+            runElection(electionType, totalVotes, totalSeats, ballots, parties, new ArrayList<Candidate>());
+
+        //If the file is not found, show the following output.
+        } catch (FileNotFoundException e){
+            System.out.println("File not found.");
+        } catch (NumberFormatException e) {
+            System.out.println("Inappropriate File provided.");
+        }  
+    }
+
+    /**
+     * Reads and extracts the necessary information from OPL-type election ballot file(s).
+     * @param files             An array of the names of the given ballot files
+     * @throws IOException      if an I/O error occurs while reading the ballot file
+     */
+    public static void readOPL(String[] files) throws IOException {
         ArrayList<Candidate> candidates = new ArrayList<Candidate>();
         ArrayList<Party> parties = new ArrayList<Party>();
         ArrayList<String> partyNames = new ArrayList<String>();
         ArrayList<String[]> ballots = new ArrayList<String[]>();
-        try{
-            FileReader fileReader = new FileReader(file);
-            BufferedReader reader = new BufferedReader(fileReader);
-            String electionType = reader.readLine();
-            int totalSeats = Integer.parseInt(reader.readLine());
-            int totalVotes= Integer.parseInt(reader.readLine());
-            int numCandidateOrParties = Integer.parseInt(reader.readLine());
+        String electionType = "";
+        int totalSeats = 0;
+        int numCandidateOrParties = 0;
+        int totalVotes = 0;
 
-            //If the election type is OPL
-            if (electionType.equals("OPL")){
-                //For each candidate, store name and party affiliation with Candidate object.
-                for (int i=0; i< numCandidateOrParties; i++ ){
-                    String [] split = reader.readLine().split(",");
-                    String partyn = split[0];
-                    String name = split[1];
-                    Candidate candidate = new Candidate(name, partyn, 0);
-                    candidates.add(candidate);
-                    //save party name if it has not stored yet
-                    if (!partyNames.contains(partyn)) {
-                        partyNames.add(partyn);
-                    }
-                }
-                //For each party, store info with Party object.
-                for (String partyname: partyNames) {
-                    ArrayList<Candidate> thisPartyCandidates = new ArrayList<Candidate>();
-                    for (Candidate can: candidates) {
-                        if (partyname.equals(can.getParty())) {
-                            thisPartyCandidates.add(can);
+        try{
+            //Reads and extracts the necessary data from each ballot file.
+            for(int i = 0; i < files.length; i++) {
+                FileReader fileReader = new FileReader(files[i]);
+                BufferedReader reader = new BufferedReader(fileReader);
+                electionType = reader.readLine();
+                totalSeats = Integer.parseInt(reader.readLine());
+                int currVotes = Integer.parseInt(reader.readLine());
+                totalVotes += currVotes;
+                numCandidateOrParties = Integer.parseInt(reader.readLine());
+                
+                //If this is the first file being read, then the Arraylist of parties candidates are initialized.
+                if(i == 0) {
+                    //For each candidate, store name and party affiliation with Candidate object.
+                    for (int j=0; j< numCandidateOrParties; j++ ){
+                        String [] split = reader.readLine().split(",");
+                        String partyn = split[0];
+                        String name = split[1];
+                        Candidate candidate = new Candidate(name, partyn, 0);
+                        candidates.add(candidate);
+                        //save party name if it has not stored yet
+                        if (!partyNames.contains(partyn)) {
+                            partyNames.add(partyn);
                         }
                     }
-                    Party party = new Party(partyname, 0, thisPartyCandidates);
-                    parties.add(party);
+                    //For each party, store info with Party object.
+                    for (String partyname: partyNames) {
+                        ArrayList<Candidate> thisPartyCandidates = new ArrayList<Candidate>();
+                        for (Candidate can: candidates) {
+                            if (partyname.equals(can.getParty())) {
+                                thisPartyCandidates.add(can);
+                            }
+                        }
+                        Party party = new Party(partyname, 0, thisPartyCandidates);
+                        parties.add(party);
+                    }
+
+                //Otherwise, these lines are skipped.
+                } else {
+                    for(int j = 0; j < numCandidateOrParties; j++) {
+                        reader.readLine();
+                    }   
                 }
 
-            //If the election type is CPL
-            } else if (electionType.equals("CPL")) {
-                //For each party, store all candidates and party infos with objects.
-                for (int i=0; i<numCandidateOrParties; i++){
-                    ArrayList<Candidate> thisPartyCandidates = new ArrayList<Candidate>();
-                    String [] split = reader.readLine().split(",");
-                    String partyn = split[0];
-                    //Store canidates info for this party.
-                    for (int j=1; j< split.length; j++){
-                        String name = split[j];
-                        Candidate candidate = new Candidate(name, partyn, 0);
-                        thisPartyCandidates.add(candidate);
-                    }
-                    Party party = new Party(partyn, 0, thisPartyCandidates);
-                    parties.add(party);
+                //Adds the lines that contains the ballots to a data structure.
+                for (int j = 0; j < currVotes; j++) {
+                    ballots.add(reader.readLine().split(","));
                 }
+                reader.close();
             }
-            for (int i = 0; i < totalVotes; i++) {
-                ballots.add(reader.readLine().split(","));
-            }
-            reader.close();
-            
             runElection(electionType, totalVotes, totalSeats, ballots, parties, candidates);
+
         //If the file is not found, show the following output.
         } catch (FileNotFoundException e){
             System.out.println("File not found.");
+        } catch (NumberFormatException e) {
+            System.out.println("Inappropriate File provided.");
         }
     }
+    
+    public static void readMPO(String[] files) throws IOException {}
+
+    public static void readMV(String[] files) throws IOException {}
 
     /**
      * This will be implemented first in this voting system program. It receives
@@ -125,30 +220,37 @@ public class Main {
      * @throws IOException if an I/O error occurs while reading the ballot file
      */
     public static void main(String[] args) throws IOException {
-        String filename = null;
+        String[] filenames;
+        File[] files;
         Scanner scanner = new Scanner(System.in);
+
         //File name given from command line argument.
         if (args.length > 0) {
-            filename = args[0];
+            filenames = args;
         //Ask file name by text prompt.
         } else {
-            System.out.print("Please enter your file name: ");
-            filename = scanner.nextLine();
+            System.out.print("Please enter your file name(s) (separate each file name with a space): ");
+            filenames = scanner.nextLine().split(" ");
         }
-        
-        File file = new File(filename);
-        //If the given file name is not found, keep asking the file name
-        while (!file.exists() || file.isDirectory()) {
-        	System.out.println("File Not Found");
-            System.out.print("Please enter your file name: ");
-            filename = scanner.nextLine();
-            file = new File(filename);
+        files = new File[filenames.length];
+
+        //Makes every filename into a File object and adding it to the files array
+        for(int i = 0; i < files.length; i++) {
+            files[i] = new File(filenames[i]);
+
+            //If the given file name is not found, keep asking for the file name
+            while (!files[i].exists() || files[i].isDirectory()) {
+                System.out.println("File " + (i + 1) + " Not Found");
+                System.out.print("Please enter your file name: ");
+                filenames[i] = scanner.nextLine();
+                files[i] = new File(filenames[i]);
+            }
         }
         scanner.close();
         
         //Try to open the given file, fetch the ballots info, and clarify the results.
         try {
-            readBallotFile(filename);
+            readBallotFile(filenames);
         //If it fails to open, stop the process
         } catch (NullPointerException e) {
             System.out.println();

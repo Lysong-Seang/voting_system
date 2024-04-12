@@ -43,7 +43,7 @@ public class Audit {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy_MM_dd_HH_mm_ss");
         String formattedDateTime = now.format(formatter);
         this.fileName = "auditFile" + formattedDateTime + ".txt";
-        // this.fileName = createUniqueFile(this.fileName);
+        this.fileName = createUniqueFile(this.fileName);
     }
 
     /**
@@ -123,21 +123,21 @@ public class Audit {
         
     }
 
-    // private String createUniqueFile(String originalFileName) {
-    //     File f = new File(originalFileName); // creating a file object
-    //     String targ = originalFileName; // potentially variable file name
-    //     int count = 0;
+    private String createUniqueFile(String originalFileName) {
+        File f = new File(originalFileName); // creating a file object
+        String targ = originalFileName; // potentially variable file name
+        int count = 0;
 
-    //     if (!f.exists()) { // if does not exist, the original file name will be returned
-    //         return originalFileName;
-    //     }
+        if (!f.exists()) { // if does not exist, the original file name will be returned
+            return originalFileName;
+        }
 
-    //     while(f.exists()) { // if not
-    //         // the new format will be "-n.txt" instead
-    //         targ = originalFileName.replace(".txt", "-" + count + ".txt"); 
-    //         f = new File(originalFileName);
-    //         count++;
-    //     }
-    //     return targ;
-    // }
+        while(f.exists()) { // if not
+            // the new format will be "-n.txt" instead
+            targ = originalFileName.replace(".txt", "-" + count + ".txt"); 
+            f = new File(originalFileName);
+            count++;
+        }
+        return targ;
+    }
 }
