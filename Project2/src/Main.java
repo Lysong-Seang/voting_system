@@ -128,9 +128,9 @@ public class Main {
 
         //If the file is not found, show the following output.
         } catch (FileNotFoundException e){
-            System.out.println("File not found.");
+            System.out.println("File Not Found.");
         } catch (NumberFormatException e) {
-            System.out.println("Inappropriate File provided.");
+            System.out.println("Inappropriate File Provided.");
         }  
     }
 
@@ -203,9 +203,9 @@ public class Main {
 
         //If the file is not found, show the following output.
         } catch (FileNotFoundException e){
-            System.out.println("File not found.");
+            System.out.println("File Not Found.");
         } catch (NumberFormatException e) {
-            System.out.println("Inappropriate File provided.");
+            System.out.println("Inappropriate File Provided.");
         }
     }
     
@@ -244,10 +244,8 @@ public class Main {
             if(index > 0) extension = filenames[i].substring(index + 1);
 
             //If the given file name is not found, keep asking for the file name
-            while (!files[i].exists() || files[i].isDirectory() || extension != "csv") {
-                //Checks if the file has the wrong file extension, it will print out an appropriate error message. 
-                if(extension != "csv") System.out.println("File " + (i + 1) + " is not a csv file");
-                else System.out.println("File " + (i + 1) + " Not Found");
+            while (!files[i].exists() || files[i].isDirectory() || !extension.equals("csv")) {
+                System.out.println("File " + (i + 1) + ": '" + filenames[i] + "' is not valid or not found");
 
                 System.out.print("Please enter your file name: ");
                 filenames[i] = scanner.nextLine();
@@ -257,6 +255,7 @@ public class Main {
                 if(index > 0) extension = filenames[i].substring(index + 1);
 
                 files[i] = new File(filenames[i]);
+
             }
         }
         scanner.close();
@@ -266,7 +265,7 @@ public class Main {
             readBallotFile(filenames);
         //If it fails to open, stop the process
         } catch (NullPointerException e) {
-            System.out.println();
+            System.out.println("Failed To Open the File.");
         }
         System.out.println();
         System.out.println("End the Process");
