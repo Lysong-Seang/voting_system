@@ -122,20 +122,29 @@ public class Audit {
         file.setExecutable(false, false);
         
     }
-
-    private String createUniqueFile(String originalFileName) {
+    /**
+     * Creates a unique file name for the audit file.
+     * 
+     * @param originalFileName  A string that holds the original file name.
+     * @return targ             A unique file name.
+     */
+    public String createUniqueFile(String originalFileName) {
         File f = new File(originalFileName); // creating a file object
         String targ = originalFileName; // potentially variable file name
-        int count = 0;
+        int count = 1;
 
         if (!f.exists()) { // if does not exist, the original file name will be returned
             return originalFileName;
         }
-
-        while(f.exists()) { // if not
-            // the new format will be "-n.txt" instead
-            targ = originalFileName.replace(".txt", "-" + count + ".txt"); 
-            f = new File(originalFileName);
+        // if not, the new format will be "-n.txt" instead
+        targ = originalFileName.replace(".txt", "-1.txt");
+        f = new File(targ);
+        
+        // if the new file name has been taken,
+        // continuously increment n until the file name is unique
+        while(f.exists()) {     
+            targ = targ.replace("-" + count + ".txt", "-" + (count+1) + ".txt"); 
+            f = new File(targ);
             count++;
         }
         return targ;
