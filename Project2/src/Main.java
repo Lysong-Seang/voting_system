@@ -128,9 +128,9 @@ public class Main {
 
         //If the file is not found, show the following output.
         } catch (FileNotFoundException e){
-            System.out.println("File not found.");
+            System.out.println("File Not Found.");
         } catch (NumberFormatException e) {
-            System.out.println("Inappropriate File provided.");
+            System.out.println("Inappropriate File Provided.");
         }  
     }
 
@@ -203,9 +203,9 @@ public class Main {
 
         //If the file is not found, show the following output.
         } catch (FileNotFoundException e){
-            System.out.println("File not found.");
+            System.out.println("File Not Found.");
         } catch (NumberFormatException e) {
-            System.out.println("Inappropriate File provided.");
+            System.out.println("Inappropriate File Provided.");
         }
     }
     
@@ -233,17 +233,29 @@ public class Main {
             filenames = scanner.nextLine().split(" ");
         }
         files = new File[filenames.length];
-
+        
         //Makes every filename into a File object and adding it to the files array
         for(int i = 0; i < files.length; i++) {
             files[i] = new File(filenames[i]);
+            
+            int index = filenames[i].lastIndexOf('.');
+            String extension = "";
+            //If the file name has a file extension, then we take the file extension.
+            if(index > 0) extension = filenames[i].substring(index + 1);
 
             //If the given file name is not found, keep asking for the file name
-            while (!files[i].exists() || files[i].isDirectory()) {
-                System.out.println("File " + (i + 1) + " Not Found");
+            while (!files[i].exists() || files[i].isDirectory() || !extension.equals("csv")) {
+                System.out.println("File " + (i + 1) + ": '" + filenames[i] + "' is not valid or not found");
+
                 System.out.print("Please enter your file name: ");
                 filenames[i] = scanner.nextLine();
+
+                index = filenames[i].lastIndexOf('.');
+                //If the file name has a file extension, then we take the file extension.
+                if(index > 0) extension = filenames[i].substring(index + 1);
+
                 files[i] = new File(filenames[i]);
+
             }
         }
         scanner.close();
@@ -253,7 +265,7 @@ public class Main {
             readBallotFile(filenames);
         //If it fails to open, stop the process
         } catch (NullPointerException e) {
-            System.out.println();
+            System.out.println("Failed To Open the File.");
         }
         System.out.println();
         System.out.println("End the Process");
