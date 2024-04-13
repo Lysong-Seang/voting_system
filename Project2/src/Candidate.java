@@ -9,6 +9,7 @@ public class Candidate {
     private String name;
     private String party;
     private int numVotes;
+    private int numSeats;
 
      /**
      * Initialize the variables of Canddiate class.
@@ -20,6 +21,7 @@ public class Candidate {
         this.name = name;
         this.party = party;
         this.numVotes = numVotes;
+        this.numSeats = 0;
     }
 
     /**
@@ -52,6 +54,14 @@ public class Candidate {
      */
     public void setNumVotes(int voteNum) {
         this.numVotes = voteNum;
+    }
+
+    public int getNumSeats() {
+        return numSeats;
+    }
+
+    public void setNumSeats(int numSeats) {
+        this.numSeats = numSeats;
     }
 }
 
