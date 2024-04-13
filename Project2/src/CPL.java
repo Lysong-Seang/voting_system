@@ -46,4 +46,3 @@ public class CPL extends Election{
 
 
 }
-

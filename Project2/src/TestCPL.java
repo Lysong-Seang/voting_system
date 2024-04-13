@@ -294,4 +294,3 @@ public class TestCPL {
         assertEquals("Winners are saved successfully", winners, cpl.winnerList);
     }
 }
-

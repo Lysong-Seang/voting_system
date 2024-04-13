@@ -43,6 +43,7 @@ public class Audit {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy_MM_dd_HH_mm_ss");
         String formattedDateTime = now.format(formatter);
         this.fileName = "auditFile" + formattedDateTime + ".txt";
+        this.fileName = createUniqueFile(this.fileName);
     }
 
     /**
@@ -51,7 +52,6 @@ public class Audit {
      * @throws IOException if an I/O error occurs while creating an audit file
      */
     public void audit() throws IOException {
-        File f = new File("testing.txt");  	
         BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
         writer.write("Election type: " + electionType);
         writer.newLine();
@@ -122,5 +122,31 @@ public class Audit {
         file.setExecutable(false, false);
         
     }
-}
+    /**
+     * Creates a unique file name for the audit file.
+     * 
+     * @param originalFileName  A string that holds the original file name.
+     * @return targ             A unique file name.
+     */
+    public String createUniqueFile(String originalFileName) {
+        File f = new File(originalFileName); // creating a file object
+        String targ = originalFileName; // potentially variable file name
+        int count = 1;
 
+        if (!f.exists()) { // if does not exist, the original file name will be returned
+            return originalFileName;
+        }
+        // if not, the new format will be "-n.txt" instead
+        targ = originalFileName.replace(".txt", "-1.txt");
+        f = new File(targ);
+        
+        // if the new file name has been taken,
+        // continuously increment n until the file name is unique
+        while(f.exists()) {     
+            targ = targ.replace("-" + count + ".txt", "-" + (count+1) + ".txt"); 
+            f = new File(targ);
+            count++;
+        }
+        return targ;
+    }
+}
