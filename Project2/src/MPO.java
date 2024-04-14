@@ -15,7 +15,7 @@ public class MPO extends Election {
      * @param totalVotes total number of votes in election
      * @param totalSeats total number of allocated seaats in election
      * @param parties    a list of parties in election
-     * @param br         a buffered reader to continue reading the given ballot file
+     * @param ballots    array of array list of strings storing ballots info
      * @param candidates a list of candidates in election
      */
     public MPO(int totalVotes, int totalSeats, ArrayList<Party> parties, 

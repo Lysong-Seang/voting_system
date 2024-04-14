@@ -24,7 +24,7 @@ public class Election{
      * @param totalVotes total number of votes in election
      * @param totalSeats total number of seats in election
      * @param parties    a list of parties in election
-     * @param br         buffered reader to continue reading the given ballot file
+     * @param ballots    array list of array of strings that store each ballot info
      */
     public Election(int totalVotes, int totalSeats, ArrayList<Party> parties, ArrayList<String[]> ballots){
         this.totalVotes = totalVotes;
@@ -51,8 +51,8 @@ public class Election{
     public void voteCounting() {}
 
     /**
-     * Simulates a fair coin toss to break a tie between a list of parties.
-     * @param winners a list of election winners
+     * Simulates a fair coin toss to break a tie between candidates or parties.
+     * @param len integer indicates the num of candidates or parties in a tie
      * @return The randomly chosen index of winner 
      */
     public int coinToss(int len) {
@@ -131,6 +131,7 @@ public class Election{
 
     /**
      * Calls the Display class to display the results of the election.
+     * @param type election type
      */
     public void displayResults(String type) {
         DisplayResults results = new DisplayResults(
@@ -146,6 +147,7 @@ public class Election{
 
     /**
      * Calls the Audit class to create an audit file.
+     * @param type election type
      */
     public void auditFile(String type) {
         Audit auditFile = new Audit(
