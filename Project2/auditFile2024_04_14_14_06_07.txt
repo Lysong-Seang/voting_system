@@ -1,0 +1,45 @@
+Election type: CPL
+Number of Parties: 6
+Number of Ballots: 9
+Number of Seats: 3
+Quota Value: 3
+Democratic:  Joe,  Sally,  Ahmed, 
+Republican:  Allen,  Nikki,  Taihui, 
+New Wave:  Sarah, 
+Reform:  Xinyue,  Nikita, 
+Green:  Bethany, 
+Independent:  Mike, 
+----- Democratic -----
+Total Seats: 1
+Votes:3 / Quota:3 = First Allocation Seats:1
+Remaining Votes:0 --> Second Allocation Seats:0
+% of Vote / % of Seats: 33% / 33%
+----- Republican -----
+Total Seats: 1
+Votes:2 / Quota:3 = First Allocation Seats:0
+Remaining Votes:2 --> Second Allocation Seats:1
+% of Vote / % of Seats: 22% / 33%
+----- New Wave -----
+Total Seats: 0
+Votes:0 / Quota:3 = First Allocation Seats:0
+Remaining Votes:0 --> Second Allocation Seats:0
+% of Vote / % of Seats: 0% / 0%
+----- Reform -----
+Total Seats: 1
+Votes:2 / Quota:3 = First Allocation Seats:0
+Remaining Votes:2 --> Second Allocation Seats:1
+% of Vote / % of Seats: 22% / 33%
+----- Green -----
+Total Seats: 0
+Votes:1 / Quota:3 = First Allocation Seats:0
+Remaining Votes:1 --> Second Allocation Seats:0
+% of Vote / % of Seats: 11% / 0%
+----- Independent -----
+Total Seats: 0
+Votes:1 / Quota:3 = First Allocation Seats:0
+Remaining Votes:1 --> Second Allocation Seats:0
+% of Vote / % of Seats: 11% / 0%
+*** Winner(s) ***
+ Joe (Democratic)
+ Allen (Republican)
+ Xinyue (Reform)

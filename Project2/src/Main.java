@@ -74,8 +74,9 @@ public class Main {
                 readCPL(files);
             else if (electionType.equals("OPL"))
                 readOPL(files);
-            else if (electionType.equals("MPO"))
+            else if (electionType.equals("MPO")) {
                 readMPO(files);
+            }
             else
                 readMV(files);
 
@@ -253,7 +254,6 @@ public class Main {
                 totalVotes += currVotes;
 
                 if (i == 0) {
-
                     for (int j = 0; j < numCandidateOrParties; j++) {
                         // replace the [ and ] with empty string
                         String candidateDetails = candidateInfo[j].replaceAll("[^A-Za-z,]", "");
@@ -278,15 +278,12 @@ public class Main {
                         Party party = new Party(partyname, 0, thisPartyCandidates);
                         parties.add(party);
                     }
-                } else {
-                    for (int j = 0; j < numCandidateOrParties; j++) {
-                        reader.readLine();
-                    }
                 }
-
+                
                 for (int j = 0; j < currVotes; j++) {
                     ballots.add(reader.readLine().split(","));
                 }
+
                 reader.close();
             }
             runElection(electionType, totalVotes, totalSeats, ballots, parties, candidates);
