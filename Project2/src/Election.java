@@ -14,6 +14,7 @@ public class Election{
     public int totalVotes;
     public int totalSeats;
     public ArrayList<Party> parties;
+    public ArrayList<Candidate> candidates;
     public int quota;
     public ArrayList<Candidate> winnerList;
     ArrayList<String[]> ballots;

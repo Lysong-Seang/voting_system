@@ -69,64 +69,97 @@ public class DisplayResults {
 
         // print in CPL style
         if (electionType.equals("CPL")) {
-            // loop throgh array of parties to get the seat of each party
-            for (int i = 0; i < parties.size(); i++) {
-                int numberVote = parties.get(i).getNumAllocatedSeats();
-                System.out.println(parties.get(i).getName() + ": Number of Seats: " + numberVote);
-                System.out.print("*** Winner(s): ");
-
-                // Loop through winner list to get the name of the winner
-                for (int j = 0; j < winnerList.size(); j++) {
-                    if (winnerList.get(j).getParty().equals(parties.get(i).getName())) {
-                        System.out.print(winnerList.get(j).getName() + ", ");
-                    }
-                }
-                System.out.print(" ***\n");
-                System.out.println("Number of Votes: " + parties.get(i).getNumVotes());
-                System.out.println("% of votes: " + (parties.get(i).getNumVotes() / (double) numBallots) * 100);
-
-                ArrayList<Candidate> arrayName = parties.get(i).getCandidates();
-                System.out.print("Candidate(s): ");
-                // Loop through the arrayname to get the name of Candidates in each party
-                for (int k = 0; k < arrayName.size(); k++) {
-                    System.out.print(arrayName.get(k).getName() + ", ");
-                }
-
-                System.out.println();
-                System.out.println("_____________________________________________\n");
-            }
-
-        } else {
-
-            // print out in OPL style
-            if (electionType.equals("OPL")) {
-                System.out.println("***** Winner *****\n");
-                // print out the name of the winner, % of the total votes and the nubmer of
-                // votes each candidate gets
-                for (int i = 0; i < winnerList.size(); i++) {
-                    System.out.println((i + 1) + ". " + winnerList.get(i).getName() + " ( % of number of toal votes " +
-                            (winnerList.get(i).getNumVotes() / (double) numBallots) * 100 + " | number of votes "
-                            + winnerList.get(i).getNumVotes() + ")");
-
-                }
-                System.out.println("\n");
-                System.out.println("***** Candidate *****\n");
-                // loop through parties list to get the number of seats each party get
-                for (int j = 0; j < parties.size(); j++) {
-                    ArrayList<Candidate> arrayName = parties.get(j).getCandidates();
-                    System.out.print(
-                            parties.get(j).getName() + " Won: " + parties.get(j).getNumAllocatedSeats() + " seat(s)\n");
-                    System.out.print("Candidate: ");
-
-                    // loop through arrayName list to get the name of candidate in that party
-                    for (int k = 0; k < arrayName.size() - 1; k++) {
-                        System.out.print(arrayName.get(k).getName() + ", ");
-                    }
-                    System.out.print(arrayName.get(arrayName.size() - 1).getName() + "\n");
-                    System.out.println("_____________\n");
-                }
-
-            }
+            displayCPL();
+        // print out in OPL style
+        } else if(electionType.equals("OPL")) {
+            displayOPL();
+        //print out in MPO style
+        } else if(electionType.equals("MPO")) {
+            displayMPO();
         }
     }
+
+
+    public void displayCPL() {
+        // loop throgh array of parties to get the seat of each party
+        for (int i = 0; i < parties.size(); i++) {
+            int numberVote = parties.get(i).getNumAllocatedSeats();
+            System.out.println(parties.get(i).getName() + ": Number of Seats: " + numberVote);
+            System.out.print("*** Winner(s): ");
+
+            // Loop through winner list to get the name of the winner
+            for (int j = 0; j < winnerList.size(); j++) {
+                if (winnerList.get(j).getParty().equals(parties.get(i).getName())) {
+                    System.out.print(winnerList.get(j).getName() + ", ");
+                }
+            }
+            System.out.print(" ***\n");
+            System.out.println("Number of Votes: " + parties.get(i).getNumVotes());
+            System.out.println("% of votes: " + (parties.get(i).getNumVotes() / (double) numBallots) * 100);
+
+            ArrayList<Candidate> arrayName = parties.get(i).getCandidates();
+            System.out.print("Candidate(s): ");
+            // Loop through the arrayname to get the name of Candidates in each party
+            for (int k = 0; k < arrayName.size(); k++) {
+                System.out.print(arrayName.get(k).getName() + ", ");
+            }
+
+            System.out.println();
+            System.out.println("_____________________________________________\n");
+        }
+    }
+
+    public void displayOPL() {
+        System.out.println("***** Winner *****\n");
+        // print out the name of the winner, % of the total votes and the number of
+        // votes each candidate gets
+        for (int i = 0; i < winnerList.size(); i++) {
+            System.out.println((i + 1) + ". " + winnerList.get(i).getName() + " ( % of number of total votes " +
+                    (winnerList.get(i).getNumVotes() / (double) numBallots) * 100 + " | number of votes "
+                    + winnerList.get(i).getNumVotes() + ")");
+
+        }
+        System.out.println("\n");
+        System.out.println("***** Candidate *****\n");
+        // loop through parties list to get the number of seats each party get
+        for (int j = 0; j < parties.size(); j++) {
+            ArrayList<Candidate> arrayName = parties.get(j).getCandidates();
+            System.out.print(
+                    parties.get(j).getName() + " Won: " + parties.get(j).getNumAllocatedSeats() + " seat(s)\n");
+            System.out.print("Candidate: ");
+
+            // loop through arrayName list to get the name of candidate in that party
+            for (int k = 0; k < arrayName.size() - 1; k++) {
+                System.out.print(arrayName.get(k).getName() + ", ");
+            }
+            System.out.print(arrayName.get(arrayName.size() - 1).getName() + "\n");
+            System.out.println("_____________\n");
+        }
+    }
+
+    public void displayMPO() {
+        System.out.println("***** Winner *****\n");
+        // print out the name of the winner, % of the total votes and the number of
+        // votes each candidate gets
+        for (int i = 0; i < winnerList.size(); i++) {
+            System.out.println((i + 1) + ". " + winnerList.get(i).getName() + " ( % of number of total votes " +
+                    (winnerList.get(i).getNumVotes() / (double) numBallots) * 100 + " | number of votes "
+                    + winnerList.get(i).getNumVotes() + ")");
+
+        }
+        System.out.println("\n");
+
+        System.out.println("\n");
+        System.out.println("***** Candidate *****\n");
+        // loops through each party to get the number of seats won by each candidate.
+        for(Party p : parties){
+            // loops through each candidate of the party to get the number of seats won by each candidate.
+            for(Candidate c : p.getCandidates()) {
+                System.out.println(c.getName() + " Won: " + c.getNumSeats() + " seat(s)");
+            }
+            System.out.println("_____________\n");
+        }
+    }
+
+    public void displayMV() {}
 }

@@ -24,7 +24,6 @@ public class MPO extends Election {
         this.candidates = candidates;
     }
 
-    
     /**
      * Counts the votes each candidate and their respective party has.
      */
@@ -101,6 +100,15 @@ public class MPO extends Election {
             }
 
             currIndex += tied.size();
+        }
+        
+        //Loops through each party to update the number of seats won by each candidate.
+        for(Party party : parties) {
+            //Loops through each party's candidates to update the number of seats won by each of them.
+            for(Candidate candidate : party.getCandidates()) {
+                int i = candidates.indexOf(candidate);
+                candidate.setNumSeats(candidates.get(i).getNumSeats());
+            }
         }
     }
 
