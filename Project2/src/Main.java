@@ -11,6 +11,7 @@ import java.util.Scanner;
  * 
  * @author Lysong Seang
  * @author Shunichi Sawamura
+ * @author Crystal Wen
  */
 public class Main {
 
@@ -20,8 +21,8 @@ public class Main {
      * @param electionType type of the election
      * @param totalVotes   total number of votes in election
      * @param totalSeats   total number of allocated seats in election
+     * @param ballots      array of array of strings storing all ballots
      * @param parties      a list of parties in election
-     * @param reader       buffered reader to continue reading the given file
      * @param candidates   a list of candidates in election
      * @throws IOException if an I/O error occurs while reading the ballot file
      */
@@ -36,7 +37,7 @@ public class Main {
             cpl.findWinners();
             cpl.auditFile("CPL");
             cpl.displayResults("CPL");
-            // If election type is OPL, create OPL object and runs voting system
+        // If election type is OPL, create OPL object and runs voting system
         } else if (electionType.equals("OPL")){
             OPL opl = new OPL(totalVotes, totalSeats, parties, ballots, candidates);
             opl.calculateQuota();
@@ -45,6 +46,7 @@ public class Main {
             opl.findWinners();
             opl.auditFile("OPL");
             opl.displayResults("OPL");
+        // If election type is MPO, create MPO object and runs voting system
         } else if(electionType.equals("MPO")) {
             MPO mpo = new MPO(totalVotes, totalSeats, parties, ballots, candidates);
             mpo.calculateQuota();
@@ -79,7 +81,7 @@ public class Main {
             else
                 readMV(files);
 
-            // If the file is not found, show the following output.
+        // If the file is not found, show the following output.
         } catch (FileNotFoundException e) {
             System.out.println("File Not Found");
         }
@@ -231,6 +233,14 @@ public class Main {
         }
     }
 
+
+    /**
+     * Reads and extracts the necessary information from MPO-type election ballot
+     * file(s).
+     *
+     * @param files An array of the names of the given ballot files
+     * @throws IOException if an I/O error occurs while reading the ballot file
+     */
     public static void readMPO(String[] files) throws IOException {
         ArrayList<Candidate> candidates = new ArrayList<Candidate>();
         ArrayList<Party> parties = new ArrayList<Party>();
@@ -296,7 +306,6 @@ public class Main {
         } catch (NumberFormatException e) {
             System.out.println("Inappropriate File provided.");
         }
-
     }
 
     public static void readMV(String[] files) throws IOException {
