@@ -23,7 +23,15 @@ class TestCandidate {
 		Candidate candidate = new Candidate("John Doe", "Independent", 0);
 		int numVotes = 1500;
 		candidate.setNumVotes(numVotes);
-		assertEquals(numVotes, candidate.getNumVotes(), "setNumVotes should update he candidate's vote count.");
+		assertEquals(numVotes, candidate.getNumVotes(), "setNumVotes should update the candidate's vote count.");
+	}
+
+	@Test
+	public void testSetNumSeats() {
+		Candidate candidate = new Candidate("John Doe", "Independent", 0);
+		int numSeats = 1;
+		candidate.setNumSeats(numSeats);
+		assertEquals(numSeats, candidate.getNumSeats(), "setNumSeats should update the candidate's seat count.");
 	}
 
 }

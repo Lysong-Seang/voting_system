@@ -104,4 +104,3 @@ public class OPL extends Election{
         }
     }
 }
-

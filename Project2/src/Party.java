@@ -82,4 +82,3 @@ public class Party {
         return numAllocatedSeats;
     }
 }
-

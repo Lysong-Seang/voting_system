@@ -75,15 +75,10 @@ public class DisplayResults {
                 System.out.println(parties.get(i).getName() + ": Number of Seats: " + numberVote);
                 System.out.print("*** Winner(s): ");
 
-                // print N/A if the winnerList is less than or equal zero
-                if (winnerList.size() <= 0) {
-                    System.out.print(" N/A ***");
-                } else {
-                    // Loop through winner list to get the name of the winner
-                    for (int j = 0; j < winnerList.size(); j++) {
-                        if (winnerList.get(j).getParty().equals(parties.get(i).getName())) {
-                            System.out.print(winnerList.get(j).getName());
-                        }
+                // Loop through winner list to get the name of the winner
+                for (int j = 0; j < winnerList.size(); j++) {
+                    if (winnerList.get(j).getParty().equals(parties.get(i).getName())) {
+                        System.out.print(winnerList.get(j).getName() + ", ");
                     }
                 }
                 System.out.print(" ***\n");
