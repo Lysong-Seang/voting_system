@@ -37,7 +37,7 @@ public class Main {
             cpl.auditFile("CPL");
             cpl.displayResults("CPL");
             // If election type is OPL, create OPL object and runs voting system
-        } else {
+        } else if (electionType.equals("OPL")){
             OPL opl = new OPL(totalVotes, totalSeats, parties, ballots, candidates);
             opl.calculateQuota();
             opl.voteCounting();
@@ -45,6 +45,14 @@ public class Main {
             opl.findWinners();
             opl.auditFile("OPL");
             opl.displayResults("OPL");
+        } else if(electionType.equals("MPO")) {
+            MPO mpo = new MPO(totalVotes, totalSeats, parties, ballots, candidates);
+            mpo.calculateQuota();
+            mpo.voteCounting();
+            mpo.allocateSeats();
+            mpo.findWinners();
+            mpo.auditFile("MPO");
+            mpo.displayResults("MPO");
         }
     }
 
@@ -200,7 +208,7 @@ public class Main {
                         parties.add(party);
                     }
 
-                    // Otherwise, these lines are skipped.
+                // Otherwise, these lines are skipped.
                 } else {
                     for (int j = 0; j < numCandidateOrParties; j++) {
                         reader.readLine();
