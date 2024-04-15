@@ -106,8 +106,14 @@ public class MPO extends Election {
         for(Party party : parties) {
             //Loops through each party's candidates to update the number of seats won by each of them.
             for(Candidate candidate : party.getCandidates()) {
-                int i = candidates.indexOf(candidate);
-                candidate.setNumSeats(candidates.get(i).getNumSeats());
+                for(Candidate c : candidates) {
+                    if(c.getName().equals(candidate.getName())) {
+                        int seats = c.getNumSeats();
+                        candidate.setNumSeats(seats);
+                        party.setNumAllocatedSeats(party.getNumAllocatedSeats() + seats);
+                        break;
+                    }
+                }
             }
         }
     }
