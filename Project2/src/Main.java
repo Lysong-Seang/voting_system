@@ -74,11 +74,9 @@ public class Main {
                 readCPL(files);
             else if (electionType.equals("OPL"))
                 readOPL(files);
-            else if (electionType.equals("MPO")) {
-                readMPO(files);
+            else {
+                readMPOMV(files);
             }
-            else
-                readMV(files);
 
         // If the file is not found, show the following output.
         } catch (FileNotFoundException e) {
@@ -232,7 +230,7 @@ public class Main {
         }
     }
 
-    public static void readMPO(String[] files) throws IOException {
+    public static void readMPOMV(String[] files) throws IOException {
         ArrayList<Candidate> candidates = new ArrayList<Candidate>();
         ArrayList<Party> parties = new ArrayList<Party>();
         ArrayList<String> partyNames = new ArrayList<String>();
@@ -293,16 +291,12 @@ public class Main {
                 reader.close();
             }
             runElection(electionType, totalVotes, totalSeats, ballots, parties, candidates);
-
+            
         } catch (FileNotFoundException e) {
             System.out.println("File not found.");
         } catch (NumberFormatException e) {
             System.out.println("Inappropriate File provided.");
         }
-
-    }
-
-    public static void readMV(String[] files) throws IOException {
     }
 
     /**
