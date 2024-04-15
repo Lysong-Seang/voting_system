@@ -20,8 +20,8 @@ public class Main {
      * @param electionType type of the election
      * @param totalVotes   total number of votes in election
      * @param totalSeats   total number of allocated seats in election
+     * @param ballots      array of array of strings storing ballots info
      * @param parties      a list of parties in election
-     * @param reader       buffered reader to continue reading the given file
      * @param candidates   a list of candidates in election
      * @throws IOException if an I/O error occurs while reading the ballot file
      */
@@ -36,7 +36,7 @@ public class Main {
             cpl.findWinners();
             cpl.auditFile("CPL");
             cpl.displayResults("CPL");
-            // If election type is OPL, create OPL object and runs voting system
+        // If election type is OPL, create OPL object and runs voting system
         } else if (electionType.equals("OPL")){
             OPL opl = new OPL(totalVotes, totalSeats, parties, ballots, candidates);
             opl.calculateQuota();
@@ -80,7 +80,7 @@ public class Main {
             else
                 readMV(files);
 
-            // If the file is not found, show the following output.
+        // If the file is not found, show the following output.
         } catch (FileNotFoundException e) {
             System.out.println("File Not Found");
         }
@@ -130,7 +130,7 @@ public class Main {
                         Party party = new Party(partyn, 0, thisPartyCandidates);
                         parties.add(party);
 
-                        // Otherwise, those lines will be skipped.
+                    // Otherwise, those lines will be skipped.
                     } else {
                         reader.readLine();
                     }
@@ -320,7 +320,7 @@ public class Main {
         // File name given from command line argument.
         if (args.length > 0) {
             filenames = args;
-            // Ask file name by text prompt.
+        // Ask file name by text prompt.
         } else {
             System.out.print("Please enter your file name(s) (separate each file name with a space): ");
             filenames = scanner.nextLine().split(" ");
@@ -356,7 +356,7 @@ public class Main {
         // Try to open the given file, fetch the ballots info, and clarify the results.
         try {
             readBallotFile(filenames);
-            // If it fails to open, stop the process
+        // If it fails to open, stop the process
         } catch (NullPointerException e) {
             System.out.println("Failed To Open the File.");
         }
