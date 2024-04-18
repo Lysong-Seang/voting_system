@@ -3,14 +3,9 @@ package src;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
-import java.util.ArrayList;
+import java.util.*;
 
-/**
- * This file tests the MPO class methods.
- * @author Crystal Wen
- */
-public class TestMPO {
-
+public class TestMV {
     private ArrayList<Party> expected;
     private ArrayList<Party> actual;
     private ArrayList<Candidate> candidatesActual;
@@ -23,8 +18,8 @@ public class TestMPO {
     private int totalVotes;
     private int totalSeats;
     private ArrayList<String[]> ballots;
-    private MPO mpo;
-    
+    private MV mv;
+
     public void setDefault() {
         ballots = new ArrayList<>();
     	expected = new ArrayList<>();
@@ -36,12 +31,12 @@ public class TestMPO {
         repCandidates = new ArrayList<>();
         indepCandidates = new ArrayList<>();
         
-        candidatesExpected.add(new Candidate("Pike", "D", 3));
+        candidatesExpected.add(new Candidate("Pike", "D", 4));
         candidatesExpected.add(new Candidate("Foster", "D", 3));
-        candidatesExpected.add(new Candidate("Deutsch", "R", 0));
-        candidatesExpected.add(new Candidate("Borg", "R", 2));
-        candidatesExpected.add(new Candidate("Jones", "R", 1));
-        candidatesExpected.add(new Candidate("Smith", "I", 1));
+        candidatesExpected.add(new Candidate("Deutsch", "R", 4));
+        candidatesExpected.add(new Candidate("Borg", "R", 4));
+        candidatesExpected.add(new Candidate("Jones", "R", 3));
+        candidatesExpected.add(new Candidate("Smith", "I", 3));
 
         candidatesActual.add(new Candidate("Pike", "D", 0));
         candidatesActual.add(new Candidate("Foster", "D", 0));
@@ -59,44 +54,49 @@ public class TestMPO {
         
         indepCandidates.add(new Candidate("Smith", "I", 0));
         
-        String[] b1 = {"1"};
-        String[] b2 = {"", "1"};
-        String[] b4 = {"", "", "", "1"};
-        String[] b5 = {"", "", "", "", "1"};
-        String[] b6 = {"","", "", "", "", "1"};
-    
-        ballots.add(b1);
+        String[] b1 = {"1", "1", "1"};
+        String[] b2 = {"1", "", "", "1", "", "1"};
+        String[] b3 = {"", "1", "", "", "1"};
+        String[] b4 = {"", "", "1", "", "1"};
+        String[] b5 = {"", "", "", "", "", "1"};
+        String[] b6 = {"1", "", "", "1"};
+        String[] b7 = {"", "", "1", "1"};
+        String[] b8 = {"1", "", "1", "1"};
+        String[] b9 = {"", "1", "", "", "1", "1"};
+
         ballots.add(b1);
         ballots.add(b2);
+        ballots.add(b3);
+        ballots.add(b4);
         ballots.add(b5);
         ballots.add(b6);
-        ballots.add(b4);
-        ballots.add(b4);
-        ballots.add(b1);
-        ballots.add(b2);
-        ballots.add(b2);
+        ballots.add(b7);
+        ballots.add(b8);
+        ballots.add(b9);
 
-        expected.add(new Party("D", 6, demCandidates));
-        expected.add(new Party("R", 3, repCandidates));
-        expected.add(new Party("I", 1, indepCandidates));
+        expected.add(new Party("D", 7, demCandidates));
+        expected.add(new Party("R", 11, repCandidates));
+        expected.add(new Party("I", 3, indepCandidates));
 
         actual.add(new Party("D", 0, demCandidates));
         actual.add(new Party("R", 0, repCandidates));
         actual.add(new Party("I", 0, indepCandidates));
 
         candidatesExpected.get(0).setNumSeats(1);
-        candidatesExpected.get(1).setNumSeats(1);
-        expected.get(0).setNumAllocatedSeats(2);
+        candidatesExpected.get(2).setNumSeats(1);
+        candidatesExpected.get(3).setNumSeats(1);
+        expected.get(0).setNumAllocatedSeats(1);
+        expected.get(1).setNumAllocatedSeats(2);
     }
 
     @Test
     public void testVoteCountingMPO() {    	
     	setDefault();
-    	totalVotes = 10;
-        totalSeats = 2;
+    	totalVotes = 9;
+        totalSeats = 3;
         
-        mpo = new MPO(totalVotes, totalSeats, actual, ballots, candidatesActual);
-        mpo.voteCounting();
+        mv = new MPO(totalVotes, totalSeats, actual, ballots, candidatesActual);
+        mv.voteCounting();
     	
         for(int i = 0; i < expected.size(); i++) {
             assertEquals(expected.get(i).getNumVotes(), actual.get(i).getNumVotes());
@@ -106,16 +106,16 @@ public class TestMPO {
             assertEquals(candidatesExpected.get(i).getNumVotes(), candidatesActual.get(i).getNumVotes());
         }
     }
-
+    
     @Test
     public void testAllocateSeats() {
         setDefault();
-        totalVotes = 10;
-        totalSeats = 2;
+        totalVotes = 9;
+        totalSeats = 3;
 
-        mpo = new MPO(totalVotes, totalSeats, actual, ballots, candidatesActual);
-        mpo.voteCounting();
-        mpo.allocateSeats();
+        mv = new MPO(totalVotes, totalSeats, actual, ballots, candidatesActual);
+        mv.voteCounting();
+        mv.allocateSeats();
 
         assertEquals(candidatesExpected.get(0).getNumSeats(), candidatesActual.get(0).getNumSeats());
         assertEquals(candidatesExpected.get(1).getNumSeats(), candidatesActual.get(1).getNumSeats());
@@ -125,16 +125,17 @@ public class TestMPO {
     @Test
     public void findWinners() {
         setDefault();
-        totalVotes = 10;
-        totalSeats = 2;
+        totalVotes = 9;
+        totalSeats = 3;
 
-        mpo = new MPO(totalVotes, totalSeats, actual, ballots, candidatesActual);
-        mpo.voteCounting();
-        mpo.allocateSeats();
-        mpo.findWinners();
+        mv = new MPO(totalVotes, totalSeats, actual, ballots, candidatesActual);
+        mv.voteCounting();
+        mv.allocateSeats();
+        mv.findWinners();
 
-        assertEquals(2, mpo.winnerList.size());
-        assertEquals("Pike", mpo.winnerList.get(0).getName());
-        assertEquals("Foster", mpo.winnerList.get(1).getName());
+        assertEquals(3, mv.winnerList.size());
+        assertEquals("Pike", mv.winnerList.get(0).getName());
+        assertEquals("Deutsch", mv.winnerList.get(1).getName());
+        assertEquals("Borg", mv.winnerList.get(2).getName());
     }
 }
