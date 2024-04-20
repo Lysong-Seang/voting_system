@@ -5,6 +5,10 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.*;
 
+/**
+ * This file tests the MV class methods.
+ * @author Crystal Wen
+ */
 public class TestMV {
     private ArrayList<Party> expected;
     private ArrayList<Party> actual;
@@ -95,7 +99,7 @@ public class TestMV {
     	totalVotes = 9;
         totalSeats = 3;
         
-        mv = new MPO(totalVotes, totalSeats, actual, ballots, candidatesActual);
+        mv = new MV(totalVotes, totalSeats, actual, ballots, candidatesActual);
         mv.voteCounting();
     	
         for(int i = 0; i < expected.size(); i++) {
@@ -113,13 +117,15 @@ public class TestMV {
         totalVotes = 9;
         totalSeats = 3;
 
-        mv = new MPO(totalVotes, totalSeats, actual, ballots, candidatesActual);
+        mv = new MV(totalVotes, totalSeats, actual, ballots, candidatesActual);
         mv.voteCounting();
         mv.allocateSeats();
-
+        
         assertEquals(candidatesExpected.get(0).getNumSeats(), candidatesActual.get(0).getNumSeats());
-        assertEquals(candidatesExpected.get(1).getNumSeats(), candidatesActual.get(1).getNumSeats());
+        assertEquals(candidatesExpected.get(2).getNumSeats(), candidatesActual.get(1).getNumSeats());
+        assertEquals(candidatesExpected.get(3).getNumSeats(), candidatesActual.get(2).getNumSeats());
         assertEquals(expected.get(0).getNumAllocatedSeats(), actual.get(0).getNumAllocatedSeats());
+        assertEquals(expected.get(1).getNumAllocatedSeats(), actual.get(1).getNumAllocatedSeats());
     }
 
     @Test
@@ -128,7 +134,7 @@ public class TestMV {
         totalVotes = 9;
         totalSeats = 3;
 
-        mv = new MPO(totalVotes, totalSeats, actual, ballots, candidatesActual);
+        mv = new MV(totalVotes, totalSeats, actual, ballots, candidatesActual);
         mv.voteCounting();
         mv.allocateSeats();
         mv.findWinners();
