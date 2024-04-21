@@ -179,6 +179,14 @@ public class DisplayResults {
     * Displays the results and statistics of a MV election.
     */
     public void displayMV() {
+        int total = 0;
+        for(Party p : parties) {
+            for(Candidate c : p.getCandidates()){
+                total += c.getNumVotes();
+            }
+        }
+
+        System.out.println("Number of Votes: " + total);
         System.out.println("***** Winner *****\n");
         // print out the name of the winner, % of the total votes and the number of
         // votes each candidate gets

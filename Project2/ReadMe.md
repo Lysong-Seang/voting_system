@@ -1,5 +1,3 @@
-We will be using our two-day late pass for this project
-
 # Voting System
 The Voting System is a stand-alone product to be used after the voting and a CSV file holding the ballots is created. This system is to count the number of votes each party or candidate recieved. This system runs two types of elections: a Closed-Party listing and an Open-Party listing. It will also display the results and statistics of the election and save this information in an audit file.
 
@@ -18,7 +16,7 @@ Download the files from https://github.umn.edu/umn-csci-5801-01-S24/repo-Team16/
 - **buglist.pdf**: This file documents the bugs and issues found during testing.
 
 ## Running
-After the files are downloaded, compile all of the program files in the "src" folder using the command `javac src/*.java`. Then use the command `java src/Main` to run the program. If you wish to run the program with one of the test csv files in "testing", type in your file name when prompted. Otherwise, type the file path to your csv file when prompted. If you are a tester, pass your file path as a command line argument when running the program.
+After the files are downloaded, compile all of the program files in the "src" folder using the command `javac src/*.java`. Then use the command `java src/Main` to run the program. If you wish to run the program with one of the test csv files in "testing", type in your file name when prompted. Otherwise, type the file path to your csv file when prompted. If you are a tester, pass your file path as a command line argument when running the program. If you are running multiple files, please add a space in between each file path. Please ensure that there are no spaces within your file path, for example, your folder names cannot have spaces in them.
 
 # Authors
 Team 16
