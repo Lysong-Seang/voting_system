@@ -60,7 +60,7 @@ public class Main {
             mv.voteCounting();
             mv.allocateSeats();
             mv.findWinners();
-            mv.displayResults("MPO");
+            mv.displayResults("MV");
         }
     }
 
@@ -247,6 +247,7 @@ public class Main {
         int totalSeats = 0;
         int numCandidateOrParties = 0;
         int totalVotes = 0;
+        String line;
 
         try {
             // Reads and extracts the necessary data from each ballot file.
@@ -257,7 +258,10 @@ public class Main {
                 totalSeats = Integer.parseInt(reader.readLine());
                 numCandidateOrParties = Integer.parseInt(reader.readLine());
                 String[] candidateInfo = reader.readLine().split(", (?=\\[)");
-                int currVotes = Integer.parseInt(reader.readLine());
+                // reader.readLine();
+                while ((line = reader.readLine()) != null && line.trim().isEmpty());
+                // int currVotes = Integer.parseInt(reader.readLine());
+                int currVotes = Integer.parseInt(line);
                 totalVotes += currVotes;
 
                 // If this is the first file being read, then the Arraylist of parties and

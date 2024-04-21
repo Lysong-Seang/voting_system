@@ -75,10 +75,14 @@ public class DisplayResults {
         //print out in MPO style
         } else if(electionType.equals("MPO")) {
             displayMPO();
+        } else{
+            displayMV();
         }
     }
 
-
+    /**
+     * Displays the results and statistics of a CPL election.
+     */
     public void displayCPL() {
         System.out.println("Number of Quota : " + this.quota + "\n");
 
@@ -110,6 +114,9 @@ public class DisplayResults {
         }
     }
 
+    /**
+     * Displays the results and statistics of a OPL election.
+     */
     public void displayOPL() {
         System.out.println("Number of Quota : " + this.quota + "\n");
         System.out.println("***** Winner *****\n");
@@ -140,6 +147,9 @@ public class DisplayResults {
         }
     }
 
+    /**
+     * Displays the results and statistics of a MPO election.
+     */
     public void displayMPO() {
         System.out.println("***** Winners *****\n");
 
@@ -165,5 +175,30 @@ public class DisplayResults {
         }
     }
 
-    public void displayMV() {}
+    /**
+    * Displays the results and statistics of a MV election.
+    */
+    public void displayMV() {
+        System.out.println("***** Winner *****\n");
+        // print out the name of the winner, % of the total votes and the number of
+        // votes each candidate gets
+        for (int i = 0; i < winnerList.size(); i++) {
+            System.out.println((i + 1) + ". " + winnerList.get(i).getName() + " ( number of total votes "
+                    + winnerList.get(i).getNumVotes() + ")");
+
+        }
+        System.out.println("\n");
+
+        System.out.println("***** Candidate *****\n");
+        // loops through each party to get the number of seats won by each candidate.
+        for(Party p : parties){
+            // loops through each candidate of the party to get the number of seats won by each candidate.
+            for(Candidate c : p.getCandidates()) {
+                System.out.println(c.getName() + " Won: " + c.getNumSeats() + " seat(s)" + " ( % of number of total votes " +
+                (c.getNumVotes() / (double) numBallots) * 100 + " | number of votes "
+                + c.getNumVotes() + ")");
+            }
+        }
+    }
 }
+

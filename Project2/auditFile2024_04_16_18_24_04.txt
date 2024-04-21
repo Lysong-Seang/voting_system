@@ -1,0 +1,26 @@
+Election type: MPO
+Number of Parties: 3
+Number of Ballots: 4
+Number of Seats: 2
+Quota Value: 2
+D: Pike, Foster, 
+R: Deutsch, Borg, Jones, 
+I: Smith, 
+----- D -----
+Total Seats: 2
+Votes:4 / Quota:2 = First Allocation Seats:2
+Remaining Votes:0 --> Second Allocation Seats:0
+% of Vote / % of Seats: 100% / 100%
+----- R -----
+Total Seats: 0
+Votes:0 / Quota:2 = First Allocation Seats:0
+Remaining Votes:0 --> Second Allocation Seats:0
+% of Vote / % of Seats: 0% / 0%
+----- I -----
+Total Seats: 0
+Votes:0 / Quota:2 = First Allocation Seats:0
+Remaining Votes:0 --> Second Allocation Seats:0
+% of Vote / % of Seats: 0% / 0%
+*** Winner(s) ***
+Pike (D)
+Foster (D)
