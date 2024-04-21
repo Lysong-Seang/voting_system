@@ -16,7 +16,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Audit {
     private String electionType;
-    private int numParties, numBallots, numSeats, quota;
+    private int numBallots, numSeats, quota;
     private ArrayList<Candidate> winnerList;
     private ArrayList<Party> parties;
     private String fileName;
@@ -30,10 +30,9 @@ public class Audit {
      * @param winnerList   a list of candidates who have won in the election.
      * @param parties      a list of parties in the election. 
      */
-    public Audit(String electionType, int numParties, int numBallots, int numSeats,
+    public Audit(String electionType, int numBallots, int numSeats,
         ArrayList<Candidate> winnerList, ArrayList<Party> parties){
         this.electionType = electionType;
-        this.numParties = numParties;
         this.numBallots = numBallots;
         this.numSeats = numSeats;
         this.winnerList = winnerList;

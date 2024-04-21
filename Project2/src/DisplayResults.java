@@ -16,7 +16,7 @@ import java.util.ArrayList;
  */
 public class DisplayResults {
     private String electionType;
-    private int numParties, numBallots, numSeats, quota;
+    private int numBallots, numSeats, quota;
     private ArrayList<Candidate> winnerList;
     private ArrayList<Party> parties;
 
@@ -30,10 +30,9 @@ public class DisplayResults {
      * @param winnerList   a list of candidates who have won in the election.
      * @param parties      a list of parties in the election.
      */
-    public DisplayResults(String electionType, int numParties, int numBallots, int numSeats,
+    public DisplayResults(String electionType, int numBallots, int numSeats,
             ArrayList<Candidate> winnerList, ArrayList<Party> parties) {
         this.electionType = electionType;
-        this.numParties = numParties;
         this.numBallots = numBallots;
         this.numSeats = numSeats;
         this.winnerList = winnerList;
@@ -180,20 +179,21 @@ public class DisplayResults {
     * Displays the results and statistics of a MV election.
     */
     public void displayMV() {
-        int total = 0;
+        int totalVotes = 0;
         for(Party p : parties) {
             for(Candidate c : p.getCandidates()){
-                total += c.getNumVotes();
+                totalVotes += c.getNumVotes();
             }
         }
 
-        System.out.println("Number of Votes: " + total);
+        System.out.println("Number of Votes: " + totalVotes);
         System.out.println("***** Winner *****\n");
         // Print out the name of the winner, % of the total votes and the number of
         // Votes each candidate gets
         for (int i = 0; i < winnerList.size(); i++) {
-            System.out.println((i + 1) + ". " + winnerList.get(i).getName() + " ( number of total votes "
-                    + winnerList.get(i).getNumVotes() + ")");
+            System.out.println((i + 1) + ". " + winnerList.get(i).getName() + " ( % of number of total votes " +
+            (winnerList.get(i).getNumVotes() / (double) numBallots) * 100 + " | number of votes "
+            + winnerList.get(i).getNumVotes() + ")");
 
         }
         System.out.println("\n");
@@ -204,7 +204,7 @@ public class DisplayResults {
             // Loops through each candidate of the party to get the number of seats won by each candidate.
             for(Candidate c : p.getCandidates()) {
                 System.out.println(c.getName() + " Won: " + c.getNumSeats() + " seat(s)" + " ( % of number of total votes " +
-                (c.getNumVotes() / (double) numBallots) * 100 + " | number of votes "
+                (c.getNumVotes() / (double) totalVotes) * 100 + " | number of votes "
                 + c.getNumVotes() + ")");
             }
         }

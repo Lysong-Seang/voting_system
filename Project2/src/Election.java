@@ -135,8 +135,7 @@ public class Election{
      */
     public void displayResults(String type) {
         DisplayResults results = new DisplayResults(
-                type, 
-                this.parties.size(), 
+                type,  
                 this.totalVotes, 
                 this.totalSeats,
                 this.winnerList,
@@ -152,7 +151,6 @@ public class Election{
     public void auditFile(String type) {
         Audit auditFile = new Audit(
                 type,
-                this.parties.size(),
                 this.totalVotes,
                 this.totalSeats,
                 this.winnerList,

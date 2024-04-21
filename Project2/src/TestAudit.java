@@ -13,7 +13,7 @@ public class TestAudit {
     
     @Test
     public void testNewFileNameCreateUniqueFile(){
-        Audit audit = new Audit("CPL", 6, 9, 3, 
+        Audit audit = new Audit("CPL", 9, 3, 
                                  new ArrayList<Candidate>(), new ArrayList<Party>());
         String filename = audit.createUniqueFile("newName.txt");
         assertEquals(filename, "newName.txt");
@@ -21,7 +21,7 @@ public class TestAudit {
 
     @Test
     public void testExistingFileNameCreateUniqueFile(){
-        Audit audit = new Audit("CPL", 6, 9, 3, 
+        Audit audit = new Audit("CPL", 9, 3, 
                                  new ArrayList<Candidate>(), new ArrayList<Party>());
         String filename = audit.createUniqueFile("testAudit.txt");
         assertEquals(filename, "testAudit-1.txt");
@@ -29,7 +29,7 @@ public class TestAudit {
 
     @Test
     public void testMultipleExistingFileNameCreateUniqueFile(){
-        Audit audit = new Audit("CPL", 6, 9, 3, 
+        Audit audit = new Audit("CPL", 9, 3, 
                                  new ArrayList<Candidate>(), new ArrayList<Party>());
         String filename = audit.createUniqueFile("testMultiAudit.txt");
         assertEquals(filename, "testMultiAudit-2.txt");
