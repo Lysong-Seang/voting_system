@@ -64,7 +64,7 @@ public class Audit {
         writer.write("Quota Value: "+ quota);
         writer.newLine();
         
-        //Save each party name and candidate affiliation to the audit file.
+        // Save each party name and candidate affiliation to the audit file.
         for (Party party: parties) {
         	String partyCandidateInfo = party.getName() + ": ";  
         	//iterate candidate info in each party
@@ -75,7 +75,7 @@ public class Audit {
         	writer.newLine();
         }
         
-        //Save calculations of the largest remainder approach for each party to the audit file.
+        // Save calculations of the largest remainder approach for each party to the audit file.
         for (Party party: parties) {
         	writer.write("----- " + party.getName() + " -----");
         	writer.newLine();
@@ -90,13 +90,13 @@ public class Audit {
         	writer.write(party2ndSeatCalculation);
         	writer.newLine();
 
-            //Add statistics % of Vote to % of Seats
+            // Add statistics % of Vote to % of Seats
             int percentVotes = party.getNumVotes() * 100 / numBallots;
             int percentSeats = party.getNumAllocatedSeats() * 100 / numSeats;
             String percents = "% of Vote / % of Seats: " + percentVotes + "% / " + percentSeats + "%";
             writer.write(percents);
             writer.newLine();
-        	//Save the number of votes for each candidate if election is OPL to the audit file.
+        	// Save the number of votes for each candidate if election is OPL to the audit file.
         	if (electionType.equals("OPL")) {
         		for (Candidate candidate: party.getCandidates()) {
         			writer.write(candidate.getName() + " Votes: " + candidate.getNumVotes());
@@ -107,7 +107,7 @@ public class Audit {
         
         writer.write("*** Winner(s) ***");
         writer.newLine();
-        //Save winners and its party affiliation to the audit file.
+        // Save winners and its party affiliation to the audit file.
         for (Candidate winner: winnerList) {
         	writer.write(winner.getName() + " (" + winner.getParty() + ")");
         	writer.newLine();
@@ -115,7 +115,7 @@ public class Audit {
         writer.flush();
         writer.close();
         
-        //Update file permission to prevent editing.
+        // Update file permission to prevent editing.
         File file = new File(fileName);
         file.setReadable(true); 
         file.setWritable(false, false);
@@ -136,11 +136,11 @@ public class Audit {
         if (!f.exists()) { // if does not exist, the original file name will be returned
             return originalFileName;
         }
-        // if not, the new format will be "-n.txt" instead
+        // If not, the new format will be "-n.txt" instead
         targ = originalFileName.replace(".txt", "-1.txt");
         f = new File(targ);
         
-        // if the new file name has been taken,
+        // If the new file name has been taken,
         // continuously increment n until the file name is unique
         while(f.exists()) {     
             targ = targ.replace("-" + count + ".txt", "-" + (count+1) + ".txt"); 

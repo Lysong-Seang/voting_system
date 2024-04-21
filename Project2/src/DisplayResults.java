@@ -120,6 +120,7 @@ public class DisplayResults {
     public void displayOPL() {
         System.out.println("Number of Quota : " + this.quota + "\n");
         System.out.println("***** Winner *****\n");
+
         // print out the name of the winner, % of the total votes and the number of
         // votes each candidate gets
         for (int i = 0; i < winnerList.size(); i++) {

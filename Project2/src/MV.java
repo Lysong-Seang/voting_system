@@ -31,8 +31,9 @@ public class MV extends Election {
 
     @Override
     public void voteCounting() {
-
+        // Iterate though all saved ballots
         for (String[] ballot : ballots) {
+            // Check who got a ballot
             for (int voteIndex = 0; voteIndex < ballot.length; voteIndex++) {
                 if (ballot[voteIndex].equals("1")) {
                     // Increment the corresponding candidate's vote count
@@ -119,6 +120,7 @@ public class MV extends Election {
             // each of them.
             for (Candidate candidate : party.getCandidates()) {
                 for (Candidate c : candidates) {
+                    // If the canadidate info is matched, update
                     if (c.getName().equals(candidate.getName())) {
                         int seats = c.getNumSeats();
                         candidate.setNumSeats(seats);

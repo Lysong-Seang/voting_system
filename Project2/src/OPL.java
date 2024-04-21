@@ -36,19 +36,19 @@ public class OPL extends Election{
         }
     
     
-        /*Finds the party of each respective candidate and sums up the votes of the candiates
+        /* Finds the party of each respective candidate and sums up the votes of the candiates
         in their respective party to determine the number of votes that their party gets. */ 
         for (Candidate candidate:candidates) {
             int candidateVotes = candidate.getNumVotes();
             int partyIndex = -5;
-            //Finds the party index in party arrays for each candidate. 
+            // Finds the party index in party arrays for each candidate. 
             for (int i=0; i<parties.size(); i++) {
                 if (parties.get(i).getName().equals(candidate.getParty())) {
                     partyIndex = i;
                 }
             }
             int canIndex = -5;
-            //Finds the candidate index in candidate arrays in Party object for each candidate. 
+            // Finds the candidate index in candidate arrays in Party object for each candidate. 
             for (int i=0; i<parties.get(partyIndex).getCandidates().size(); i++) {
                 if (parties.get(partyIndex).getCandidates().get(i).getName().equals(candidate.getName())) {
                     canIndex = i;
@@ -75,6 +75,7 @@ public class OPL extends Election{
             for (int i=0; i<maxAllocation; i++) {
                 int largestVote = -1;
                 ArrayList<Candidate> largestVoteCandidates = new ArrayList<Candidate>();
+                // Iterate all candidates in this party
                 for (Candidate candidate: thisPartyCandidates) {
                     int thisCandidateVote = candidate.getNumVotes();
                     
