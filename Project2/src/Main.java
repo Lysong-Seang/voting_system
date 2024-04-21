@@ -258,9 +258,7 @@ public class Main {
                 totalSeats = Integer.parseInt(reader.readLine());
                 numCandidateOrParties = Integer.parseInt(reader.readLine());
                 String[] candidateInfo = reader.readLine().split(", (?=\\[)");
-                // reader.readLine();
                 while ((line = reader.readLine()) != null && line.trim().isEmpty());
-                // int currVotes = Integer.parseInt(reader.readLine());
                 int currVotes = Integer.parseInt(line);
                 totalVotes += currVotes;
 

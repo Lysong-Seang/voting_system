@@ -57,7 +57,7 @@ public class DisplayResults {
         System.out.println("Number of Parties: " + parties.size());
         int count = 0;
 
-        // loop through parties arry to get the total number of candidates
+        // Loop through parties arry to get the total number of candidates
         for (int i = 0; i < parties.size(); i++) {
             int numCandidate = parties.get(i).getCandidates().size();
             count += numCandidate;
@@ -66,15 +66,16 @@ public class DisplayResults {
         System.out.println("Number of Seats: " + numSeats);
         System.out.println("Number of Ballots: " + numBallots);
 
-        // print in CPL style
+        // Print in CPL style
         if (electionType.equals("CPL")) {
             displayCPL();
-        // print out in OPL style
+        // Print out in OPL style
         } else if(electionType.equals("OPL")) {
             displayOPL();
-        //print out in MPO style
+        // Print out in MPO style
         } else if(electionType.equals("MPO")) {
             displayMPO();
+        // Print out in MV style
         } else{
             displayMV();
         }
@@ -86,7 +87,7 @@ public class DisplayResults {
     public void displayCPL() {
         System.out.println("Number of Quota : " + this.quota + "\n");
 
-        // loop throgh array of parties to get the seat of each party
+        // Loop throgh array of parties to get the seat of each party
         for (int i = 0; i < parties.size(); i++) {
             int numberVote = parties.get(i).getNumAllocatedSeats();
             System.out.println(parties.get(i).getName() + ": Number of Seats: " + numberVote);
@@ -121,8 +122,8 @@ public class DisplayResults {
         System.out.println("Number of Quota : " + this.quota + "\n");
         System.out.println("***** Winner *****\n");
 
-        // print out the name of the winner, % of the total votes and the number of
-        // votes each candidate gets
+        // Print out the name of the winner, % of the total votes and the number of
+        // Votes each candidate gets
         for (int i = 0; i < winnerList.size(); i++) {
             System.out.println((i + 1) + ". " + winnerList.get(i).getName() + " ( % of number of total votes " +
                     (winnerList.get(i).getNumVotes() / (double) numBallots) * 100 + " | number of votes "
@@ -131,14 +132,14 @@ public class DisplayResults {
         }
         System.out.println("\n");
         System.out.println("***** Candidate *****\n");
-        // loop through parties list to get the number of seats each party get
+        // Loop through parties list to get the number of seats each party get
         for (int j = 0; j < parties.size(); j++) {
             ArrayList<Candidate> arrayName = parties.get(j).getCandidates();
             System.out.print(
                     parties.get(j).getName() + " Won: " + parties.get(j).getNumAllocatedSeats() + " seat(s)\n");
             System.out.print("Candidate: ");
 
-            // loop through arrayName list to get the name of candidate in that party
+            // Loop through arrayName list to get the name of candidate in that party
             for (int k = 0; k < arrayName.size() - 1; k++) {
                 System.out.print(arrayName.get(k).getName() + ", ");
             }
@@ -153,8 +154,8 @@ public class DisplayResults {
     public void displayMPO() {
         System.out.println("***** Winners *****\n");
 
-        // print out the name of the winner, % of the total votes and the number of
-        // votes each candidate gets
+        // Print out the name of the winner, % of the total votes and the number of
+        // Votes each candidate gets
         for (int i = 0; i < winnerList.size(); i++) {
             System.out.println((i + 1) + ". " + winnerList.get(i).getName() + " ( % of number of total votes " +
                     (winnerList.get(i).getNumVotes() / (double) numBallots) * 100 + " | number of votes "
@@ -164,9 +165,9 @@ public class DisplayResults {
 
         System.out.println("\n");
         System.out.println("***** Candidates *****\n");
-        // loops through each party to get the number of seats won by each candidate.
+        // Loops through each party to get the number of seats won by each candidate.
         for(Party p : parties){
-            // loops through each candidate of the party to get the number of seats won by each candidate.
+            // Loops through each candidate of the party to get the number of seats won by each candidate.
             for(Candidate c : p.getCandidates()) {
                 System.out.println(c.getName() + ": " + c.getNumSeats() + " seat(s)" + " ( % of number of total votes " +
                 (c.getNumVotes() / (double) numBallots) * 100 + " | number of votes "
@@ -180,8 +181,8 @@ public class DisplayResults {
     */
     public void displayMV() {
         System.out.println("***** Winner *****\n");
-        // print out the name of the winner, % of the total votes and the number of
-        // votes each candidate gets
+        // Print out the name of the winner, % of the total votes and the number of
+        // Votes each candidate gets
         for (int i = 0; i < winnerList.size(); i++) {
             System.out.println((i + 1) + ". " + winnerList.get(i).getName() + " ( number of total votes "
                     + winnerList.get(i).getNumVotes() + ")");
@@ -190,9 +191,9 @@ public class DisplayResults {
         System.out.println("\n");
 
         System.out.println("***** Candidate *****\n");
-        // loops through each party to get the number of seats won by each candidate.
+        // Loops through each party to get the number of seats won by each candidate.
         for(Party p : parties){
-            // loops through each candidate of the party to get the number of seats won by each candidate.
+            // Loops through each candidate of the party to get the number of seats won by each candidate.
             for(Candidate c : p.getCandidates()) {
                 System.out.println(c.getName() + " Won: " + c.getNumSeats() + " seat(s)" + " ( % of number of total votes " +
                 (c.getNumVotes() / (double) numBallots) * 100 + " | number of votes "

@@ -29,6 +29,9 @@ public class MV extends Election {
         this.candidates = candidates;
     }
 
+    /**
+     * Counts the votes each candidate and their respective party has.
+     */
     @Override
     public void voteCounting() {
         // Iterate though all saved ballots

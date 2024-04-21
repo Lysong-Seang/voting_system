@@ -73,46 +73,46 @@ public class Election{
      */
     public void allocateSeats() {
         int remainingSeats = this.totalSeats;
-        //divide the number of votes that each party gets by the quota.
+        // Divide the number of votes that each party gets by the quota.
         for (Party party: parties) {
-            //seat allocation first round
+            // Seat allocation first round
             int firstAllocatedSeats = party.getNumVotes() / this.quota;
             party.setNumAllocatedSeats(firstAllocatedSeats);
             remainingSeats -= firstAllocatedSeats;
         }
 
-        //Distribute remaining seats by comparing the largest remainder of votes 
-        //for each party in a round-robin fashion.
+        // Distribute remaining seats by comparing the largest remainder of votes 
+        // for each party in a round-robin fashion.
         while (remainingSeats > 0){
             int largestRemainingVotes = -1;
             ArrayList<Party> largestVoteParties = new ArrayList<Party>();
 
-            //Checks remaining seats for each party and 
-            //figures out which party has the largest remaining votes.
+            // Checks remaining seats for each party and 
+            // figures out which party has the largest remaining votes.
             for (Party party: parties) {
-                //Calculate remaining votes.
+                // Calculate remaining votes.
                 int remainingVotes = party.getNumVotes() - this.quota * party.getNumAllocatedSeats();
-                //If current remaining votes are larger than current largest, update the largest votes.
+                // If current remaining votes are larger than current largest, update the largest votes.
                 if (remainingVotes > largestRemainingVotes) {
                     largestRemainingVotes = remainingVotes;
                     largestVoteParties.clear();
                     largestVoteParties.add(party);
-                //If it is same as the current largest, 
-                //record this party as one of the largest votes parties.
+                // If it is same as the current largest, 
+                // record this party as one of the largest votes parties.
                 } else if (remainingVotes == largestRemainingVotes) {
                     largestVoteParties.add(party);
                 }
             }
 
-            //If there is only one party that has the largest votes, give the seat to that party.
+            // If there is only one party that has the largest votes, give the seat to that party.
             if (largestVoteParties.size() == 1) {
                 Party allocatedParty = largestVoteParties.get(0);
                 allocatedParty.setNumAllocatedSeats(allocatedParty.getNumAllocatedSeats() + 1);
                 remainingSeats -= 1;
-            //If there are multiple parties that have the largest votes, 
-            //randomly picks one party to seat allocation.
+            // If there are multiple parties that have the largest votes, 
+            // randomly picks one party to seat allocation.
             } else if (largestVoteParties.size() > 1) {
-                //Coin toss to determine seat allocation
+                // Coin toss to determine seat allocation
                 int index = coinToss(largestVoteParties.size());
                 Party allocatedParty = largestVoteParties.get(index);
                 allocatedParty.setNumAllocatedSeats(allocatedParty.getNumAllocatedSeats() + 1);
