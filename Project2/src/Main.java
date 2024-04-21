@@ -60,7 +60,7 @@ public class Main {
             mv.voteCounting();
             mv.allocateSeats();
             mv.findWinners();
-            mv.displayResults("MPO");
+            mv.displayResults("MV");
         }
     }
 

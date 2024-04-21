@@ -76,10 +76,14 @@ public class DisplayResults {
         //print out in MPO style
         } else if(electionType.equals("MPO")) {
             displayMPO();
+        } else{
+            displayMV();
         }
     }
 
-
+    /**
+     * Displays the results and statistics of a CPL election.
+     */
     public void displayCPL() {
         // loop throgh array of parties to get the seat of each party
         for (int i = 0; i < parties.size(); i++) {
@@ -109,6 +113,9 @@ public class DisplayResults {
         }
     }
 
+    /**
+     * Displays the results and statistics of a OPL election.
+     */
     public void displayOPL() {
         System.out.println("***** Winner *****\n");
         // print out the name of the winner, % of the total votes and the number of
@@ -137,6 +144,9 @@ public class DisplayResults {
         }
     }
 
+    /**
+     * Displays the results and statistics of a MPO election.
+     */
     public void displayMPO() {
         System.out.println("***** Winner *****\n");
 
@@ -159,6 +169,9 @@ public class DisplayResults {
         }
     }
 
+    /**
+    * Displays the results and statistics of a MV election.
+    */
     public void displayMV() {
         System.out.println("***** Winner *****\n");
         // print out the name of the winner, % of the total votes and the number of
