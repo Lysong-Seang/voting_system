@@ -65,7 +65,6 @@ public class DisplayResults {
         System.out.println("Number of Candidates: " + count);
         System.out.println("Number of Seats: " + numSeats);
         System.out.println("Number of Ballots: " + numBallots);
-        System.out.println("Number of Quota : " + this.quota + "\n");
 
         // print in CPL style
         if (electionType.equals("CPL")) {
@@ -81,6 +80,8 @@ public class DisplayResults {
 
 
     public void displayCPL() {
+        System.out.println("Number of Quota : " + this.quota + "\n");
+
         // loop throgh array of parties to get the seat of each party
         for (int i = 0; i < parties.size(); i++) {
             int numberVote = parties.get(i).getNumAllocatedSeats();
@@ -110,7 +111,9 @@ public class DisplayResults {
     }
 
     public void displayOPL() {
+        System.out.println("Number of Quota : " + this.quota + "\n");
         System.out.println("***** Winner *****\n");
+
         // print out the name of the winner, % of the total votes and the number of
         // votes each candidate gets
         for (int i = 0; i < winnerList.size(); i++) {
@@ -138,7 +141,7 @@ public class DisplayResults {
     }
 
     public void displayMPO() {
-        System.out.println("***** Winner *****\n");
+        System.out.println("***** Winners *****\n");
 
         // print out the name of the winner, % of the total votes and the number of
         // votes each candidate gets
@@ -150,12 +153,14 @@ public class DisplayResults {
         System.out.println("\n");
 
         System.out.println("\n");
-        System.out.println("***** Candidate *****\n");
+        System.out.println("***** Candidates *****\n");
         // loops through each party to get the number of seats won by each candidate.
         for(Party p : parties){
             // loops through each candidate of the party to get the number of seats won by each candidate.
             for(Candidate c : p.getCandidates()) {
-                System.out.println(c.getName() + " Won: " + c.getNumSeats() + " seat(s)");
+                System.out.println(c.getName() + ": " + c.getNumSeats() + " seat(s)" + " ( % of number of total votes " +
+                (c.getNumVotes() / (double) numBallots) * 100 + " | number of votes "
+                + c.getNumVotes() + ")");
             }
         }
     }
