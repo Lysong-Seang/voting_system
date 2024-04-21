@@ -18,7 +18,7 @@ public class CPL extends Election{
      */
     @Override
     public void voteCounting() {
-        //Reads through each ballot and counts each parties ballots.
+        // Reads through each ballot and counts each parties ballots.
         for (int i = 0; i < totalVotes; i++) {
             int index = ballots.get(i).length - 1;
             parties.get(index).setNumVotes(parties.get(index).getNumVotes() + 1);
@@ -31,7 +31,7 @@ public class CPL extends Election{
      */
     @Override
     public void findWinners() {
-        //Each party clarifies the number of allocated seats based on the voting results and candidate information.
+        // Each party clarifies the number of allocated seats based on the voting results and candidate information.
         for (Party party: parties) {
             int thisPartySeats = party.getNumAllocatedSeats();
             ArrayList<Candidate> thisPartyCandidates = party.getCandidates();
