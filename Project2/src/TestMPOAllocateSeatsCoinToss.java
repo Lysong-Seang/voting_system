@@ -2,7 +2,7 @@ package src;
 import java.util.*;
 
 /**
- * This file tests seat allocation when there is a tie
+ * This file tests seat allocation when there is a tie for MPO
  * @author Crystal Wen
  */
 public class TestMPOAllocateSeatsCoinToss {

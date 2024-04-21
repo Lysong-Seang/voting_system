@@ -37,7 +37,7 @@ public class CPL extends Election{
             ArrayList<Candidate> thisPartyCandidates = party.getCandidates();
             int maxAllocation = Math.min(thisPartySeats, thisPartyCandidates.size());
 
-            //Give the seat to candidate from the
+            // Give the seat to candidate from the
             for (int i=0; i<maxAllocation; i++) {
                 this.winnerList.add(thisPartyCandidates.get(i));
             }

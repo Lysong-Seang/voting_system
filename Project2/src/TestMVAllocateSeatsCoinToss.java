@@ -1,6 +1,10 @@
 package src;
 import java.util.*;
 
+/**
+ * This file tests seat allocation when there is a tie for MV
+ * @author Crystal Wen
+ */
 public class TestMVAllocateSeatsCoinToss {
 
     public static void main (String[] args) {
