@@ -139,13 +139,13 @@ public class DisplayResults {
 
     public void displayMPO() {
         System.out.println("***** Winner *****\n");
+
         // print out the name of the winner, % of the total votes and the number of
         // votes each candidate gets
         for (int i = 0; i < winnerList.size(); i++) {
             System.out.println((i + 1) + ". " + winnerList.get(i).getName() + " ( % of number of total votes " +
                     (winnerList.get(i).getNumVotes() / (double) numBallots) * 100 + " | number of votes "
                     + winnerList.get(i).getNumVotes() + ")");
-
         }
         System.out.println("\n");
 
@@ -156,7 +156,6 @@ public class DisplayResults {
             for(Candidate c : p.getCandidates()) {
                 System.out.println(c.getName() + " Won: " + c.getNumSeats() + " seat(s)");
             }
-            System.out.println("_____________\n");
         }
     }
 

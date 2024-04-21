@@ -45,14 +45,22 @@ public class Main {
             opl.findWinners();
             opl.auditFile("OPL");
             opl.displayResults("OPL");
+        // If election type is MPO, create MPO object and runs voting system 
         } else if(electionType.equals("MPO")) {
             MPO mpo = new MPO(totalVotes, totalSeats, parties, ballots, candidates);
             mpo.calculateQuota();
             mpo.voteCounting();
             mpo.allocateSeats();
             mpo.findWinners();
-            mpo.auditFile("MPO");
             mpo.displayResults("MPO");
+        // If election type is MV, create MV object and runs voting system 
+        } else {
+            MV mv = new MV(totalVotes, totalSeats, parties, ballots, candidates);
+            mv.calculateQuota();
+            mv.voteCounting();
+            mv.allocateSeats();
+            mv.findWinners();
+            mv.displayResults("MPO");
         }
     }
 
