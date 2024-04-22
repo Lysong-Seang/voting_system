@@ -13,7 +13,6 @@ Download the files from https://github.umn.edu/umn-csci-5801-01-S24/repo-Team16/
 - **./testing**: This folder holds the test logs and all of the test files.
 - **./documentation**: This folder holds all of the documentation documents.
 - **ReadMe.md**: This file provides the instructions to use the software.
-- **buglist.pdf**: This file documents the bugs and issues found during testing.
 
 ## Running
 After the files are downloaded, compile all of the program files in the "src" folder using the command `javac src/*.java`. Then use the command `java src/Main` to run the program. If you wish to run the program with one of the test csv files in "testing", type in your file name when prompted. Otherwise, type the file path to your csv file when prompted. If you are a tester, pass your file path as a command line argument when running the program. Additionally, if you are testing multiple files, there directories that store the ballot files for multiple file processing (multipleCPL, multipleOPL, multipleMPO, and multipleMV). If you are running multiple files, please add a space in between each file path. Please ensure that there are no spaces within your file path, for example, your folder names cannot have spaces in them. This program assumes the following preconditions:
