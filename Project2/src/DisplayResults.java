@@ -24,7 +24,6 @@ public class DisplayResults {
      * Object with the specified details of the election.
      * 
      * @param electionType the type of the election.
-     * @param numParties   the number of parties participating in the election.
      * @param numBallots   the total number of ballots cast.
      * @param numSeats     the total number of seats available.
      * @param winnerList   a list of candidates who have won in the election.
